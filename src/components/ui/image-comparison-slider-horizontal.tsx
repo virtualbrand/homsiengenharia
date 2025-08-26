@@ -27,7 +27,7 @@ export const ImageComparisonSlider = React.forwardRef<
       onInteractionStart,
       ...props
     },
-    ref
+  // ...existing code...
   ) => {
     // State to manage slider position (0 to 100)
     const [sliderPosition, setSliderPosition] = React.useState(initialPosition);
@@ -63,7 +63,7 @@ export const ImageComparisonSlider = React.forwardRef<
     };
     
     // Handlers for starting and stopping the drag interaction
-    const handleInteractionStart = (e: React.MouseEvent | React.TouchEvent) => {
+    const handleInteractionStart = () => {
       setIsDragging(true);
       // Call the onInteractionStart callback if provided
       onInteractionStart?.();

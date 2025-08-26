@@ -1,1 +1,2 @@
-export { WorkshopPage as default } from '../../../pages/WorkshopPage'
+import WorkshopPage from '../../../pages/WorkshopPage'
+export default WorkshopPage;
