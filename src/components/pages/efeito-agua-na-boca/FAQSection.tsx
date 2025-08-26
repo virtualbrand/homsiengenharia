@@ -105,9 +105,14 @@ export const FAQSection = () => {
             className="text-muted-foreground text-center"
           >
             Não encontrou o que procura? Entre em contato com nosso{' '}
-            <span className="text-primary font-medium hover:underline">
+            <a
+              href="https://wa.link/n3h6vu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-medium hover:underline"
+            >
               suporte
-            </span>
+            </a>
           </motion.p>
         </div>
       </div>
