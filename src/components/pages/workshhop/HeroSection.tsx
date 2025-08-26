@@ -1,5 +1,5 @@
 // ...existing code...
-<p>teste</p>
+<p>teste 2</p>
 const HeroSection = () => {
   return (
     <section
