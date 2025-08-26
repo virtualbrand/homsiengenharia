@@ -1,0 +1,329 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ================================
+   FONT FACE DECLARATIONS
+   ================================ */
+@font-face {
+  font-family: 'KumbhSans';
+  src: url('/fonts/KumbhSans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KumbhSans';
+  src: url('/fonts/KumbhSans-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================
+   RESET & BASE STYLES
+   ================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-family: 'KumbhSans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ================================
+     PALETA DE CORES - CORES DO SISTEMA
+     ================================ */
+
+  /* Primário - #6C8C8A (Verde-azulado suave) */
+  --color-primary-50: #f0f5f5;
+  --color-primary-100: #d9e7e6;
+  --color-primary-200: #b3cfcd;
+  --color-primary-300: #8db7b4;
+  --color-primary-400: #679f9b;
+  --color-primary-500: #6C8C8A;
+  --color-primary-600: #567070;
+  --color-primary-700: #415456;
+  --color-primary-800: #2b383c;
+  --color-primary-900: #161c22;
+
+  /* Secundário - #CC4C31 (Terracota) */
+  --color-secondary-50: #fef2f0;
+  --color-secondary-100: #fce4df;
+  --color-secondary-200: #f8c9bf;
+  --color-secondary-300: #f4ae9f;
+  --color-secondary-400: #f0937f;
+  --color-secondary-500: #CC4C31;
+  --color-secondary-600: #a33d28;
+  --color-secondary-700: #7a2e1e;
+  --color-secondary-800: #511f14;
+  --color-secondary-900: #28100a;
+
+  /* Texto - #0E0604 (Marrom muito escuro) */
+  --color-text-50: #f7f6f6;
+  --color-text-100: #efedec;
+  --color-text-200: #dfdbd9;
+  --color-text-300: #cfc9c6;
+  --color-text-400: #bfb7b3;
+  --color-text-500: #afa5a0;
+  --color-text-600: #7f756f;
+  --color-text-700: #4f453e;
+  --color-text-800: #1f1b19;
+  --color-text-900: #0E0604;
+
+  /* Acento - #E68830 (Laranja quente) */
+  --color-accent-50: #fef6f0;
+  --color-accent-100: #fdede0;
+  --color-accent-200: #fbdbc1;
+  --color-accent-300: #f9c9a2;
+  --color-accent-400: #f7b783;
+  --color-accent-500: #E68830;
+  --color-accent-600: #b86d26;
+  --color-accent-700: #8a521d;
+  --color-accent-800: #5c3713;
+  --color-accent-900: #2e1c0a;
+
+  /* ================================
+     CORES PERSONALIZADAS
+     ================================ */
+
+  /* Brown - #8D412A */
+  --color-brown-50: #f5f1ef;
+  --color-brown-100: #ebe3df;
+  --color-brown-200: #d7c7bf;
+  --color-brown-300: #c3ab9f;
+  --color-brown-400: #af8f7f;
+  --color-brown-500: #8D412A;
+  --color-brown-600: #713422;
+  --color-brown-700: #552719;
+  --color-brown-800: #391a11;
+  --color-brown-900: #1c0d08;
+
+  /* Off White - #FFFF8 */
+  --color-off-white: #FFFFF8;
+
+  /* Text White - #FFFFFF */
+  --color-text-white: #FFFFFF;
+
+  /* Light Brown - #8A8D7F */
+  --color-light-brown-50: #f5f5f4;
+  --color-light-brown-100: #ebeae9;
+  --color-light-brown-200: #d7d5d3;
+  --color-light-brown-300: #c3c0bd;
+  --color-light-brown-400: #afaba7;
+  --color-light-brown-500: #8A8D7F;
+  --color-light-brown-600: #6e7166;
+  --color-light-brown-700: #53554c;
+  --color-light-brown-800: #373933;
+  --color-light-brown-900: #1c1c19;
+
+  /* White (Light Brown) - #F3ECE9 */
+  --color-white-light-brown: #F3ECE9;
+
+  /* ================================
+     CONFIGURAÇÕES GLOBAIS
+     ================================ */
+  color: var(--color-text-900);
+  background-color: var(--color-off-white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* ================================
+   ESTILOS BASE DE ELEMENTOS
+   ================================ */
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-off-white);
+  color: var(--color-text-900);
+  overflow-x: hidden;
+  font-family: 'KumbhSans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-accent-500);
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-600);
+}
+
+/* Força o h1 a ter o mesmo tamanho do h2, mantendo cor e outros estilos do componente */
+h1 {
+  font-size: 2.25rem; /* text-3xl do Tailwind */
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* md:text-4xl do Tailwind */
+  }
+}
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3rem; /* lg:text-5xl do Tailwind */
+  }
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--color-brown-500);
+  font-family: 'KumbhSans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.5em;
+  font-family: 'KumbhSans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+/* ================================
+   COMPONENTES DE BOTÃO
+   ================================ */
+button {
+  border-radius: 50px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: 'KumbhSans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--color-accent-500);
+  color: var(--color-text-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-accent-500);
+  transform: translateY(-1px);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-500);
+  color: var(--color-text-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-500);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary-500);
+  color: var(--color-text-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-500);
+}
+
+/* ================================
+   CLASSES UTILITÁRIAS DE COR
+   ================================ */
+.text-primary {
+  color: var(--color-primary-500);
+}
+
+.text-secondary {
+  color: var(--color-secondary-500);
+}
+
+.text-accent {
+  color: var(--color-accent-500);
+}
+
+.text-brown {
+  color: var(--color-brown-500);
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+}
+
+.bg-secondary-gradient {
+  background: linear-gradient(135deg, var(--color-secondary-500) 0%, var(--color-secondary-600) 100%);
+}
+
+.bg-accent-gradient {
+  background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-600) 100%);
+}
+
+/* ================================
+   CLASSES SEMÂNTICAS PARA SHADCN/UI
+   ================================ */
+.text-foreground {
+  color: var(--color-text-900);
+}
+
+.text-muted-foreground {
+  color: var(--color-text-600);
+}
+
+.bg-muted {
+  background-color: var(--color-white-light-brown);
+}
+
+/* ================================
+   COMPONENTES CUSTOMIZADOS
+   ================================ */
+
+/* Accordion customizado */
+.accordion-trigger {
+  background-color: transparent !important;
+  border: none !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+}
+
+.accordion-trigger:hover {
+  background-color: transparent !important;
+  transform: none !important;
+  color: inherit !important;
+}
+
+.accordion-trigger:focus,
+.accordion-trigger:focus-visible {
+  outline: none !important;
+  background-color: transparent !important;
+}
+
+/* Carousel scrollbar hide */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
