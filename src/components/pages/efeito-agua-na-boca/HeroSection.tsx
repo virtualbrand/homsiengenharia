@@ -1,15 +1,13 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
+// ...existing code...
 
 import { ImageComparisonSlider } from "../../ui/image-comparison-slider-horizontal"
 
 export const HeroSection = () => {
-  const [showCompareText, setShowCompareText] = useState(true)
-  const [sliderPosition, setSliderPosition] = useState(65)
+  // ...existing code...
 
   // Atualiza o estado corretamente ao interagir com o slider
   const handleSliderInteraction = () => {
-    setShowCompareText(false);
     // Se quiser atualizar a posição do slider, use o callback do próprio slider
   };
   return (
