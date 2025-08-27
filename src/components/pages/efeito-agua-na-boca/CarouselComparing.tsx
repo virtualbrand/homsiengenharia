@@ -1,10 +1,12 @@
 import { ImageComparisonSlider } from "@/components/ui/image-comparison-slider-horizontal";
 import { presetsComparisons } from "@/data/presets-images";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 // Componente carousel usando CSS scroll-snap com comparação de imagens reais
 export const CarouselComparing = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+
   // Usando todos os presets disponíveis no carousel
   // Duplicamos os items para criar o efeito de loop infinito
   const originalPresets = presetsComparisons;
@@ -62,11 +64,50 @@ export const CarouselComparing = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    let startX = 0;
+    let scrollLeft = 0;
+    let isDown = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      isDown = true;
+      startX = e.touches[0].pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - el.offsetLeft;
+      const walk = (x - startX) * 1; // scroll-fast
+      el.scrollLeft = scrollLeft - walk;
+      // Impede o scroll do body enquanto move o carrossel
+      if (Math.abs(walk) > 10) e.preventDefault();
+    };
+
+    const onTouchEnd = () => {
+      isDown = false;
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: false });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd);
+
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
+
   return (
     <div className="w-full">
       <div className="container mx-auto">
         <div className="relative px-4 md:px-8">
           <div 
+            ref={carouselRef}
             className="carousel-container flex overflow-x-auto gap-3 md:gap-4 pb-4 scroll-smooth scrollbar-hide"
             style={{ 
               scrollbarWidth: 'none', 
