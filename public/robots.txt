@@ -2,4 +2,10 @@ User-agent: *
 Allow: /
 Allow: /workshop
 Allow: /efeito-agua-na-boca
+
 Sitemap: https://dudaberger.com/sitemap.xml
+
+User-agent: Googlebot
+Disallow: /private
+
+
