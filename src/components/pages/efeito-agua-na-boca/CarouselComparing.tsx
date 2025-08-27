@@ -1,7 +1,7 @@
 import { ImageComparisonSlider } from "@/components/ui/image-comparison-slider-horizontal";
 import { presetsComparisons } from "@/data/presets-images";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 // Componente carousel usando CSS scroll-snap com comparação de imagens reais
 export const CarouselComparing = () => {
