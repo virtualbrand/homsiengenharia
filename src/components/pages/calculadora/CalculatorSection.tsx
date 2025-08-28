@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 
-// Paleta Duda Berger (exemplo):
-const primary = "#CC8A3A";
-const secondary = "#F5E9DC";
-const accent = "#E17055";
-const success = "#00b894";
-const warning = "#fdcb6e";
-const danger = "#fd79a8";
-const info = "#74b9ff";
 
 const currencyFormat = (value: number) =>
   value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
