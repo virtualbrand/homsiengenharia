@@ -90,7 +90,7 @@ export default {
         'text-white': '#FFFFFF',
         'white-light-brown': '#F3ECE9',
         // Cores do sistema shadcn
-        'border': 'hsl(214.3 31.8% 91.4%)',
+        'border': 'hsl(0 0% 89%)',
         'ring': 'hsl(222.2 84% 4.9%)',
         'background': 'hsl(0 0% 100%)',
         'foreground': 'hsl(222.2 84% 4.9%)',

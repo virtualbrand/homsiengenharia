@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import EfeitoAguaNaBocaPage from './pages/EfeitoAguaNaBocaPage'
 
 import WorkshopPage from './pages/WorkshopPage'
+import CalculadoraPage from './pages/CalculadoraPage'
 import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/efeito-agua-na-boca" element={<EfeitoAguaNaBocaPage />} />
           <Route path="/workshop" element={<WorkshopPage />} />
+          <Route path="/calculadora" element={<CalculadoraPage />} />
         </Routes>
       </Router>
     </HelmetProvider>

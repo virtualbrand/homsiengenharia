@@ -1,0 +1,7 @@
+export { default as HeroSection } from './HeroSection'
+export { default as PainSection } from './PainSection'
+// export { default as ForWhoSection } from './ForWhoSection'
+// export { default as TestimonialsSection } from './TestimonialsSection'
+export { default as PricingSection } from './PricingSection'
+export { default as FAQSection } from './FAQSection'
+export { default as AboutSection } from './AboutSection'

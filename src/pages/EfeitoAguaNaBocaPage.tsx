@@ -1,6 +1,4 @@
-import { HeroSection, ForWhoSection, TestimonialsSection, PricingSection, FAQSection, AboutSection, PainSection } from '../components/pages/efeito-agua-na-boca'
-import FinalCTASection from '../components/pages/efeito-agua-na-boca/FinalCTASection'
-import DisclaimerSection from '../components/pages/efeito-agua-na-boca/DisclaimerSection'
+import { HeroSection, ForWhoSection, TestimonialsSection, PricingSection, FAQSection, AboutSection, PainSection, FinalCTASection, DisclaimerSection } from '../components/pages/efeito-agua-na-boca'
 import Seo from '@/components/Seo';
 
 const EfeitoAguaNaBocaPage = () => {
