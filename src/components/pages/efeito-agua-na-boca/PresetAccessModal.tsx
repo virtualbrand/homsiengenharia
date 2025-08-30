@@ -145,7 +145,7 @@ export default function PresetAccessModal({ open, onClose }: PresetAccessModalPr
     setPhoneValue("");
     setIsSubmitting(false);
     onClose();
-    window.location.href = `https://pay.hotmart.com/T86837978R?off=uq6jsrns&bid=1756069046655&&name=${data.name}&email=${data.email}&phonenumber=${data.phone}&offDiscount=DESCONTO`;
+    window.location.href = `https://pay.hotmart.com/T86837978R?off=uq6jsrns&bid=1756069046655&name=${data.name}&email=${data.email}&phonenumber=${data.phone}&offDiscount=DESCONTO`;
   };
 
   return (

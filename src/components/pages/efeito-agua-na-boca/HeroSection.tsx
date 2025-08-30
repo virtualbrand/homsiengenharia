@@ -1,28 +1,19 @@
 import { motion } from "framer-motion"
 // ...existing code...
 
-import { ImageComparisonSlider } from "../../ui/image-comparison-slider-horizontal"
-
 export const HeroSection = () => {
   // ...existing code...
 
-  // Atualiza o estado corretamente ao interagir com o slider
-  const handleSliderInteraction = () => {
-    // Se quiser atualizar a posição do slider, use o callback do próprio slider
-  };
   return (
-    <section className="h-screen w-full relative overflow-hidden">
+    <section
+      className="h-screen w-full relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/presets-hero-after.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="h-full w-full relative">
-        <ImageComparisonSlider
-          leftImage="/images/presets-hero-before.webp"
-          rightImage="/images/presets-hero-after.webp"
-          altLeft="Foto original do bolo - antes dos presets"
-          altRight="Foto transformada com presets profissionais - depois"
-          initialPosition={60}
-          className="h-full w-full"
-          onInteractionStart={handleSliderInteraction}
-        />
-
         <div className="absolute inset-0 flex items-center pointer-events-none z-10">
           <div className="container mx-auto px-4 md:px-8">
             <motion.div
@@ -71,24 +62,6 @@ export const HeroSection = () => {
               >
                 Quero despertar o Efeito Água na Boca
               </motion.button>
-              
-              {/* Texto "Arraste para comparar" absolutamente posicionado próximo ao botão do slider
-              {showCompareText && (
-                <motion.div
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: showCompareText ? 1 : 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="pointer-events-none"
-                  style={{ left: `calc(${sliderPosition}% - 60px)` }} // Ajustado para alinhar à esquerda do slider
-                >
-                  <span
-                    className="absolute z-30 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 px-3 py-1 rounded-full text-xs font-medium shadow-md backdrop-blur-md"
-                    style={{ minWidth: 0 }}
-                  >
-                    ↔️ Arraste para comparar
-                  </span>
-                </motion.div>
-              )} */}
             </motion.div>
           </motion.div>
           </div>

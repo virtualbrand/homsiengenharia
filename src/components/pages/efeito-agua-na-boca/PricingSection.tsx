@@ -1,17 +1,8 @@
-
 import { motion } from "framer-motion"
 import { GradientBackground } from "../../ui/gradient-background"
 import { Check } from "lucide-react"
 
-import { useState } from "react"
-import PresetAccessModal from "./PresetAccessModal"
-
 const PricingSection = () => {
-  const [showModal, setShowModal] = useState(false)
-
-  const handleOpenModal = () => setShowModal(true)
-  const handleCloseModal = () => setShowModal(false)
-
   return (
     <GradientBackground
       gradients={[ 
@@ -22,7 +13,7 @@ const PricingSection = () => {
       animationDelay={0.5}
       className="py-16 md:py-24"
     >
-  <div id="investimento" className="mx-auto max-w-5xl px-6 scroll-mt-24">
+      <div id="investimento" className="mx-auto max-w-5xl px-6 scroll-mt-24">
         <div className="mx-auto max-w-2xl text-center mb-10">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -48,8 +39,18 @@ const PricingSection = () => {
               </span>
               <div className="flex justify-center">
                 <button
-                  className="mt-2 bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg font-kumbh"
-                  onClick={handleOpenModal}
+                  type="button"
+                  onClick={() =>
+                    window.open(
+                      "https://pay.hotmart.com/T86837978R?off=uq6jsrns&bid=1756069046655&offDiscount=DESCONTO",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  className="mt-2 bg-accent-500 hover:bg-accent-600 text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg font-kumbh text-lg md:text-xl"
+                  style={{
+                    boxShadow: "0 4px 24px 0 rgba(242,185,75,0.15)",
+                  }}
                 >
                   Quero o efeito agora
                 </button>
@@ -82,9 +83,8 @@ const PricingSection = () => {
           </div>
         </div>
       </div>
-  <PresetAccessModal open={showModal} onClose={handleCloseModal} />
     </GradientBackground>
   )
 }
 
-export default PricingSection;
+export default PricingSection
