@@ -43,7 +43,6 @@ const PricingSection = () => {
                   onClick={() =>
                     window.open(
                       "https://pay.hotmart.com/T86837978R?off=uq6jsrns&bid=1756069046655&offDiscount=DESCONTO",
-                      "_blank",
                       "noopener,noreferrer"
                     )
                   }
