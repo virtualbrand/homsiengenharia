@@ -1,52 +1,125 @@
 import { Progress } from "@/components/ui/progress";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { useEffect, useRef } from "react";
+import { workshopConfig, getPrimaryButtonText, getHoverButtonText, getProgressText, getCurrentLot } from "@/data/workshop-config";
 
+// Declarações de tipo para Vanta.js
+declare global {
+  interface Window {
+    THREE: any;
+    VANTA: {
+      FOG: (options: any) => any;
+    };
+  }
+}
 
 export const HeroSection = () => {
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    if (!vantaEffect.current && vantaRef.current) {
+      // Carrega os scripts do Vanta.js dinamicamente
+      const loadVanta = async () => {
+        // Carrega Three.js primeiro
+        if (!window.THREE) {
+          const threeScript = document.createElement('script');
+          threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+          document.head.appendChild(threeScript);
+          await new Promise(resolve => threeScript.onload = resolve);
+        }
+
+        // Carrega Vanta FOG
+        if (!window.VANTA?.FOG) {
+          const vantaScript = document.createElement('script');
+          vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js';
+          document.head.appendChild(vantaScript);
+          await new Promise(resolve => vantaScript.onload = resolve);
+        }
+
+        // Inicializa o efeito Vanta FOG
+        if (window.VANTA?.FOG && vantaRef.current) {
+          vantaEffect.current = window.VANTA.FOG({
+            el: vantaRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0x800F2F,
+            midtoneColor: 0xFFB3C1,
+            lowlightColor: 0xA4133C,
+            baseColor: 0x23060E,
+            blurFactor: 0.61,
+            speed: 1.5,
+            zoom: 1
+          });
+        }
+      };
+
+      loadVanta();
+    }
+
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+    };
+  }, []);
+
   return (
-    <section className="h-screen w-full relative overflow-hidden bg-white">
-      {/* Imagem de fundo decorativa, pode ser ajustada conforme necessidade */}
-      <div className="absolute inset-0 w-full h-full">
-        <img
-          src="/images/duda.webp"
-          alt="Confeitaria com IA"
-          className="object-cover w-full h-full opacity-40"
-          loading="lazy"
-        />
+    <section 
+      ref={vantaRef}
+      className="min-h-screen w-full relative overflow-hidden"
+    >
+      <div className="absolute top-0 left-0 w-full">
+        <div className="container mx-auto px-6 md:px-8">
+          <div className="flex items-center gap-3 py-8">
+            <img src="/images/workshop-duda-logo.svg" alt="Logo" className="w-45 h-45" />
+            <div className="inline-block px-4 py-2 rounded-full bg-white/10 text-white/80 text-sm">
+              {workshopConfig.event.edition}
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="relative h-full w-full flex items-center justify-center z-10">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="backdrop-blur-md rounded-2xl p-8 md:p-10 lg:p-12 max-w-xl lg:max-w-2xl text-white shadow-2xl bg-[var(--color-primary-500)]/90">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl tracking-tight font-bold !text-white mb-4">
-              Confeitaria com IA: <span className="text-accent-400">da sobrecarga ao sucesso</span>
+      
+      <div className="relative h-screen w-full flex items-center z-10">
+        <div className="container mx-auto px-6 md:px-8">
+          <div className="max-w-4xl">
+            <div className="inline-block px-6 py-2 rounded-full bg-white/10 text-white/80 text-sm mb-8">
+              {workshopConfig.event.date}
+            </div>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
+              Do ZERO aos R$ 5.000 /mês trabalhando de casa com Confeitaria
             </h1>
-            <div className="text-white mb-6 leading-relaxed text-base md:text-lg">
-              <p className="mb-3">
-                2 dias ao vivo para quebrar o ciclo de trabalhar muito e ganhar pouco, usando IA para organizar, precificar e vender de forma estratégica
+            <div className="text-white mb-8 text-lg md:text-xl">
+              <p>
+                2 dias com o passo a passo completo para faturar da sua cozinha:
               </p>
-              <p className="mb-3">
-                Se você trabalha 12 horas por dia, atende no WhatsApp até tarde e ainda não sabe se está lucrando de verdade, essa imersão vai te mostrar como a IA pode revolucionar sua confeitaria.
+              <p>
+                <strong>PRODUTO + LUCRO + VENDA</strong>
               </p>
             </div>
-            <div className="space-y-3">
-              <button
-                className="bg-accent-500 hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-all duration-300 w-full text-base md:text-lg"
-                onClick={() => {
-                  const el = document.getElementById('ingresso');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Garantir um ingresso
-              </button>
-              <div className="mt-2">
-                <div className="flex items-center mb-1">
-                  <span className="text-xs font-semibold text-muted-foreground mr-2">LOTE 1</span>
-                  <span className="text-xs font-semibold text-accent-600">35% VENDIDO</span>
-                </div>
-                <Progress
-                  value={35}
-                  className="w-full h-3 bg-white/30 rounded-full"
-                  barClassName="bg-accent-500 rounded-full transition-all"
+                          <div className="mt-10">
+              <div className="flex flex-col gap-4 max-w-[360px]">
+                <InteractiveHoverButton
+                  text={getPrimaryButtonText()}
+                  hoverText={getHoverButtonText()}
+                  className="w-full"
+                  onClick={() => {
+                    const el = document.getElementById('investimento');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 />
+                <div className="flex flex-col gap-2">
+                  <Progress
+                    value={getCurrentLot().soldPercentage}
+                    className="w-full h-2 bg-white/10 rounded-full"
+                    barClassName="bg-[#FFB3C1] rounded-full transition-all"
+                  />
+                  <span className="text-sm text-white/90">{getProgressText()}</span>
+                </div>
               </div>
             </div>
           </div>

@@ -1,76 +1,68 @@
-import { motion } from "framer-motion"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 
 const faqs = [
   {
     id: 'item-1',
-    question: "Como o Efeito Água na Boca vai melhorar minhas fotos de confeitaria?",
-    answer: "O Efeito Água na Boca foi desenvolvido especificamente para despertar o desejo de comer através da foto. Nossos presets realçam cores, texturas e detalhes dos doces de forma científica, ajustando automaticamente iluminação, saturação e contraste para que seus doces tenham aquela aparência irresistível que faz o cliente querer provar só de ver a imagem."
+    question: "Estou começando do zero, consigo aproveitar?",
+    answer: "Sim, com certeza!\n\nEste workshop foi pensado especialmente para quem está começando. Nos dois dias vamos passar por etapas iniciais essenciais: escolher o que vender, aprender a precificar corretamente e entender como divulgar seus bolos de forma estratégica.\n\nVocê vai sair com um plano prático de 30 dias para colocar em ação imediatamente."
   },
   {
     id: 'item-2',
-    question: "Não tenho conhecimento sobre edição de fotos. Consigo aplicar o Efeito Água na Boca?",
-    answer: "Sim! O Efeito Água na Boca foi criado justamente para quem não entende de edição. São apenas 3 cliques: abrir a foto, escolher o preset e aplicar. Incluímos tutoriais e uma aula de edição para você saber exatamente onde clicar."
+    question: "Como saber se é pra mim?",
+    answer: "Se você quer transformar sua habilidade de fazer bolos em renda extra de R$ 5.000/mês trabalhando da cozinha de casa, este workshop é para você.\n\nVamos proporcionar uma experiência prática onde você vai descobrir exatamente o que vender, como precificar para ter lucro real e as melhores formas de divulgar - mesmo que ainda esteja na CLT.\n\nSe esses objetivos estão alinhados com o que você procura, este workshop é definitivamente para você."
   },
   {
     id: 'item-3',
-    question: "Preciso pagar o Lightroom para usar o Efeito Água na Boca?",
-    answer: "Não! A versão 100% gratuita funciona perfeitamente com nossos presets. Você não paga nada por mês, não tem assinatura, não tem pegadinha. Baixa uma vez e usa para sempre, sem custos adicionais."
+    question: "Vão me vender algo durante o Workshop ou é 100% conteúdo?",
+    answer: "Sim, vamos te oferecer uma oportunidade.\n\nDurante os 2 dias, você terá acesso a conteúdo completo e prático ao vivo através do Zoom. No final do workshop, vou apresentar o Método RENDA completo - meu curso de 5 módulos para quem quer ir além dos primeiros R$ 5.000/mês de forma estruturada. \n\nMas isso não compromete o valor do workshop: você vai sair com aprendizados práticos, planilhas, templates e um plano de ação para executar imediatamente, independente de qualquer outra decisão."
   },
   {
     id: 'item-4',
-    question: "Preciso de uma câmera profissional para ativar o Efeito Água na Boca?",
-    answer: "Absolutamente não! Eu mesmo uso apenas o celular para todas as minhas fotos e elas ficam com qualidade profissional. O Efeito Água na Boca foi criado especificamente para celular - é onde funciona melhor! O segredo não está no equipamento, mas em aplicar os presets certos que despertam o desejo. Com seu celular + nossos presets, suas fotos vão competir de igual para igual com quem tem equipamentos caros."
+    question: "Vai ficar gravado?",
+    answer: "Sim, mas o ingresso do evento ao vivo não dá acesso às gravações.\n\nVocê poderá adquirir separadamente as gravações dos 2 dias de evento durante a compra do seu ingresso para o evento ao vivo! O preço das gravações é de R$ 247 à vista ou em até 12x de R$ 34,32. E ela pode ser comprada juntamente com o seu ingresso para o evento ao vivo.\n\nSe precisar de ajuda, pode falar com nosso time de suporte, chamando o Jaisson no WhatsApp!"
   },
   {
     id: 'item-5',
-    question: "A câmera do meu celular não é muito boa. Consigo criar o Efeito Água na Boca?",
-    answer: "Sim! Nossos presets foram testados em celulares básicos e sempre funcionam. O Efeito Água na Boca compensa as limitações da câmera realçando cores, texturas e brilho de forma automática. Você vai se surpreender como seus doces vão ficar apetitosos mesmo com um celular simples."
+    question: "Posso desistir do meu ingresso?",
+    answer: "Sim! O workshop tem prazo de garantia, mas por ser um evento ao vivo, as regras são um pouco diferentes. Você pode solicitar o reembolso do seu ingresso em até 7 dias após a compra, desde que isso seja feito com pelo menos 48 horas de antecedência ao início do evento.\n\nApós esse período (ou se faltarem menos de 48 horas para o evento), não será possível solicitar o reembolso.\n\nSe tiver qualquer dúvida, entre em contato com nosso suporte!"
   },
   {
     id: 'item-6',
-    question: "Não sei tirar boas fotos. Vou conseguir fazer meus doces despertarem desejo?",
-    answer: "Com certeza! O Efeito Água na Boca transforma até fotos básicas em imagens irresistíveis."
+    question: "Preciso de algum conhecimento prévio?",
+    answer: "Não, nenhum conhecimento prévio é necessário. O workshop é estruturado para quem está começando do zero.\n\nVamos abordar desde os conceitos básicos até estratégias práticas que você pode implementar imediatamente. Se você sabe fazer bolos e quer transformar isso em renda, já tem tudo que precisa para aproveitar ao máximo."
   },
   {
     id: 'item-7',
-    question: "Por quanto tempo posso usar o Efeito Água na Boca?",
-    answer: "Acesso vitalício! Uma vez que você adquire, pode usar os presets quantas vezes quiser, em quantas fotos quiser, pelo tempo que quiser. É seu para sempre, sem renovações ou taxas adicionais."
+    question: "Quanto tempo preciso dedicar após o workshop?",
+    answer: "O workshop entrega um plano de ação para os primeiros 30 dias.\n\nA ideia é que você consiga implementar trabalhando 10-15 horas por semana, perfeitamente conciliável com sua CLT.\n\nO foco é eficiência: fazer o certo, não fazer muito. Você vai aprender a organizar sua agenda para que a confeitaria caiba na sua rotina, não o contrário."
   },
   {
     id: 'item-8',
-    question: "Posso compartilhar ou revender o Efeito Água na Boca?",
-    answer: "Os presets são para uso pessoal apenas. Você pode usar em todas as suas fotos de confeitaria, mas não pode compartilhar, revender ou distribuir os presets para outras pessoas. Isso protege o trabalho desenvolvido e mantém a exclusividade do método."
+    question: "Vou receber algum material de apoio?",
+    answer: "Sim! Durante o workshop você vai receber: Planilha de precificação, Template de pesquisa de mercado, Scripts de WhatsApp prontos, Checklist dos primeiros 30 dias, Lista de fornecedores, Guia de embalagens. Tudo pronto para você usar imediatamente após o workshop."
   }
 ]
 
 export const FAQSection = () => {
+  useScrollAnimation();
+  
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-4xl px-6">
         <div className="space-y-12">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-primary-700 text-center text-4xl font-semibold"
+          <h2 
+            className="!text-[var(--color-amaranth-500)] text-center text-4xl font-semibold fade-in"
           >
             Dúvidas Frequentes
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <Accordion
+          <Accordion
               type="single"
               collapsible
               className="-mx-2 sm:mx-0"
@@ -82,27 +74,22 @@ export const FAQSection = () => {
                 >
                   <AccordionItem
                     value={item.id}
-                    className="peer rounded-xl border-none px-5 py-1 md:px-7 data-[state=open]:bg-gray-50"
+                    className="peer rounded-xl border-none px-5 py-1 md:px-7 data-[state=open]:bg-gray-50 fade-in"
                   >
-                    <AccordionTrigger className="cursor-pointer text-base hover:no-underline text-left !text-black font-semibold">
+                    <AccordionTrigger className="cursor-pointer !text-lg hover:no-underline text-left !text-black font-semibold">
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p className="text-foreground text-left">{item.answer}</p>
+                      <p className="text-foreground text-left text-base whitespace-pre-line">{item.answer}</p>
                     </AccordionContent>
                   </AccordionItem>
                   <hr className="mx-5 -mb-px group-last:hidden peer-data-[state=open]:hidden md:mx-7 border-gray-200" />
                 </div>
               ))}
             </Accordion>
-          </motion.div>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-muted-foreground text-center"
+          <p 
+            className="text-muted-foreground text-center fade-in"
           >
             Não encontrou o que procura? Entre em contato com nosso{' '}
             <a
@@ -113,7 +100,7 @@ export const FAQSection = () => {
             >
               suporte
             </a>
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>

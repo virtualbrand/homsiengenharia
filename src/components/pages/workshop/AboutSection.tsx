@@ -1,55 +1,80 @@
-import { motion } from "framer-motion"
+import { Timeline } from "@/components/ui/timeline"
+import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 
 export const AboutSection = () => {
+  useScrollAnimation();
+  const timelineData = [
+    {
+      image: "/images/duda-about-presets.webp",
+      content: (
+        <div className="space-y-4 text-neutral-700 leading-relaxed">
+          <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)] fade-in">De Mochileira a Confeiteira</h3>
+          <p className="fade-in">
+            De mochileira aventureira a confeiteira: minha história começou servindo café da manhã numa pousada boutique na Praia do Rosa, onde aprendi que produtos artesanais e locais valem ouro.
+          </p>
+          <p className="fade-in">
+            Formada em Gastronomia pela UFPEL, descobri meu verdadeiro talento quando todos diziam que eu tinha "mão para bolo".
+          </p> 
+        </div>
+      ),
+    },
+    {
+      image: "/images/duda-about-presets.webp",
+      content: (
+        <div className="space-y-4 text-neutral-700 leading-relaxed">
+          <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)] fade-in">Onde tudo começou de verdade</h3>
+          <p className="fade-in">
+            Comecei no meio da pandemia, em setembro de 2020, numa cidade de 30 mil habitantes onde ninguém me conhecia. Meus primeiros testes? O aniversário do meu esposo (feito com caixinha de leite condensado como espátula), o batizado da minha afilhada e o aniversário do meu sobrinho.
+          </p>
+          <p className="fade-in">
+            Foi ali que vi a mão de Deus: o produto era excepcional e eu seria capaz de faturar muito mais do que trabalhando para outras pessoas.
+          </p>
+        </div>
+      ),
+    },
+    {
+      image: "/images/duda-about-presets.webp",
+      content: (
+        <div className="space-y-4 text-neutral-700 leading-relaxed">
+          <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)]">Crescimento exponencial em 3 anos</h3>
+          <p className="fade-in">
+            Em janeiro de 2021 criei o Instagram da Conto Atelier. No primeiro ano bati R$ 10 mil/mês, no segundo cheguei a R$ 15 mil, e na alta temporada alcancei R$ 30 mil/mês com quatro funcionárias.
+          </p>
+        </div>
+      ),
+    },
+    {
+      image: "/images/duda-about-presets.webp",
+      content: (
+        <div className="space-y-4 text-neutral-700 leading-relaxed">
+          <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)]">Maternidade e negócio em equilíbrio</h3>
+          <p className="fade-in">
+            Quando engravidei, escolhi ter mais tempo com meu filho. Repaginei tudo: transformei a confeitaria num formato menor, mais lucrativo, que me permite faturar bem enquanto cuido da minha família.
+          </p>
+        </div>
+      ),
+    },
+     {
+      image: "/images/duda-about-presets.webp",
+      content: (
+        <div className="space-y-4 text-neutral-700 leading-relaxed">
+          <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)]">Por que me tornei Mentora</h3>
+          <p className="fade-in">
+            Acredito que fazer bolos incríveis não basta – você precisa saber o que vender, como precificar e onde divulgar. E é exatamente isso que eu ensino: o lado estratégico que ninguém te conta.
+          </p>
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <section className="py-20 bg-gradient-to-r from-primary-50 to-accent-50">
-      <div className="max-w-6xl w-[90%] mx-auto md:px-8">
-        <div className="md:flex items-center gap-12">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <img 
-                src="/images/duda-about-presets.webp" 
-                alt="Duda Berger confeitando" 
-                className="w-full min-h-[500px] object-cover rounded-2xl shadow-xl"
-              />
-            </motion.div>
-          </div>
-          <div className="md:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center mb-6">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-primary-700">Quem é a Duda Berger?</h2>
-                </div>
-              </div>
-                
-                <div className="space-y-4 text-chocolate-600 leading-relaxed">
-                  <p>
-                    Formada em Gastronomia pela UFPEL, sempre gostei de fotografia e fiz um curso básico para registrar meus pratos. Quando comecei na confeitaria, criei meus próprios presets específicos para realçar doces e algo incrível aconteceu: meus bolos vendiam muito mais que o normal.
-                    As fotos tinham algo especial - despertavam vontade de comer só de olhar.</p>
-                    <p>Logo outras confeiteiras começaram a perguntar: "O que você faz para suas fotos ficarem tão irresistíveis?"
-                    Foi aí que percebi: eu havia criado, intuitivamente, presets que ativam os gatilhos visuais do apetite.</p>
-                    <p>Assim nasceu o <strong>Efeito Água na Boca.</strong></p>
-                    <p>Quando comecei a compartilhar meus presets exclusivos com outras confeiteiras, os resultados foram impressionantes. Fotos que antes passavam despercebidas começaram a gerar comentários como "nossa, que vontade!" e, principalmente, mais vendas.</p>
-                    <p>Hoje, mais de 200 confeiteiras já usam meus presets exclusivos e comprovaram: quando você aplica as configurações certas, seus doces não competem por preço - competem por desejo.
-                    Minha missão é compartilhar os presets que criei especificamente para fazer doces parecerem irresistíveis.
-                    Porque uso apenas meu celular e acredito que toda confeiteira pode ter fotos que fazem jus à qualidade dos seus doces.
-                    Agora é sua vez de usar meus presets e dominar o <strong>Efeito Água na Boca.</strong>
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
+    <section className="py-20 bg-white">
+      {/* Timeline Section */}
+      <div className="mx-auto max-w-4xl px-6">
+        <h2 className="fade-in text-3xl md:text-4xl font-bold text-center !text-[var(--color-amaranth-500)] mb-0">
+          Conheça minha trajetória até me tornar Mentora
+        </h2>
+        <Timeline data={timelineData} showHeader={false} />
       </div>
     </section>
   )

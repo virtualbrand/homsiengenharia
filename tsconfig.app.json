@@ -29,5 +29,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "@/components/ui/progress.tsx"]
+  "include": ["src"]
 }

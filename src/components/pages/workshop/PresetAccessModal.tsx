@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { getPaymentLink } from "@/data/workshop-config";
 
 interface PresetAccessModalProps {
   open: boolean;
@@ -76,14 +77,14 @@ function AppInput({
   return (
     <div className="w-full min-w-[200px] relative">
       {label && (
-        <label className="block mb-1 text-xs font-bold text-white font-kumbh text-left">
+        <label className="block mb-1 text-xs font-bold text-[var(--color-primary-500)] font-kumbh text-left">
           {label}
         </label>
       )}
       <div className="relative w-full">
         <input
           type={type}
-          className={`relative z-10 border-2 border-[#bfc9c7] h-12 w-full rounded-md bg-white px-4 outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-[#e6eae9] placeholder:font-normal text-sm lg:text-base font-normal text-gray-800 placeholder:text-gray-400 ${className}`}
+          className={`relative z-10 border-2 border-[var(--color-lavender-600)] h-12 w-full rounded-md bg-white px-4 outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-[var(--color-lavender-50)] placeholder:font-normal text-sm lg:text-base font-normal text-gray-800 placeholder:text-gray-400 ${className}`}
           placeholder={placeholder}
           value={value}
           name={name}
@@ -101,13 +102,13 @@ function AppInput({
             <div
               className="absolute pointer-events-none top-0 left-0 right-0 h-[2px] z-20 rounded-t-md overflow-hidden"
               style={{
-                background: `radial-gradient(30px circle at ${mousePosition.x}px 0px, #CC8A3A 0%, transparent 70%)`,
+                background: `radial-gradient(30px circle at ${mousePosition.x}px 0px, #f14d82 0%, transparent 70%)`,
               }}
             />
             <div
               className="absolute pointer-events-none bottom-0 left-0 right-0 h-[2px] z-20 rounded-b-md overflow-hidden"
               style={{
-                background: `radial-gradient(30px circle at ${mousePosition.x}px 2px, #CC8A3A 0%, transparent 70%)`,
+                background: `radial-gradient(30px circle at ${mousePosition.x}px 2px, #f14d82 0%, transparent 70%)`,
               }}
             />
           </>
@@ -145,7 +146,8 @@ export default function PresetAccessModal({ open, onClose }: PresetAccessModalPr
     setPhoneValue("");
     setIsSubmitting(false);
     onClose();
-    window.location.href = `https://pay.hotmart.com/T86837978R?off=uq6jsrns&bid=1756069046655&&name=${data.name}&email=${data.email}&phonenumber=${data.phone}&offDiscount=DESCONTO`;
+    const paymentUrl = getPaymentLink();
+    window.location.href = `${paymentUrl}&name=${data.name}&email=${data.email}&phonenumber=${data.phone}`;
   };
 
   return (
@@ -159,7 +161,7 @@ export default function PresetAccessModal({ open, onClose }: PresetAccessModalPr
           transition={{ duration: 0.22 }}
         >
           <motion.div
-            className="bg-[#7A8B89] rounded-lg p-8 w-full max-w-md relative shadow-2xl"
+            className="bg-[var(--color-lavender-300)] rounded-lg p-8 w-full max-w-md relative shadow-2xl"
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
@@ -199,7 +201,7 @@ export default function PresetAccessModal({ open, onClose }: PresetAccessModalPr
               />
               <AppInput
                 label="Telefone *"
-                placeholder="(21) 99999-9999"
+                placeholder="(99) 99999-9999"
                 type="tel"
                 name="phone"
                 value={phoneValue}
@@ -220,8 +222,8 @@ export default function PresetAccessModal({ open, onClose }: PresetAccessModalPr
                 error={errors.phone?.message}
                 touched={touchedFields.phone}
               />
-              <button type="submit" disabled={isSubmitting} className="mt-2 bg-[#CC8A3A] hover:bg-[#b8772d] text-white font-bold px-4 py-3 rounded-md transition-all font-kumbh disabled:opacity-60">
-                {isSubmitting ? "Enviando..." : "Solicitar acesso"}
+              <button type="submit" disabled={isSubmitting} className="mt-2 bg-[var(--color-accent-500)] hover:bg-[var(--color-accent-600)] text-white font-bold px-4 py-3 rounded-md transition-all font-kumbh disabled:opacity-60">
+                {isSubmitting ? "Indo para o checkout..." : "Garantir minha vaga"}
               </button>
             </form>
           </motion.div>
