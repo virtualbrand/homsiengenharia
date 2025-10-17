@@ -19,7 +19,7 @@ export const AboutSection = () => {
       ),
     },
     {
-      image: "/images/duda-about-presets.webp",
+      image: "/images/workshop/primeiro-bolo-duda.webp",
       content: (
         <div className="space-y-4 text-neutral-700 leading-relaxed">
           <h3 className="text-xl md:text-2xl font-bold !text-[var(--color-amaranth-500)] fade-in">Onde tudo começou de verdade</h3>
