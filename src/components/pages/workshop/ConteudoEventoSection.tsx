@@ -72,8 +72,7 @@ const modulosWorkshop: ModuloData[] = [
 export const Card = ({ title, day, description }: CardProps) => {
   return (
     <div
-      className='card flex flex-col w-full rounded-2xl shadow-2xl border border-gray-200 bg-white'
-      style={{ gridArea: '1 / 1 / 2 / 2' }}
+      className='card flex flex-col w-full rounded-2xl shadow-2xl border border-gray-200 bg-white p-6 md:p-8 md:[grid-area:1/1/2/2]'
     >
       <div className="flex items-center justify-between mb-4 md:mb-4">
         <span className="text-xs md:text-sm font-semibold text-[var(--color-amaranth-500)] bg-[var(--color-amaranth-500)]/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
@@ -147,7 +146,10 @@ const createScrollObserver = (
     const hasNoNextLabel = !timeline.nextLabel() && isScrollingDown;
     const hasNoPreviousLabel = !timeline.previousLabel() && !isScrollingDown;
     
-    if (hasNoNextLabel || hasNoPreviousLabel) return;
+    // Se chegou ao fim ou ao início, permitir o scroll nativo continuar
+    if (hasNoNextLabel || hasNoPreviousLabel) {
+      return false; // Retorna false para não prevenir o scroll padrão
+    }
     
     if (!animatingRef.current && direction) {
       animatingRef.current = true;
@@ -156,25 +158,19 @@ const createScrollObserver = (
           animatingRef.current = false;
         },
       });
+      return true; // Retorna true para prevenir o scroll padrão apenas neste caso
     }
+    
+    return false;
   };
 
   return Observer.create({
+    type: 'wheel,touch,scroll',
     wheelSpeed: -1,
-    onDown: () => tweenToLabel(timeline.previousLabel(), false),
-    onUp: () => tweenToLabel(timeline.nextLabel(), true),
+    onDown: () => !tweenToLabel(timeline.previousLabel(), false),
+    onUp: () => !tweenToLabel(timeline.nextLabel(), true),
     tolerance: 10,
-    preventDefault: true,
-    onEnable(self: any) {
-      const savedScroll = self.scrollY();
-      (self as any)._restoreScroll = () => self.scrollY(savedScroll);
-      document.addEventListener('scroll', (self as any)._restoreScroll, {
-        passive: false,
-      });
-    },
-    onDisable: (self: any) => {
-      document.removeEventListener('scroll', (self as any)._restoreScroll);
-    },
+    preventDefault: false, // Permite scroll nativo
   });
 };
 
@@ -183,17 +179,34 @@ const createScrollObserver = (
  */
 const createScrollTrigger = (cardsObserver: any, cardsCount: number) => {
   const scrollDistance = (cardsCount - 1) * SCROLL_DISTANCE_PER_CARD;
+  const isMobile = window.innerWidth < 768;
   
   ScrollTrigger.create({
     trigger: '.cards-section',
-    pin: true,
+    pin: !isMobile, // Não fazer pin no mobile
     start: 'top 20%',
-    end: `+=${scrollDistance}`,
-    scrub: true,
-    onEnter: () => !cardsObserver.isEnabled && cardsObserver.enable(),
-    onEnterBack: () => !cardsObserver.isEnabled && cardsObserver.enable(),
-    onLeave: () => cardsObserver.disable(),
-    onLeaveBack: () => cardsObserver.disable(),
+    end: isMobile ? 'bottom bottom' : `+=${scrollDistance}`,
+    scrub: !isMobile,
+    onEnter: () => {
+      if (!isMobile && !cardsObserver.isEnabled) {
+        cardsObserver.enable();
+      }
+    },
+    onEnterBack: () => {
+      if (!isMobile && !cardsObserver.isEnabled) {
+        cardsObserver.enable();
+      }
+    },
+    onLeave: () => {
+      if (cardsObserver.isEnabled) {
+        cardsObserver.disable();
+      }
+    },
+    onLeaveBack: () => {
+      if (cardsObserver.isEnabled) {
+        cardsObserver.disable();
+      }
+    },
   });
 };
 
@@ -213,8 +226,15 @@ function ConteudoEventoSection() {
     if (!cardsRef.current) return;
 
     const cards = gsap.utils.toArray('.card') as HTMLElement[];
+    const isMobile = window.innerWidth < 768;
 
-    // Criar timeline com animações dos cards
+    // No mobile, não aplicar animação de stacking - apenas scroll normal
+    if (isMobile) {
+      gsap.set(cards, { clearProps: 'all' });
+      return;
+    }
+
+    // Criar timeline com animações dos cards (apenas desktop)
     const timeline = createCardStackTimeline(cards);
     timelineRef.current = timeline;
 
@@ -259,7 +279,7 @@ function ConteudoEventoSection() {
 
             {/* Coluna da direita - Cards empilhados */}
             <div className="lg:col-span-7">
-              <div ref={cardsRef} className='cards grid' style={{ gridTemplateColumns: '1fr' }}>
+              <div ref={cardsRef} className='cards flex flex-col gap-6 md:gap-0 md:grid md:[grid-template-columns:1fr]'>
                 {modulosWorkshop.map((modulo, i) => (
                   <Card
                     key={`modulo_${i}`}
