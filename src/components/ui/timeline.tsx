@@ -40,31 +40,32 @@ export const Timeline = ({
   useEffect(() => {
     if (!lineRef.current || !ref.current) return;
 
-    // Detecta se é mobile
     const isMobile = window.innerWidth < 768;
 
+    // Usa ScrollTrigger tanto para mobile quanto desktop
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: isMobile ? "top 200px" : "top 80%",
-        end: isMobile ? "bottom 200px" : "bottom 40%",
-        scrub: 1,
+        start: "top 80%",
+        end: isMobile ? "bottom top" : "bottom 40%",
+        scrub: 0.3,
         invalidateOnRefresh: true,
+        markers: false,
       }
     });
 
+    // No mobile, anima até 200% para garantir que cobre todos os itens
     timeline.fromTo(
       lineRef.current,
       {
         height: "0%",
       },
       {
-        height: "100%",
+        height: isMobile ? "200%" : "98%",
         ease: "none",
       }
     );
 
-    // Atualiza ScrollTrigger quando a janela é redimensionada
     const handleResize = () => {
       ScrollTrigger.refresh();
     };
@@ -98,7 +99,7 @@ export const Timeline = ({
             key={index}
             className="flex justify-start pt-10 md:pt-20 md:gap-1"
           >
-            <div className="sticky flex flex-col md:flex-row z-40 top-[200px] md:top-40 self-start w-12">
+            <div className="sticky flex flex-col md:flex-row z-40 top-[160px] md:top-40 self-start w-12">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white flex items-top pt-2 justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300" />
               </div>
@@ -122,7 +123,7 @@ export const Timeline = ({
                 <img 
                   src={item.image} 
                   alt={item.title || "Timeline image"} 
-                  className="scroll-right w-full md:w-64 md:h-64 object-cover rounded-2xl shadow-lg flex-shrink-0"
+                  className="fade-in w-full md:w-64 md:h-64 object-cover rounded-2xl shadow-lg flex-shrink-0"
                 />
               )}
             </div>
