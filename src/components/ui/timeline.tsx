@@ -40,12 +40,16 @@ export const Timeline = ({
   useEffect(() => {
     if (!lineRef.current || !ref.current) return;
 
+    // Detecta se é mobile
+    const isMobile = window.innerWidth < 768;
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 80%",
-        end: "bottom 40%",
+        start: isMobile ? "top 200px" : "top 80%",
+        end: isMobile ? "bottom 200px" : "bottom 40%",
         scrub: 1,
+        invalidateOnRefresh: true,
       }
     });
 
@@ -60,8 +64,16 @@ export const Timeline = ({
       }
     );
 
+    // Atualiza ScrollTrigger quando a janela é redimensionada
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
       timeline.kill();
+      window.removeEventListener('resize', handleResize);
     };
   }, [height]);
 
@@ -86,7 +98,7 @@ export const Timeline = ({
             key={index}
             className="flex justify-start pt-10 md:pt-20 md:gap-1"
           >
-            <div className="sticky flex flex-col md:flex-row z-40 top-40 self-start w-12">
+            <div className="sticky flex flex-col md:flex-row z-40 top-[200px] md:top-40 self-start w-12">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white flex items-top pt-2 justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300" />
               </div>
