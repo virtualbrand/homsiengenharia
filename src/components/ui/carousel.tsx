@@ -1,14 +1,14 @@
 'use client';
 import {
   Children,
-  ReactNode,
+  type ReactNode,
   createContext,
   useContext,
   useEffect,
   useRef,
   useState,
 } from 'react';
-import { motion, Transition, useMotionValue } from 'motion/react';
+import { motion, type Transition, useMotionValue } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
