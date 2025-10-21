@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /workshop
-Allow: /efeito-agua-na-boca
 
 Sitemap: https://homsiengenharia.com/sitemap.xml
 

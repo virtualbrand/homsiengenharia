@@ -4,10 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import HomePage from './pages/HomePage'
-import EfeitoAguaNaBocaPage from './pages/EfeitoAguaNaBocaPage'
-import WorkshopPage from './pages/WorkshopPage'
-import CalculadoraPage from './pages/CalculadoraPage'
+import HomePage from './pages/HomePage';
+import LinksPage from './pages/LinksPage';
 import { HelmetProvider } from 'react-helmet-async';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -21,6 +19,9 @@ function App() {
       smoothWheel: true,
     });
 
+    // Expõe o Lenis no window para acesso global
+    (window as any).lenis = lenis;
+
     // Conecta Lenis com GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -32,6 +33,7 @@ function App() {
 
     return () => {
       lenis.destroy();
+      delete (window as any).lenis;
     };
   }, []);
 
@@ -40,9 +42,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/efeito-agua-na-boca" element={<EfeitoAguaNaBocaPage />} />
-          <Route path="/workshop" element={<WorkshopPage />} />
-          <Route path="/calculadora" element={<CalculadoraPage />} />
+          <Route path="/links" element={<LinksPage />} />
         </Routes>
       </Router>
     </HelmetProvider>

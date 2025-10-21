@@ -1,117 +1,251 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDarkSection, setIsDarkSection] = useState(true)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const target = document.querySelector(targetId)
+    if (target) {
+      // Get Lenis instance from window
+      const lenis = (window as any).lenis
+      if (lenis) {
+        lenis.scrollTo(target, {
+          offset: -80, // 80px offset for header
+          duration: 1.5,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        })
+      } else {
+        // Fallback if Lenis is not available
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
+    setIsMenuOpen(false)
+  }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get all sections
+      const aboutSection = document.querySelector('#sobre')
+      const projectsSection = document.querySelector('#projetos')
+      
+      if (aboutSection || projectsSection) {
+        const aboutRect = aboutSection?.getBoundingClientRect()
+        const projectsRect = projectsSection?.getBoundingClientRect()
+        
+        // Check if we're in the about section (light background)
+        const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
+        
+        // Check if we're in the projects section (light background)
+        const isInProjectsSection = projectsRect && projectsRect.top <= 100 && projectsRect.bottom >= 100
+        
+        setIsDarkSection(!isInAboutSection && !isInProjectsSection)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check initial position
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className="py-4 px-4 md:px-8 bg-white/95 backdrop-blur-sm shadow-lg border-b border-primary-100 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
-            🍰
+    <header className="fixed top-0 left-0 z-50 w-full">
+      <div className="backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-2xl">
+        <div className="container mx-auto px-4 py-4 md:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-8">
+          {/* Logo */}
+          <div className="flex items-center space-x-3 flex-shrink-0">
+            <img 
+              src="/images/icon-white.svg"
+              alt="Homsi Engenharia" 
+              className={cn(
+                "w-8 h-8 transition-all duration-300",
+                !isDarkSection && "brightness-0"
+              )}
+            />
+            <div className="hidden sm:block">
+              <h1 className={cn(
+                "text-2xl font-bold transition-colors duration-300",
+                isDarkSection ? "text-white" : "text-gray-900"
+              )}>Homsi Engenharia</h1>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl md:text-2xl font-bold text-primary-600">A Confeiteira Próspera</h1>
-            <p className="text-xs text-chocolate-500 hidden md:block">por Duda Berger</p>
+          
+          {/* Navigation Menu - Desktop */}
+          <nav className="hidden md:flex flex-1 justify-center" aria-label="Menu principal">
+            <ul className="flex items-center space-x-6 lg:space-x-8">
+               <li>
+                <a 
+                  href="#sobre" 
+                  title="Sobre a Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#sobre')}
+                  className={cn(
+                    "px-4 py-2 text-sm font-bold transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white hover:opacity-80" 
+                      : "text-gray-900 hover:text-primary-600"
+                  )}
+                >
+                  Sobre
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#servicos" 
+                  title="Serviços de engenharia civil"
+                  onClick={(e) => handleAnchorClick(e, '#servicos')}
+                  className={cn(
+                    "px-4 py-2 text-sm font-bold transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white hover:opacity-80" 
+                      : "text-gray-900 hover:text-primary-600"
+                  )}
+                >
+                  Serviços
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#projetos" 
+                  title="Projetos de engenharia realizados pela Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#projetos')}
+                  className={cn(
+                    "px-4 py-2 text-sm font-bold transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white hover:opacity-80" 
+                      : "text-gray-900 hover:text-primary-600"
+                  )}
+                >
+                  Projetos
+                </a>
+              </li>
+            </ul>
+          </nav>
+          
+          {/* CTA Button */}
+          <div className="flex items-center space-x-4 flex-shrink-0">
+            <button 
+              className="hidden sm:flex btn-primary rounded-xl px-6 py-2 shadow-lg items-center justify-center"
+            >
+              Solicitar orçamento
+            </button>
+            
+            {/* Mobile Menu Button */}
+            <button 
+              className={cn(
+                "md:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg",
+                isDarkSection ? "text-white" : "text-gray-900"
+              )}
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              </svg>
+            </button>
           </div>
         </div>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            <li>
-              <Link to="/" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 font-medium flex items-center space-x-1">
-                <span>🏠</span>
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 font-medium flex items-center space-x-1">
-                <span>👩‍🍳</span>
-                <span>Sobre</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 font-medium flex items-center space-x-1">
-                <span>🎓</span>
-                <span>Cursos</span>
-              </a>
-            </li>
-            <li>
-              <Link to="/presets" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 font-medium flex items-center space-x-1">
-                <span>🎨</span>
-                <span>Presets</span>
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-full transition-colors duration-300 font-medium flex items-center space-x-1">
-                <span>💬</span>
-                <span>Contato</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-chocolate-600 hover:text-accent-600 transition-colors duration-300 p-2"
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-          </svg>
-        </button>
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <motion.nav 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden mt-4 pt-4 border-t border-white/20"
+            aria-label="Menu principal mobile"
+          >
+            <ul className="flex flex-col space-y-2">
+              <li>
+                <Link 
+                  to="/" 
+                  title="Início - Homsi Engenharia"
+                  className={cn(
+                    "hover:opacity-80 transition-all duration-300 block py-3 px-4 rounded-xl font-bold uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="#servicos" 
+                  title="Serviços de engenharia civil"
+                  onClick={(e) => handleAnchorClick(e, '#servicos')}
+                  className={cn(
+                    "hover:opacity-80 transition-all duration-300 block py-3 px-4 rounded-xl font-bold uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                >
+                  Serviços
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#projetos" 
+                  title="Projetos de engenharia realizados pela Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#projetos')}
+                  className={cn(
+                    "hover:opacity-80 transition-all duration-300 block py-3 px-4 rounded-xl font-bold uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                >
+                  Projetos
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#sobre" 
+                  title="Sobre a Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#sobre')}
+                  className={cn(
+                    "hover:opacity-80 transition-all duration-300 block py-3 px-4 rounded-xl font-bold uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                >
+                  Sobre
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#contato" 
+                  title="Entre em contato com a Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#contato')}
+                  className={cn(
+                    "hover:opacity-80 transition-all duration-300 block py-3 px-4 rounded-xl font-bold uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                >
+                  Contato
+                </a>
+              </li>
+              <li>
+                <button 
+                  className="sm:hidden btn-primary rounded-xl px-6 py-3 shadow-lg mt-4 w-full"
+                >
+                  Orçamento Grátis
+                </button>
+              </li>
+            </ul>
+          </motion.nav>
+        )}
+        </div>
       </div>
-      
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <motion.nav 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden mt-4 border-t border-primary-100 pt-4"
-        >
-          <ul className="flex flex-col space-y-2">
-            <li>
-              <Link to="/" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 block py-3 px-4 rounded-lg hover:bg-accent-50 font-medium flex items-center space-x-2">
-                <span>🏠</span>
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 block py-3 px-4 rounded-lg hover:bg-accent-50 font-medium flex items-center space-x-2">
-                <span>👩‍🍳</span>
-                <span>Sobre</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 block py-3 px-4 rounded-lg hover:bg-accent-50 font-medium flex items-center space-x-2">
-                <span>🎓</span>
-                <span>Cursos</span>
-              </a>
-            </li>
-            <li>
-              <Link to="/presets" className="text-chocolate-600 hover:text-accent-600 transition-colors duration-300 block py-3 px-4 rounded-lg hover:bg-accent-50 font-medium flex items-center space-x-2">
-                <span>🎨</span>
-                <span>Presets</span>
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="bg-accent-500 hover:bg-accent-600 text-white py-3 px-4 rounded-lg transition-colors duration-300 font-medium flex items-center space-x-2">
-                <span>💬</span>
-                <span>Contato</span>
-              </a>
-            </li>
-          </ul>
-        </motion.nav>
-      )}
     </header>
   )
 }
