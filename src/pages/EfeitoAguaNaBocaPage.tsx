@@ -7,12 +7,12 @@ const EfeitoAguaNaBocaPage = () => {
       <Seo
         title="Efeito Água na Boca | Duda Berger"
         description="Uma descrição detalhada da página Efeito Água na Boca."
-        canonical="https://dudaberger.com.br/efeito-agua-na-boca"
+        canonical="https://homsiengenharia.com/efeito-agua-na-boca"
         schemaMarkup={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Efeito Água na Boca',
-          url: 'https://dudaberger.com.br/efeito-agua-na-boca',
+          url: 'https://homsiengenharia.com/efeito-agua-na-boca',
         }}
       />
       <HeroSection />

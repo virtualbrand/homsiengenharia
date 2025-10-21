@@ -18,7 +18,7 @@ const WorkshopPage = () => {
             <Seo
         title="Do ZERO aos R$ 5.000/mês com Confeitaria | Workshop Ao Vivo"
         description="2 dias ao vivo para sair do zero e faturar R$ 5.000/mês com confeitaria caseira. Aprenda produto, precificação e vendas que realmente funcionam. 08 e 09 de novembro no Zoom."
-        canonical="https://dudaberger.com.br/workshop-confeitaria-casa"
+        canonical="https://homsiengenharia.com/workshop-confeitaria-casa"
         schemaMarkup={{
           '@context': 'https://schema.org',
           '@type': 'Event',
@@ -29,16 +29,16 @@ const WorkshopPage = () => {
           eventStatus: 'https://schema.org/EventScheduled',
           location: {
             '@type': 'VirtualLocation',
-            url: 'https://dudaberger.com.br/workshop-confeitaria-casa',
+            url: 'https://homsiengenharia.com/workshop-confeitaria-casa',
           },
           description: '2 dias ao vivo para confeiteiras aprenderem o passo a passo completo para faturar da cozinha de casa: produto + lucro + venda.',
-          url: 'https://dudaberger.com.br/workshop-confeitaria-casa',
+          url: 'https://homsiengenharia.com/workshop-confeitaria-casa',
           offers: {
             '@type': 'Offer',
             price: '37',
             priceCurrency: 'BRL',
             availability: 'https://schema.org/InStock',
-            url: 'https://dudaberger.com.br/workshop-confeitaria-casa'
+            url: 'https://homsiengenharia.com/workshop-confeitaria-casa'
           },
           performer: {
             '@type': 'Person',

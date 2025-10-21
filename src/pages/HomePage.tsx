@@ -7,12 +7,12 @@ const HomePage = () => {
       <Seo
         title="Duda Berger | Confeiteira"
         description="A detailed description of the Home page."
-        canonical="https://dudaberger.com.br/"
+        canonical="https://homsiengenharia.com/"
         schemaMarkup={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
           name: 'Duda Berger',
-          url: 'https://dudaberger.com.br/',
+          url: 'https://homsiengenharia.com/',
         }}
       />
       <HeroSection />
