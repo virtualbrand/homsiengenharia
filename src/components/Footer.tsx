@@ -1,13 +1,11 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 
 function Footer() {
   return (
@@ -16,14 +14,14 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
             <h2 className="mb-4 text-3xl font-bold tracking-tight">Homsi Engenharia</h2>
-            <p className="mb-6 text-muted-foreground">
+            <p className="mb-6 text-lg text-gray-700 leading-relaxed">
               A Homsi Engenharia é uma empresa especializada em construção e reformas de alto padrão, atuando com excelência em Belo Horizonte e na região metropolitana.
             </p>
             <div className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
           </div>
           <div>
             <h3 className="mb-4 text-lg font-semibold">Links Rápidos</h3>
-            <nav className="space-y-2 text-sm">
+            <nav className="space-y-2 text-lg text-gray-700 leading-relaxed">
               <a href="#" className="block transition-colors hover:text-primary">
                 Sobre Nós
               </a>
@@ -40,7 +38,7 @@ function Footer() {
           </div>
           <div className="relative">
             <h3 className="mb-4 text-lg font-semibold">Contato</h3>
-            <address className="space-y-2 text-sm not-italic mb-6">
+            <address className="space-y-2 text-lg text-gray-700 leading-relaxed mb-6">
               <p>Rua Tenente Brito Melo - Barro Preto</p>
               <p>Belo Horizonte - MG, 30180-072</p>
               <p>Telefone: (11) 1234-5678</p>
@@ -48,57 +46,59 @@ function Footer() {
               <p className="pt-2">Segunda à Sexta - 8h30 às 17h30</p>
             </address>
             <div>
-              <h4 className="mb-4 text-sm font-semibold">Siga-nos</h4>
+              <h4 className="mb-4 text-sm font-semibold">Acompanhe</h4>
               <div className="flex space-x-4">
-                <TooltipProvider>
+                  <TooltipProvider delayDuration={200}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon" className="rounded-full">
-                        <Facebook className="h-4 w-4" />
-                        <span className="sr-only">Facebook</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Siga-nos no Facebook</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon" className="rounded-full">
-                        <Twitter className="h-4 w-4" />
-                        <span className="sr-only">Twitter</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Siga-nos no Twitter</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon" className="rounded-full">
-                        <Instagram className="h-4 w-4" />
+                      <a 
+                        href="https://www.instagram.com/kemel_homsiengenharia" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
+                      >
+                        <img src="/icons/instagram.svg" alt="" className="h-5 w-5" />
                         <span className="sr-only">Instagram</span>
-                      </Button>
+                      </a>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Siga-nos no Instagram</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                <TooltipProvider>
+                <TooltipProvider delayDuration={200}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon" className="rounded-full">
-                        <Linkedin className="h-4 w-4" />
-                        <span className="sr-only">LinkedIn</span>
-                      </Button>
+                      <a 
+                        href="https://www.youtube.com/@HomsiEngenharia?sub_confirmation=1" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-00"
+                      >
+                        <img src="/icons/youtube.svg" alt="" className="h-5 w-5" />
+                        <span className="sr-only">YouTube</span>
+                      </a>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Conecte-se no LinkedIn</p>
+                      <p>Inscreva-se no YouTube</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider delayDuration={200}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a 
+                        href="https://www.tiktok.com/@homsiengenharia" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
+                      >
+                        <img src="/icons/tiktok.svg" alt="" className="h-5 w-5" />
+                        <span className="sr-only">TikTok</span>
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Siga-nos no TikTok</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

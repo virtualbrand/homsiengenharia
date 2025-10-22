@@ -2,6 +2,29 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
 const HeroSection = () => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const target = document.querySelector(targetId)
+    if (target) {
+      // Get Lenis instance from window
+      const lenis = (window as any).lenis
+      if (lenis) {
+        lenis.scrollTo(target, {
+          offset: -80, // 80px offset for header
+          duration: 1.5,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        })
+      } else {
+        // Fallback if Lenis is not available
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -54,11 +77,13 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
             
-            <button 
+            <a 
+              href="#sobre"
+              onClick={(e) => handleAnchorClick(e, '#sobre')}
               className="btn-secondary rounded-xl px-8 py-4 text-lg font-semibold group flex items-center justify-center"
             >
               Sobre
-            </button>
+            </a>
           </motion.div>
         </div>
       </div>
