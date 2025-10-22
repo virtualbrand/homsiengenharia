@@ -8,9 +8,32 @@ import {
 } from "@/components/ui/tooltip"
 
 function Footer() {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const target = document.querySelector(targetId)
+    if (target) {
+      // Get Lenis instance from window
+      const lenis = (window as any).lenis
+      if (lenis) {
+        lenis.scrollTo(target, {
+          offset: -80, // 80px offset for header
+          duration: 1.5,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        })
+      } else {
+        // Fallback if Lenis is not available
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+
   return (
     <footer className="relative border-t bg-background text-foreground transition-colors duration-300">
-      <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
+      <div className="container mx-auto px-4 pt-20 pb-12 md:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
             <h2 className="mb-4 text-3xl font-bold tracking-tight">Homsi Engenharia</h2>
@@ -22,16 +45,32 @@ function Footer() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">Links Rápidos</h3>
             <nav className="space-y-2 text-lg text-gray-700 leading-relaxed">
-              <a href="#" className="block transition-colors hover:text-primary">
+              <a 
+                href="#sobre" 
+                onClick={(e) => handleAnchorClick(e, '#sobre')}
+                className="block transition-colors hover:text-primary"
+              >
                 Sobre Nós
               </a>
-              <a href="#" className="block transition-colors hover:text-primary">
+              <a 
+                href="#servicos" 
+                onClick={(e) => handleAnchorClick(e, '#servicos')}
+                className="block transition-colors hover:text-primary"
+              >
                 Serviços
               </a>
-              <a href="#" className="block transition-colors hover:text-primary">
+              <a 
+                href="#projetos" 
+                onClick={(e) => handleAnchorClick(e, '#projetos')}
+                className="block transition-colors hover:text-primary"
+              >
                 Projetos
               </a>
-              <a href="#" className="block transition-colors hover:text-primary">
+              <a 
+                href="#contato" 
+                onClick={(e) => handleAnchorClick(e, '#contato')}
+                className="block transition-colors hover:text-primary"
+              >
                 Contato
               </a>
             </nav>
@@ -57,7 +96,7 @@ function Footer() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
                       >
-                        <img src="/icons/instagram.svg" alt="" className="h-5 w-5" />
+                        <img src="/icons/instagram.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">Instagram</span>
                       </a>
                     </TooltipTrigger>
@@ -75,7 +114,7 @@ function Footer() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-00"
                       >
-                        <img src="/icons/youtube.svg" alt="" className="h-5 w-5" />
+                        <img src="/icons/youtube.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">YouTube</span>
                       </a>
                     </TooltipTrigger>
@@ -93,7 +132,7 @@ function Footer() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
                       >
-                        <img src="/icons/tiktok.svg" alt="" className="h-5 w-5" />
+                        <img src="/icons/tiktok.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">TikTok</span>
                       </a>
                     </TooltipTrigger>

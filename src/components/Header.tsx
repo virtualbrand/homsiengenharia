@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils'
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkSection, setIsDarkSection] = useState(true)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -37,6 +39,17 @@ export const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Show header when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      }
+      
+      setLastScrollY(currentScrollY)
+      
       // Get all sections
       const aboutSection = document.querySelector('#sobre')
       const projectsSection = document.querySelector('#projetos')
@@ -59,10 +72,13 @@ export const Header = () => {
     handleScroll() // Check initial position
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full">
+    <header className={cn(
+      "fixed top-0 left-0 z-50 w-full transition-transform duration-300 ease-in-out",
+      isVisible ? "translate-y-0" : "-translate-y-full"
+    )}>
       <div className="backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-2xl">
         <div className="container mx-auto px-4 py-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-8">
