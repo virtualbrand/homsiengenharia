@@ -42,7 +42,7 @@ const AboutSection = () => {
             <div className="fade-in">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-2xl opacity-20 blur-2xl" />
               <img
-                src="/images/kemel-homsi-sobre.webp"
+                src="/images/kemel.webp"
                 alt="Kemel Homsi - Engenheiro Civil"
                 className="relative rounded-2xl shadow-2xl w-full h-auto object-cover"
               />
