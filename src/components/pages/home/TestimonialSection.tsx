@@ -4,65 +4,59 @@ import { motion } from "motion/react";
 
 const testimonials = [
   {
-    text: "A HomsiEngenharia transformou nosso projeto em realidade com excelência técnica e atenção aos detalhes. Superaram nossas expectativas em todos os aspectos.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-    name: "Mariana Santos",
-    role: "Diretora de Operações",
+    text: "Excelente profissional, com alta capacidade de gestão de prazos e obras complexas, fazendo com naturalidade uma obra acontecer sem trazer para o cliente a dor de cabeça das dificuldades que existem no caminho.",
+    name: "Gustavo Duarte",
   },
   {
-    text: "Profissionais extremamente competentes e dedicados. A qualidade do projeto estrutural foi impecável e entregue dentro do prazo estabelecido.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-    name: "Carlos Eduardo",
-    role: "Gerente de Projetos",
+    text: "Profissional compromissado e competente. Além de ser fiel aos prazos e muito atencioso aos detalhes. Super indico!!!",
+    name: "Marianna Matoso",
   },
   {
-    text: "Equipe técnica de altíssimo nível. O acompanhamento durante toda a obra nos trouxe segurança e tranquilidade para seguir com o empreendimento.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-    name: "Ana Paula Oliveira",
-    role: "Arquiteta",
+    text: "Muito feliz com a experiência do começo ao fim. Atendimento exemplar com excelentes soluções, acompanhamento responsável e entrega no prazo combinado!",
+    name: "Ju Yokomizo",
   },
   {
-    text: "A HomsiEngenharia entregou soluções inovadoras e sustentáveis para nosso projeto. Recomendo fortemente pelos resultados excepcionais.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-    name: "Roberto Ferreira",
-    role: "Empresário",
+    text: "Tivemos uma excelente experiência com a HOMSI na reforma da nossa empresa. Profissionalismo, compromisso nos prazos e atenção aos detalhes. Recomendamos com total confiança!",
+    name: "João Victor Fagundes",
   },
   {
-    text: "Excelente custo-benefício aliado a um trabalho de primeira qualidade. A consultoria técnica foi fundamental para o sucesso do nosso projeto.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
-    name: "Juliana Costa",
-    role: "Engenheira Civil",
+    text: "Uma empresa gerida por profissionais sérios e comprometidos. O Kemel é extremamente técnico e atencioso com o cliente, um profissional muito atento aos detalhes.",
+    name: "Thiago Valeriano",
   },
   {
-    text: "Impressionante como conseguiram otimizar nosso projeto, reduzindo custos sem comprometer a qualidade. Parceria de confiança.",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
-    name: "Fernando Almeida",
-    role: "Investidor Imobiliário",
+    text: "Meu consultório ficou impecável e o serviço foi incrível em todo o processo. Super recomendo!",
+    name: "Paula Torido",
   },
   {
-    text: "Atendimento personalizado e soluções sob medida. A HomsiEngenharia entende as necessidades do cliente e entrega além do esperado.",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop",
-    name: "Patrícia Rodrigues",
-    role: "Construtora",
+    text: "Encontrei dois profissionais em uma só pessoa: o engenheiro e o construtor, que presta serviços com rigorosidade técnica e, ao mesmo tempo, demonstra amorosidade pelo sonho de seu cliente.",
+    name: "Khellen Kastellarz",
   },
   {
-    text: "Profissionalismo exemplar em todas as etapas do projeto. A expertise técnica da equipe fez toda a diferença no resultado final.",
-    image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop",
-    name: "Ricardo Mendes",
-    role: "Diretor Técnico",
+    text: "Gostaria de destacar o excelente trabalho pela Homsi Serviço de Engenharia, liderada pelo engenheiro Kemel. A empresa se destaca pelo alto padrão técnico, comprometimento com prazos e soluções inteligentes em engenharia.",
+    name: "Rafael Esteves",
   },
   {
-    text: "Superaram todos os desafios do nosso projeto complexo. A capacidade de resolver problemas e propor soluções criativas é admirável.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-    name: "Camila Souza",
-    role: "Coordenadora de Obras",
+    text: "MARAVILHOSO trabalho! Excelentes profissionais.",
+    name: "Cristina Maia Batista Santos",
+  },
+  {
+    text: "Atendimento excelente!",
+    name: "Maria Raquel Batista",
+  },
+  {
+    text: "Super competente!!!",
+    name: "Lorena Speltz",
+  },
+  {
+    text: "Excelente e detalhista.",
+    name: "Hannée Homsi",
   },
 ];
 
 
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 9);
+const firstColumn = testimonials.slice(0, 4);
+const secondColumn = testimonials.slice(4, 8);
+const thirdColumn = testimonials.slice(8, 12);
 
 
 const TestimonialSection = () => {
