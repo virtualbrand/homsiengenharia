@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import {
   Tooltip,
   TooltipContent,
@@ -32,7 +33,13 @@ function Footer() {
   }
 
   return (
-    <footer className="relative border-t bg-background text-foreground transition-colors duration-300">
+    <motion.footer 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative border-t bg-background text-foreground transition-colors duration-300"
+    >
       <div className="container mx-auto px-4 pt-20 pb-12 md:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
@@ -94,7 +101,7 @@ function Footer() {
                         href="https://www.instagram.com/kemel_homsiengenharia" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
                       >
                         <img src="/icons/instagram.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">Instagram</span>
@@ -112,7 +119,7 @@ function Footer() {
                         href="https://www.youtube.com/@HomsiEngenharia?sub_confirmation=1" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-00"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
                       >
                         <img src="/icons/youtube.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">YouTube</span>
@@ -130,7 +137,7 @@ function Footer() {
                         href="https://www.tiktok.com/@homsiengenharia" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white border border-gray-900 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500"
                       >
                         <img src="/icons/tiktok.svg" alt="" className="h-4 w-4" />
                         <span className="sr-only">TikTok</span>
@@ -156,7 +163,7 @@ function Footer() {
           </nav>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 

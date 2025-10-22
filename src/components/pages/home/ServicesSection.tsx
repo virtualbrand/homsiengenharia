@@ -24,9 +24,9 @@ export default function ServicesSection() {
   useScrollAnimation();
   
   return (
-    <section id="servicos">
+    <section id="servicos" className="min-h-screen">
     <BackgroundShader 
-      className="w-full"
+      className="w-full min-h-screen"
       colors={[
         "hsl(0, 0%, 7%)",       // Very dark gray
         "hsl(0, 0%, 15%)",      // Dark gray
@@ -38,9 +38,10 @@ export default function ServicesSection() {
       speed={0.8}
     >
       {/* Two Columns Layout - Full Width */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 min-h-screen">
         {/* Left Column - Video Full Width (5 columns) */}
-        <div className="relative overflow-hidden h-full min-h-[400px] lg:min-h-[700px] lg:col-span-5">
+        <div className="relative overflow-hidden min-h-[400px] lg:min-h-screen lg:col-span-5">
           <video
             autoPlay
             loop
@@ -97,6 +98,7 @@ export default function ServicesSection() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </BackgroundShader>
     </section>
