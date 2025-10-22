@@ -27,7 +27,7 @@ export const TestimonialsColumn = (props: {
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, name }, i) => (
-                <div className="p-10 rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.1)] max-w-xs w-full" key={i}>
+                <div className="p-10 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.1)] max-w-xs w-full" key={i}>
                   <div className="flex gap-0.5 mb-4">
                     {[...Array(5)].map((_, starIndex) => (
                       <Star

@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import HeroSection from '../components/pages/home/HeroSection'
 import AboutSection from '../components/pages/home/AboutSection'
 import ServicesSection from '../components/pages/home/ServicesSection'
-import PortfolioSection from '../components/pages/home/PortfolioSection'
+import ProjectsSection from '../components/pages/home/ProjectsSection'
 import TestimonialSection from '../components/pages/home/TestimonialSection'
 import CtaSection from '../components/pages/home/CtaSection'
 import Footer from '@/components/Footer'
@@ -54,7 +54,7 @@ const HomePage = () => {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <PortfolioSection />
+        <ProjectsSection />
         <TestimonialSection />
         <CtaSection />
         <Footer />

@@ -1,6 +1,7 @@
 "use client";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { motion } from "motion/react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const testimonials = [
   {
@@ -60,8 +61,10 @@ const thirdColumn = testimonials.slice(8, 12);
 
 
 const TestimonialSection = () => {
+  useScrollAnimation();
+  
   return (
-    <section className="bg-background my-20 relative">
+    <section className="bg-background py-20 md:py-32 relative">
 
       <div className="container z-10 mx-auto">
         <motion.div
@@ -71,10 +74,10 @@ const TestimonialSection = () => {
           viewport={{ once: true }}
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5 text-center">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4">
             O que nossos clientes dizem
           </h2>
-          <p className="text-center mt-5 opacity-75">
+          <p className="fade-in text-xl md:text-2xl text-gray-700 leading-relaxed text-center mt-4">
             Veja o que nossos clientes têm a dizer sobre nossos serviços.
           </p>
         </motion.div>
