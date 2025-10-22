@@ -74,11 +74,11 @@ const TestimonialSection = () => {
           viewport={{ once: true }}
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4">
+          <h2 className="fade-in text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4">
             O que nossos clientes dizem
           </h2>
-          <p className="fade-in text-xl md:text-2xl text-gray-700 leading-relaxed text-center mt-4">
-            Veja o que nossos clientes têm a dizer sobre nossos serviços.
+          <p className="fade-in text-xl leading-relaxed mb-2 text-gray-700">
+            Veja o que nossos clientes têm a dizer sobre nossos serviços
           </p>
         </motion.div>
 

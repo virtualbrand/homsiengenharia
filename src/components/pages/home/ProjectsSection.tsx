@@ -1,148 +1,427 @@
 "use client";
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   motion,
   useScroll,
   useTransform,
   useSpring,
   MotionValue,
+  AnimatePresence,
 } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+
+// Definir os projetos com suas galerias
+const projectGalleries = {
+  "apto-felipe": [
+    "/images/apto-felipe/1-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/2-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/3-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/4-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/5-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/6-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/7-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/8-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/9-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/10-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/11-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/12-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/13-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/14-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/15-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/16-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/17-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/18-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/19-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/20-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/21-apto-felipe-homsiengenharia.webp",
+    "/images/apto-felipe/22-apto-felipe-homsiengenharia.webp",
+  ],
+  "clinica-raissa": [
+    "/images/clinica-raissa/1-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/2-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/3-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/4-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/5-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/6-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/7-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/8-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/9-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/10-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/11-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/12-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/14-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/15-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/16-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/17-medplex.homsiengenharia.webp",
+    "/images/clinica-raissa/18-medplex.homsiengenharia.webp",
+  ],
+  "clinica-marcos": [
+    "/images/clinica-marcos/1-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/2-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/3-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/4-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/5-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/6-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/7-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/8-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/9-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/10-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/11-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/12-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/13-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/14-vianello.homsiengenharia.webp",
+    "/images/clinica-marcos/15-vianello.homsiengenharia.webp",
+  ],
+};
 
 const products = [
   {
     title: "Apartamento Residencial",
     link: "#",
     thumbnail: "/images/apto-felipe-cover.jpg",
+    projectId: "apto-felipe",
   },
   {
     title: "Casa",
     link: "#",
     thumbnail: "/images/casa-herbert-cover.jpg",
+    projectId: null,
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos-cover.jpg",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Odontológica",
     link: "#",
     thumbnail: "/images/clinica-raissa-cover.jpg",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/1-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/2-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/3-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/4-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/5-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/6-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/7-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/8-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/9-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/10-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/11-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/12-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/13-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/14-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/15-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/16-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/17-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/18-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/19-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/20-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/21-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Apartamento Residencial",
+    link: "#",
+    thumbnail: "/images/apto-felipe/22-apto-felipe-homsiengenharia.webp",
+    projectId: "apto-felipe",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/1-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/2-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/3-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/4-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/5-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/6-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/7-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/8-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/9-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/10-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/11-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/12-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/14-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/15-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/16-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/17-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
+  },
+  {
+    title: "Clínica Odontológica",
+    link: "#",
+    thumbnail: "/images/clinica-raissa/18-medplex.homsiengenharia.webp",
+    projectId: "clinica-raissa",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/1-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/2-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/3-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/4-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/5-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/6-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/7-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/8-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/9-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/10-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/11-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/12-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/13-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/14-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
   {
     title: "Clínica Médica",
     link: "#",
     thumbnail: "/images/clinica-marcos/15-vianello.homsiengenharia.webp",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe-cover.jpg",
-  },
-  {
-    title: "Casa",
-    link: "#",
-    thumbnail: "/images/casa-herbert-cover.jpg",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos-cover.jpg",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa-cover.jpg",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/1-vianello.homsiengenharia.webp",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/2-vianello.homsiengenharia.webp",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/3-vianello.homsiengenharia.webp",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/4-vianello.homsiengenharia.webp",
+    projectId: "clinica-marcos",
   },
 ];
 
@@ -159,17 +438,199 @@ const Header = () => {
   );
 };
 
+// Componente de Galeria (Lightbox) com Embla Carousel
+const GalleryModal = ({ 
+  isOpen, 
+  onClose, 
+  images, 
+  initialIndex = 0,
+  projectTitle 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  images: string[]; 
+  initialIndex?: number;
+  projectTitle: string;
+}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    startIndex: initialIndex 
+  });
+  const [emblaThumbsRef] = useEmblaCarousel({
+    containScroll: "keepSnaps",
+    dragFree: true,
+  });
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
+
+  const onThumbClick = useCallback((index: number) => {
+    if (!emblaApi) return;
+    emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollTo(initialIndex, true);
+  }, [emblaApi, initialIndex]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen || !emblaApi) return;
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") emblaApi.scrollPrev();
+      if (e.key === "ArrowRight") emblaApi.scrollNext();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, emblaApi, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+          onClick={onClose}
+        >
+          {/* Header */}
+          <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-10">
+            <div className="text-white">
+              <h3 className="text-xl font-bold">{projectTitle}</h3>
+              <p className="text-sm text-gray-300">{selectedIndex + 1} / {images.length}</p>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-white hover:text-gray-300 transition-colors p-2"
+              aria-label="Fechar galeria"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Carousel Principal */}
+          <div className="relative w-full max-w-7xl mx-4" onClick={(e) => e.stopPropagation()}>
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {images.map((image, index) => (
+                  <div key={index} className="flex-[0_0_100%] min-w-0">
+                    <div className="flex items-center justify-center h-[70vh]">
+                      <img
+                        src={image}
+                        alt={`${projectTitle} - Imagem ${index + 1}`}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Botões de Navegação */}
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    emblaApi?.scrollPrev();
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors backdrop-blur-sm z-10"
+                  aria-label="Imagem anterior"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    emblaApi?.scrollNext();
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors backdrop-blur-sm z-10"
+                  aria-label="Próxima imagem"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Thumbnails Carousel */}
+          <div className="absolute bottom-6 left-0 right-0 max-w-7xl mx-auto px-8" onClick={(e) => e.stopPropagation()}>
+            <div className="overflow-hidden rounded-2xl bg-black/40 backdrop-blur-md p-3 shadow-2xl" ref={emblaThumbsRef}>
+              <div className="flex gap-3 items-center">
+                {images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => onThumbClick(index)}
+                    className={`group relative flex-[0_0_auto] min-w-0 overflow-hidden transition-all duration-300 ${
+                      index === selectedIndex 
+                        ? "rounded-[10px] scale-110 shadow-2xl opacity-100" 
+                        : "rounded-[5px] opacity-50 hover:opacity-100 hover:scale-105"
+                    }`}
+                  >
+                    <img 
+                      src={image} 
+                      alt={`Thumbnail ${index + 1}`} 
+                      className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                    />
+                    {/* Overlay de hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 ${
+                      index === selectedIndex ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+                    }`} />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const ProductCard = ({
   product,
   translate,
+  onOpenGallery,
 }: {
   product: {
     title: string;
     link: string;
     thumbnail: string;
+    projectId: string | null;
   };
   translate: MotionValue<number>;
+  onOpenGallery: (projectId: string | null, thumbnail: string) => void;
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onOpenGallery(product.projectId, product.thumbnail);
+  };
+
   return (
     <motion.div
       style={{
@@ -180,7 +641,8 @@ const ProductCard = ({
     >
       <a
         href={product.link}
-        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full"
+        onClick={handleClick}
+        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer"
       >
         <img
           src={product.thumbnail}
@@ -191,15 +653,58 @@ const ProductCard = ({
         />
         {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
         <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300" />
-        <h2 className="absolute bottom-4 left-4 text-white font-bold text-xl opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
+        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base !md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
           {product.title}
-        </h2>
+        </h3>
       </a>
     </motion.div>
   );
 };
 
 export default function ProjectsSection() {
+  // Estado da galeria
+  const [galleryState, setGalleryState] = useState<{
+    isOpen: boolean;
+    projectId: string | null;
+    initialIndex: number;
+    projectTitle: string;
+  }>({
+    isOpen: false,
+    projectId: null,
+    initialIndex: 0,
+    projectTitle: "",
+  });
+
+  // Função para abrir a galeria
+  const handleOpenGallery = (projectId: string | null, clickedThumbnail: string) => {
+    if (!projectId || !projectGalleries[projectId as keyof typeof projectGalleries]) {
+      return;
+    }
+
+    const gallery = projectGalleries[projectId as keyof typeof projectGalleries];
+    const initialIndex = gallery.findIndex(img => img === clickedThumbnail);
+    
+    // Encontrar o título do projeto
+    const product = products.find(p => p.thumbnail === clickedThumbnail);
+    const projectTitle = product?.title || "Projeto";
+
+    setGalleryState({
+      isOpen: true,
+      projectId,
+      initialIndex: initialIndex >= 0 ? initialIndex : 0,
+      projectTitle,
+    });
+  };
+
+  const handleCloseGallery = () => {
+    setGalleryState({
+      isOpen: false,
+      projectId: null,
+      initialIndex: 0,
+      projectTitle: "",
+    });
+  };
+
   // Embaralha o array de produtos uma vez quando o componente monta
   const shuffledProducts = React.useMemo(() => {
     const shuffled = [...products];
@@ -214,16 +719,19 @@ export default function ProjectsSection() {
   const firstRow = shuffledProducts.slice(0, 9);
   const secondRow = shuffledProducts.slice(9, 18);
   const thirdRow = shuffledProducts.slice(18, 27);
+  const fourthRow = shuffledProducts.slice(27, 36);
   
   // Tablet: 6 fotos por linha
   const firstRowTablet = shuffledProducts.slice(0, 6);
   const secondRowTablet = shuffledProducts.slice(6, 12);
   const thirdRowTablet = shuffledProducts.slice(12, 18);
+  const fourthRowTablet = shuffledProducts.slice(18, 24);
   
   // Mobile: 3 fotos por linha
   const firstRowMobile = shuffledProducts.slice(0, 3);
   const secondRowMobile = shuffledProducts.slice(3, 6);
   const thirdRowMobile = shuffledProducts.slice(6, 9);
+  const fourthRowMobile = shuffledProducts.slice(9, 12);
   
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -260,9 +768,20 @@ export default function ProjectsSection() {
 
   return (
     <div className="bg-black w-full">
+      {/* Modal de Galeria */}
+      {galleryState.projectId && (
+        <GalleryModal
+          isOpen={galleryState.isOpen}
+          onClose={handleCloseGallery}
+          images={projectGalleries[galleryState.projectId as keyof typeof projectGalleries]}
+          initialIndex={galleryState.initialIndex}
+          projectTitle={galleryState.projectTitle}
+        />
+      )}
+
       <div
         ref={ref}
-        className="h-[141vh] py-40 overflow-hidden antialiased relative flex flex-col justify-center self-auto [perspective:1000px] [transform-style:preserve-3d]"
+        className="h-[163vh] py-40 overflow-hidden antialiased relative flex flex-col justify-center self-auto [perspective:1000px] [transform-style:preserve-3d]"
       >
         <Header />
         <motion.div
@@ -280,6 +799,7 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
@@ -289,15 +809,27 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
           </motion.div>
-          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2">
+          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
             {thirdRow.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden lg:flex flex-row space-x-2">
+            {fourthRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
@@ -309,6 +841,7 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
@@ -318,15 +851,27 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
           </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3">
+          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
             {thirdRowTablet.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3">
+            {fourthRowTablet.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
@@ -338,6 +883,7 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
@@ -347,15 +893,27 @@ export default function ProjectsSection() {
               <ProductCard
                 product={product}
                 translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}
           </motion.div>
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-4">
+          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-4 mb-4">
             {thirdRowMobile.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="flex md:hidden flex-row space-x-4">
+            {fourthRowMobile.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
             ))}

@@ -229,32 +229,32 @@ button:focus-visible {
   border-radius: 5px;
   font-weight: 900;
   text-transform: uppercase;
-  transition: all 0.3s ease !important;
+  transition: all 0.4s ease !important;
   border: none !important;
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #D6BDAA 0%, #D6BDAA 100%) !important;
-  transform: translateY(-2px) !important;
+  transform: scale(1.05) !important;
   box-shadow: 0 8px 25px rgba(156, 114, 72, 0.3) !important;
 }
 
 .btn-secondary {
   background-color: transparent !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   color: white !important;
-  padding: 0.75rem 1.5rem;
+  padding: 0.62rem 1.5rem;
   border-radius: 5px;
   font-weight: 900;
   text-transform: uppercase;
-  transition: all 0.5s ease !important;
-  backdrop-filter: blur(4px);
+  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
-  transform: translateY(-2px) !important;
+  transform: scale(1.05) !important;
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
 }
 
@@ -370,6 +370,27 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 60px -15px rgba(156, 114, 72, 0.5);
+}
+
+/* Glass effect for service cards */
+.glass-effect {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 20px;
+  z-index: -1;
 }
 
 /* Glass card shimmer animation */

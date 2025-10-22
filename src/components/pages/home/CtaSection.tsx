@@ -35,11 +35,11 @@ export default function CtaSection() {
       <div className="relative container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           {/* CTA Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="fade-in text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4">
               Pronto para Começar seu Projeto?
             </h2>
-            <p className="fade-in text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
+            <p className="fade-in text-xl text-white leading-relaxed">
               Entre em contato conosco e transforme suas ideias em realidade
             </p>
           </div>
