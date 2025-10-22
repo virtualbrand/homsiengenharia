@@ -80,7 +80,7 @@ function Footer() {
             <address className="space-y-2 text-lg text-gray-700 leading-relaxed mb-6">
               <p>Rua Tenente Brito Melo - Barro Preto</p>
               <p>Belo Horizonte - MG, 30180-072</p>
-              <p>Telefone: (11) 1234-5678</p>
+              <p>Telefone: (31) 99226-1911</p>
               <p>E-mail: contato@homsiengenharia.com</p>
               <p className="pt-2">Segunda à Sexta - 8h30 às 17h30</p>
             </address>

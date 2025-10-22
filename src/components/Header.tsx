@@ -37,6 +37,29 @@ export const Header = () => {
     setIsMenuOpen(false)
   }
 
+  const handleCtaClick = () => {
+    const target = document.querySelector('#contato')
+    if (target) {
+      // Get Lenis instance from window
+      const lenis = (window as any).lenis
+      if (lenis) {
+        lenis.scrollTo(target, {
+          offset: -80, // 80px offset for header
+          duration: 1.5,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        })
+      } else {
+        // Fallback if Lenis is not available
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
+    setIsMenuOpen(false)
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
@@ -101,7 +124,7 @@ export const Header = () => {
           </div>
           
           {/* Navigation Menu - Desktop */}
-          <nav className="hidden md:flex flex-1 justify-center" aria-label="Menu principal">
+          <nav className="hidden lg:flex flex-1 justify-center" aria-label="Menu principal">
             <ul className="flex items-center space-x-6 lg:space-x-8">
                <li>
                 <a 
@@ -151,10 +174,11 @@ export const Header = () => {
             </ul>
           </nav>
           
-          {/* CTA Button */}
+          {/* CTA Button - Desktop only */}
           <div className="flex items-center space-x-4 flex-shrink-0">
             <button 
-              className="hidden sm:flex btn-primary rounded-xl px-6 py-2 shadow-lg items-center justify-center"
+              onClick={handleCtaClick}
+              className="hidden lg:flex btn-primary rounded-xl px-6 py-2 shadow-lg items-center justify-center"
             >
               Solicitar orçamento
             </button>
@@ -162,7 +186,7 @@ export const Header = () => {
             {/* Mobile Menu Button */}
             <button 
               className={cn(
-                "md:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg",
+                "lg:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg",
                 isDarkSection ? "text-white" : "text-gray-900"
               )}
               onClick={toggleMenu}
@@ -181,22 +205,22 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pt-4 border-t border-white/20"
+            className="lg:hidden mt-4 pt-4 border-t border-white/20"
             aria-label="Menu principal mobile"
           >
             <ul className="flex flex-col space-y-2">
-              <li>
-                <Link 
-                  to="/" 
-                  title="Início - Homsi Engenharia"
+             <li>
+                <a 
+                  href="#sobre" 
+                  title="Sobre a Homsi Engenharia"
+                  onClick={(e) => handleAnchorClick(e, '#sobre')}
                   className={cn(
                     "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
                     isDarkSection ? "text-white" : "text-gray-900"
                   )}
-                  onClick={() => setIsMenuOpen(false)}
                 >
-                  Home
-                </Link>
+                  Sobre
+                </a>
               </li>
               <li>
                 <a 
@@ -225,36 +249,11 @@ export const Header = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#sobre" 
-                  title="Sobre a Homsi Engenharia"
-                  onClick={(e) => handleAnchorClick(e, '#sobre')}
-                  className={cn(
-                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
-                >
-                  Sobre
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#contato" 
-                  title="Entre em contato com a Homsi Engenharia"
-                  onClick={(e) => handleAnchorClick(e, '#contato')}
-                  className={cn(
-                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
-                >
-                  Contato
-                </a>
-              </li>
-              <li>
                 <button 
-                  className="sm:hidden btn-primary rounded-xl px-6 py-3 shadow-lg mt-4 w-full"
+                  onClick={handleCtaClick}
+                  className="btn-primary rounded-xl px-6 py-3 shadow-lg mt-4 w-full"
                 >
-                  Orçamento Grátis
+                  Solicitar orçamento
                 </button>
               </li>
             </ul>
