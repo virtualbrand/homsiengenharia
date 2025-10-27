@@ -20,13 +20,13 @@ export const Header = () => {
       const lenis = (window as any).lenis
       if (lenis) {
         lenis.scrollTo(target, {
-          offset: -80, // 80px offset for header
+          offset: 0, // Sem offset para aparecer no topo exato
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         })
       } else {
         // Fallback if Lenis is not available
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
@@ -43,13 +43,13 @@ export const Header = () => {
       const lenis = (window as any).lenis
       if (lenis) {
         lenis.scrollTo(target, {
-          offset: -80, // 80px offset for header
+          offset: 0, // Sem offset para aparecer no topo exato
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         })
       } else {
         // Fallback if Lenis is not available
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
@@ -74,19 +74,20 @@ export const Header = () => {
       
       // Get all sections
       const aboutSection = document.querySelector('#sobre')
-      const projectsSection = document.querySelector('#projetos')
+      const testimonialsSection = document.querySelector('#depoimentos')
       
-      if (aboutSection || projectsSection) {
+      if (aboutSection || testimonialsSection) {
         const aboutRect = aboutSection?.getBoundingClientRect()
-        const projectsRect = projectsSection?.getBoundingClientRect()
+        const testimonialsRect = testimonialsSection?.getBoundingClientRect()
         
         // Check if we're in the about section (light background)
         const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
         
-        // Check if we're in the projects section (light background)
-        const isInProjectsSection = projectsRect && projectsRect.top <= 100 && projectsRect.bottom >= 100
+        // Check if we're in the testimonials section (light background)
+        const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
         
-        setIsDarkSection(!isInAboutSection && !isInProjectsSection)
+        // Projects section has dark background, so we keep it as dark section
+        setIsDarkSection(!isInAboutSection && !isInTestimonialsSection)
       }
     }
 

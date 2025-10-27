@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 
 const HeroSection = () => {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -10,13 +9,13 @@ const HeroSection = () => {
       const lenis = (window as any).lenis
       if (lenis) {
         lenis.scrollTo(target, {
-          offset: -80, // 80px offset for header
+          offset: 0, // Sem offset para aparecer no topo exato - igual ao header
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         })
       } else {
         // Fallback if Lenis is not available
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
@@ -70,12 +69,13 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button 
+            <a 
+              href="#projetos"
+              onClick={(e) => handleAnchorClick(e, '#projetos')}
               className="btn-primary rounded-xl px-8 py-4 text-lg font-semibold shadow-2xl group flex items-center justify-center"
             >
               Ver projetos
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
             
             <a 
               href="#sobre"

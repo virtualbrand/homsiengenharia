@@ -64,7 +64,7 @@ const TestimonialSection = () => {
   useScrollAnimation();
   
   return (
-    <section className="bg-background py-20 md:py-32 relative">
+    <section id="depoimentos" className="bg-background pt-20 pb-10 md:pt-32 md:pb-12 relative">
 
       <div className="container z-10 mx-auto">
         <motion.div
@@ -74,7 +74,7 @@ const TestimonialSection = () => {
           viewport={{ once: true }}
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
-          <h2 className="fade-in text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4">
+          <h2 className="fade-in text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4 text-gray-900">
             O que nossos clientes dizem
           </h2>
           <p className="fade-in text-xl leading-relaxed mb-2 text-gray-700">

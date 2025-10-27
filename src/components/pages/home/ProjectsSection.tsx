@@ -767,7 +767,7 @@ export default function ProjectsSection() {
   );
 
   return (
-    <div className="bg-black w-full">
+    <div id="projetos" className="bg-black w-full">
       {/* Modal de Galeria */}
       {galleryState.projectId && (
         <GalleryModal

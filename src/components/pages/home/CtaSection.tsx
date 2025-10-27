@@ -5,6 +5,7 @@ export default function CtaSection() {
     name: "",
     email: "",
     phone: "",
+    service: "",
     message: "",
   });
 
@@ -14,7 +15,7 @@ export default function CtaSection() {
     console.log("Form submitted:", formData);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -22,7 +23,7 @@ export default function CtaSection() {
   };
 
   return (
-    <section id="contato" className="relative w-full py-16 md:py-24">
+    <section id="contato" className="relative w-full h-screen">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -32,7 +33,7 @@ export default function CtaSection() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60" />
       
-      <div className="relative container mx-auto px-4">
+      <div className="relative container mx-auto px-4 h-full flex items-center justify-center">
         <div className="max-w-2xl mx-auto">
           {/* CTA Header */}
           <div className="text-center mb-8">
@@ -53,7 +54,7 @@ export default function CtaSection() {
               {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-accent-500/5 to-transparent opacity-50 rounded-2xl" />
               
-              <form onSubmit={handleSubmit} className="relative space-y-6">
+              <form onSubmit={handleSubmit} className="relative space-y-4">
                 {/* Name Input */}
                 <div>
                   <label htmlFor="name" className="block text-white font-semibold mb-2">
@@ -72,7 +73,7 @@ export default function CtaSection() {
                 </div>
 
                 {/* Email and Phone Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="email" className="block text-white font-semibold mb-2">
                       E-mail
@@ -103,6 +104,41 @@ export default function CtaSection() {
                       className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                       placeholder="(00) 00000-0000"
                     />
+                  </div>
+                </div>
+
+                {/* Service Select - Full Width */}
+                <div>
+                  <label htmlFor="service" className="block text-white font-semibold mb-2">
+                    Serviço
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+                    >
+                      <option value="" disabled className="bg-gray-800 text-white">
+                        Selecione um serviço
+                      </option>
+                      <option value="construcao-completa" className="bg-gray-800 text-white">
+                        Construção Completa
+                      </option>
+                      <option value="reformas-modernizacoes" className="bg-gray-800 text-white">
+                        Reformas e Modernizações
+                      </option>
+                      <option value="manutencao-preventiva" className="bg-gray-800 text-white">
+                        Manutenção Preventiva
+                      </option>
+                    </select>
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                      <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
 
