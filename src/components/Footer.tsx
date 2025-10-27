@@ -68,29 +68,6 @@ function Footer() {
     }
   }, [])
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault()
-    const target = document.querySelector(targetId)
-    if (target) {
-      // Get Lenis instance from window
-      const lenis = (window as any).lenis
-      if (lenis) {
-        lenis.scrollTo(target, {
-          offset: -80, // 80px offset for header
-          duration: 1.5,
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        })
-      } else {
-        // Fallback if Lenis is not available
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        })
-      }
-    }
-  }
-
   return (
     <>
       {/* WhatsApp Floating Button */}
@@ -220,7 +197,7 @@ function Footer() {
             <div className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
           </div>
           <div className="relative">
-            <h3 className="mb-4 text-lg font-semibold text-white">Área de Atendimento</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">Áreas de Atendimento</h3>
             <div className="mb-4">
               <ServiceAreaMap />
             </div>
