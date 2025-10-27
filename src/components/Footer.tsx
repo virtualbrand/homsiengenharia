@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
 import {
   Tooltip,
   TooltipContent,
@@ -10,6 +11,58 @@ import {
 import { ServiceAreaMap } from "@/components/ui/footer-map"
 
 function Footer() {
+  const lottieRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let animation: any = null
+    
+    const loadLottie = async () => {
+      try {
+        const lottie = await import('lottie-web')
+        if (lottieRef.current) {
+          // Limpa completamente o container
+          lottieRef.current.innerHTML = ''
+          
+          animation = lottie.default.loadAnimation({
+            container: lottieRef.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/icons/whatsapp-icon.json',
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid meet'
+            }
+          })
+          
+          // Remove qualquer SVG duplicado após carregar
+          setTimeout(() => {
+            if (lottieRef.current) {
+              const svgs = lottieRef.current.querySelectorAll('svg')
+              if (svgs.length > 1) {
+                for (let i = 1; i < svgs.length; i++) {
+                  svgs[i].remove()
+                }
+              }
+            }
+          }, 100)
+        }
+      } catch (error) {
+        console.error('Erro ao carregar Lottie:', error)
+      }
+    }
+    
+    loadLottie()
+    
+    return () => {
+      if (animation) {
+        animation.destroy()
+      }
+      if (lottieRef.current) {
+        lottieRef.current.innerHTML = ''
+      }
+    }
+  }, [])
+
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
     const target = document.querySelector(targetId)
@@ -36,17 +89,16 @@ function Footer() {
   return (
     <>
       {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-5 right-2 z-50">
         <a 
           href="https://wa.me/5531992261911" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="block hover:scale-[1.03] transition-all duration-1000 ease-in-out"
+          className="block"
         >
-          <img 
-            src="/icons/whatsapp-icon.svg" 
-            alt="WhatsApp" 
-            className="w-16 h-16 drop-shadow-lg hover:drop-shadow-xl transition-all duration-1000 ease-in-out"
+          <div 
+            ref={lottieRef}
+            className="w-18 h-18"
           />
         </a>
       </div>
