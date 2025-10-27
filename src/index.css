@@ -186,6 +186,19 @@ a:hover {
   color: var(--color-accent-600);
 }
 
+/* ================================
+   HEADER NAVIGATION OVERRIDES
+   ================================ */
+/* Default hover color for dark sections */
+header nav a:hover {
+  color: var(--color-accent-400) !important;
+}
+
+/* Light section hover color */
+header.light-section nav a:hover {
+  color: var(--color-accent-500) !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Satoshi', sans-serif;
   font-weight: 900;
