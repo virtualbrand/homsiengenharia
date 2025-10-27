@@ -7,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { ServiceAreaMap } from "@/components/ui/footer-map"
 
 function Footer() {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -33,7 +34,24 @@ function Footer() {
   }
 
   return (
-    <motion.footer 
+    <>
+      {/* WhatsApp Floating Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <a 
+          href="https://wa.me/5531992261911" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block hover:scale-[1.03] transition-all duration-1000 ease-in-out"
+        >
+          <img 
+            src="/icons/whatsapp-icon.svg" 
+            alt="WhatsApp" 
+            className="w-16 h-16 drop-shadow-lg hover:drop-shadow-xl transition-all duration-1000 ease-in-out"
+          />
+        </a>
+      </div>
+
+      <motion.footer 
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -41,114 +59,113 @@ function Footer() {
       className="relative border-t border-gray-800 bg-[var(--color-primary-800)] text-white transition-colors duration-300"
     >
       <div className="container mx-auto px-4 pt-20 pb-12 md:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-12 md:grid-cols-1 lg:grid-cols-[2fr_3fr]">
           <div className="relative">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-white">Homsi Engenharia</h2>
             <p className="mb-6 text-lg text-gray-300 leading-relaxed">
-              A Homsi Engenharia é uma empresa especializada em construção e reformas de alto padrão, atuando com excelência em Belo Horizonte e na região metropolitana.
+              A Homsi Engenharia é uma empresa especializada em construção e reformas de alto padrão, atuando com excelência em Belo Horizonte, Nova Lima e Lagoa Santa / MG.
             </p>
+            
+            <div className="mt-8">
+              <h3 className="mb-4 text-lg font-semibold text-white">Contato</h3>
+              <address className="space-y-2 text-lg text-gray-300 leading-relaxed mb-6">
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 mr-3 mt-0.5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    <div>
+                      <p>Rua Tenente Brito Melo - Barro Preto</p>
+                      <p>Belo Horizonte - MG, 30180-072</p>
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 mr-3 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                    <p>(31) 99226-1911</p>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 mr-3 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    <p>contato@homsiengenharia.com</p>
+                  </li>
+                  <li className="flex items-center pt-2">
+                    <svg className="w-5 h-5 mr-3 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                    <p>Segunda à Sexta - 8h30 às 17h30</p>
+                  </li>
+                </ul>
+              </address>
+              <div>
+                <div className="flex space-x-4">
+                    <TooltipProvider delayDuration={200}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a 
+                          href="https://www.instagram.com/kemel_homsiengenharia" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
+                        >
+                          <img src="/icons/instagram.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <span className="sr-only">Instagram</span>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Siga-nos no Instagram</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <TooltipProvider delayDuration={200}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a 
+                          href="https://www.youtube.com/@HomsiEngenharia?sub_confirmation=1" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
+                        >
+                          <img src="/icons/youtube.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <span className="sr-only">YouTube</span>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Inscreva-se no YouTube</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <TooltipProvider delayDuration={200}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a 
+                          href="https://www.tiktok.com/@homsiengenharia" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
+                        >
+                          <img src="/icons/tiktok.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <span className="sr-only">TikTok</span>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Siga-nos no TikTok</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </div>
+            </div>
+            
             <div className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
           </div>
-          <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Links Rápidos</h3>
-            <nav className="space-y-2 text-lg text-gray-300 leading-relaxed">
-              <a 
-                href="#sobre" 
-                onClick={(e) => handleAnchorClick(e, '#sobre')}
-                className="block transition-colors hover:text-[#D6BDAA]"
-              >
-                Sobre
-              </a>
-              <a 
-                href="#servicos" 
-                onClick={(e) => handleAnchorClick(e, '#servicos')}
-                className="block transition-colors hover:text-[#D6BDAA]"
-              >
-                Serviços
-              </a>
-              <a 
-                href="#projetos" 
-                onClick={(e) => handleAnchorClick(e, '#projetos')}
-                className="block transition-colors hover:text-[#D6BDAA]"
-              >
-                Projetos
-              </a>
-              <a 
-                href="#contato" 
-                onClick={(e) => handleAnchorClick(e, '#contato')}
-                className="block transition-colors hover:text-[#D6BDAA]"
-              >
-                Contato
-              </a>
-            </nav>
-          </div>
           <div className="relative">
-            <h3 className="mb-4 text-lg font-semibold text-white">Contato</h3>
-            <address className="space-y-2 text-lg text-gray-300 leading-relaxed mb-6">
-              <p>Rua Tenente Brito Melo - Barro Preto</p>
-              <p>Belo Horizonte - MG, 30180-072</p>
-              <p>Telefone: (31) 99226-1911</p>
-              <p>E-mail: contato@homsiengenharia.com</p>
-              <p className="pt-2">Segunda à Sexta - 8h30 às 17h30</p>
-            </address>
-            <div>
-              <h4 className="mb-4 text-sm font-semibold text-white">Acompanhe</h4>
-              <div className="flex space-x-4">
-                  <TooltipProvider delayDuration={200}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <a 
-                        href="https://www.instagram.com/kemel_homsiengenharia" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
-                      >
-                        <img src="/icons/instagram.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
-                        <span className="sr-only">Instagram</span>
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Siga-nos no Instagram</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider delayDuration={200}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <a 
-                        href="https://www.youtube.com/@HomsiEngenharia?sub_confirmation=1" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
-                      >
-                        <img src="/icons/youtube.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
-                        <span className="sr-only">YouTube</span>
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Inscreva-se no YouTube</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider delayDuration={200}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <a 
-                        href="https://www.tiktok.com/@homsiengenharia" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
-                      >
-                        <img src="/icons/tiktok.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
-                        <span className="sr-only">TikTok</span>
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Siga-nos no TikTok</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
+            <h3 className="mb-4 text-lg font-semibold text-white">Área de Atendimento</h3>
+            <div className="mb-4">
+              <ServiceAreaMap />
             </div>
           </div>
         </div>
@@ -164,6 +181,7 @@ function Footer() {
         </div>
       </div>
     </motion.footer>
+    </>
   )
 }
 
