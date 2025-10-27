@@ -34,6 +34,11 @@ function Footer() {
             }
           })
           
+          // Torna a animação mais lenta (50% da velocidade original)
+          if (animation) {
+            animation.setSpeed(0.5)
+          }
+          
           // Remove qualquer SVG duplicado após carregar
           setTimeout(() => {
             if (lottieRef.current) {
