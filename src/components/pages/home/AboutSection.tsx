@@ -11,28 +11,29 @@ const AboutSection = () => {
           <div className="col-span-12 md:col-start-2 md:col-span-5">
             <div>
               <span className="fade-in font-bold text-sm uppercase tracking-wider block text-[var(--color-secondary-700)]">
-                Sobre o Fundador
+                A Engenharia construída pela Experiência
               </span>
               <h2 className="fade-in text-4xl md:text-5xl font-bold text-gray-900 mt-4 mb-6">
-                Kemel Homsi
+                Kemel Amir el Homsi 
               </h2>
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
-                <span className="font-bold text-gray-900">A Homsi Engenharia</span> é uma empresa especializada em{' '}
-                <span className="font-bold text-gray-900">construção e reformas de alto padrão</span>, 
-                atuando com excelência em Belo Horizonte e na região metropolitana.
+                <span className="font-bold text-gray-900">Na Homsi Engenharia</span>, fundada em 2024 sobre pilares de excelência e inovação, a história do seu fundador, Kemel Amir El Homsi, é a própria base de nossa credibilidade. Engenheiro por vocação e formação pela Pontifícia Universidade Católica, Kemel não é apenas um visionário, mas um construtor com as mãos na massa, cuja jornada profissional é um testemunho de dedicação e expertise prática.
               </p>
               
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
-                Com mais de 15 anos de experiência no mercado, Kemel Homsi construiu uma trajetória 
-                marcada pela dedicação, profissionalismo e compromisso com a qualidade. Cada projeto 
-                é tratado com atenção aos mínimos detalhes, garantindo que o resultado supere as 
-                expectativas dos clientes.
+                Sua paixão pela construção começou nos alicerces: desde os estágios na Prefeitura de Belo Horizonte e na Engenharia dos Correios, Kemel forjou seu conhecimento. No Departamento de Estradas e Rodagens de Minas Gerais (DER-MG), ele não só esteve em laboratórios e na elaboração de projetos rodoviários, mas vivenciou, in loco, a grandiosidade da engenharia de infraestrutura. Foi ele quem acompanhou, do início ao fim, as complexas obras da Secopa, incluindo a construção de três viadutos e as ampliações cruciais da rodovia para o Aeroporto de Confins, demonstrando uma capacidade ímpar de gestão e fiscalização em projetos de grande escala.
+              </p>
+
+              <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
+                Sua passagem pela SUDECAP, fiscalizando e garantindo a normativa de obras, e sua experiência em pavimentação asfáltica, incluindo a revitalização de estradas no interior de Minas e a criação de estacionamentos emblemáticos como os do Del Rey e BH Shopping, consolidaram uma visão abrangente. Até mesmo na montagem de estruturas temporárias tão desafiadoras quanto as do Circo de Solé em São Paulo e Rio de Janeiro, Kemel deixou sua marca de competência e proatividade.
+              </p>
+
+              <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
+                A habilidade de Kemel em gerir complexidades foi testada até mesmo em projetos tão singulares quanto a montagem do Circo de Solé em São Paulo e Rio de Janeiro. Contudo, foi a partir de 2014 que ele encontrou sua verdadeira paixão e especialização: <span className="font-bold text-gray-900">a construção civil de alto padrão</span>. Em condomínios de luxo como Vale dos Cristais, Vila Del Rey e Riviera, Kemel já transformou mais de 16 visões em lares de tirar o fôlego, consolidando uma reputação de precisão, qualidade e, acima de tudo, compromisso com a excelência.
               </p>
 
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-8">
-                Nossa missão é transformar sonhos em realidade, oferecendo soluções personalizadas 
-                que aliam técnica, inovação e sustentabilidade. Da concepção à entrega final, 
-                trabalhamos com transparência e excelência em cada etapa.
+                Na Homsi Engenharia, cada projeto é uma extensão dessa expertise. Somos a voz da obra bem feita, pautada na integridade inegociável e no cuidado artesanal. Nosso foco na solução prática e na proatividade garante que cada detalhe, desde o conceito à entrega das chaves e ao pós-obra, seja impecável. Kemel Amir El Homsi imprime na Homsi a garantia de que seu investimento será materializado em um sonho, com a assistência e competência que só uma vida inteira dedicada à engenharia pode oferecer. Para nós, sua satisfação não é apenas um objetivo; é a nossa palavra.
               </p>
             </div>
           </div>
