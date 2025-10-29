@@ -133,6 +133,15 @@ export default function CtaSection() {
                       <option value="manutencao-preventiva" className="bg-gray-800 text-white">
                         Manutenção Preventiva
                       </option>
+                      <option value="visita-tecnica" className="bg-gray-800 text-white">
+                        Visita Técnica
+                      </option>
+                      <option value="laudo-tecnico" className="bg-gray-800 text-white">
+                        Laudo Técnico
+                      </option>
+                      <option value="outros" className="bg-gray-800 text-white">
+                        Outros
+                      </option>
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
                       <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
