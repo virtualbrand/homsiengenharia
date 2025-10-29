@@ -23,7 +23,7 @@ export default function CtaSection() {
   };
 
   return (
-    <section id="contato" className="relative w-full h-screen py-20 md:py-32">
+    <section id="contato" className="relative w-full min-h-screen py-20 md:py-32">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -33,7 +33,7 @@ export default function CtaSection() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60" />
       
-      <div className="relative container mx-auto px-4 h-full flex items-center justify-center">
+      <div className="relative container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* CTA Header */}
           <div className="text-center mb-8">
