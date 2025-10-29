@@ -73,7 +73,7 @@ export default function ServicesSection() {
             </div>
             
             {/* Services Grid - 3 columns */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {servicesData.map((service) => (
                 <div key={service.id} className="relative scroll-bottom">
                   {/* Glow effect */}

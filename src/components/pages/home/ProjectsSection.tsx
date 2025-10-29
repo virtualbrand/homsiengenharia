@@ -36,6 +36,93 @@ const projectGalleries = {
     "/images/apto-felipe/21-apto-felipe-homsiengenharia.webp",
     "/images/apto-felipe/22-apto-felipe-homsiengenharia.webp",
   ],
+  "casa-herbert-roberta": [
+    "/images/casa-herbert-roberta/1-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/2-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/3-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/4-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/5-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/6-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/7-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/8-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/9-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/10-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/11-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/12-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/13-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/14-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/15-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/16-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/17-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/18-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/19-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/20-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/21-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/22-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/23-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/24-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/25-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/26-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/27-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/28-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/29-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/30-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/31-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/32-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/33-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/34-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/35-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/36-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/37-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/38-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/39-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/40-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/41-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/42-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/43-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/44-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/45-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/46-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/47-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/48-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/49-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/50-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/51-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/52-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/53-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/54-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/55-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/56-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/57-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/58-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/59-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/60-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/61-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/62-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/63-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/64-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/65-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/66-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/67-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/68-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/69-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/70-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/71-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/72-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/73-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/74-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/75-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/76-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/77-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/78-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/79-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/80-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/81-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/82-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/83-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/84-casa-herbert-roberta-homsiengenharia.webp",
+    "/images/casa-herbert-roberta/85-casa-herbert-roberta-homsiengenharia.webp",
+  ],
   "clinica-raissa": [
     "/images/clinica-raissa/1-medplex.homsiengenharia.webp",
     "/images/clinica-raissa/2-medplex.homsiengenharia.webp",
@@ -74,364 +161,50 @@ const projectGalleries = {
   ],
 };
 
-const products = [
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe-cover.jpg",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Casa",
-    link: "#",
-    thumbnail: "/images/casa-herbert-cover.jpg",
-    projectId: null,
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos-cover.jpg",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa-cover.jpg",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/1-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/2-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/3-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/4-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/5-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/6-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/7-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/8-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/9-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/10-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/11-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/12-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/13-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/14-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/15-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/16-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/17-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/18-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/19-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/20-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/21-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Apartamento Residencial",
-    link: "#",
-    thumbnail: "/images/apto-felipe/22-apto-felipe-homsiengenharia.webp",
-    projectId: "apto-felipe",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/1-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/2-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/3-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/4-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/5-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/6-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/7-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/8-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/9-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/10-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/11-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/12-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/14-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/15-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/16-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/17-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Odontológica",
-    link: "#",
-    thumbnail: "/images/clinica-raissa/18-medplex.homsiengenharia.webp",
-    projectId: "clinica-raissa",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/1-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/2-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/3-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/4-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/5-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/6-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/7-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/8-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/9-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/10-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/11-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/12-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/13-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/14-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-  {
-    title: "Clínica Médica",
-    link: "#",
-    thumbnail: "/images/clinica-marcos/15-vianello.homsiengenharia.webp",
-    projectId: "clinica-marcos",
-  },
-];
+// Função para gerar os produtos dinamicamente baseado nas galerias
+const generateProducts = (): Array<{
+  title: string;
+  link: string;
+  thumbnail: string;
+  projectId: string;
+}> => {
+  const allProducts: Array<{
+    title: string;
+    link: string;
+    thumbnail: string;
+    projectId: string;
+  }> = [];
+  
+  // Mapeia títulos para cada projeto
+  const projectTitles: Record<string, string> = {
+    "casa-herbert-roberta": "Casa",
+    "apto-felipe": "Apartamento", 
+    "clinica-marcos": "Clínica",
+    "clinica-raissa": "Clínica",
+  };
+
+  // Para cada projeto na galeria, adiciona todas as suas imagens
+  Object.entries(projectGalleries).forEach(([projectId, images]) => {
+    images.forEach((imagePath) => {
+      allProducts.push({
+        title: projectTitles[projectId as keyof typeof projectTitles] || "Projeto",
+        link: "#",
+        thumbnail: imagePath,
+        projectId: projectId,
+      });
+    });
+  });
+
+  return allProducts;
+};
 
 const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full left-0 top-0">
+    <div className="container mx-auto py-5 md:py-5 lg:py-20 px-4 md:px-6 lg:px-8">
       <h2 className="fade-in text-3xl md:text-5xl text-white font-bold leading-tight">
         Nossos Projetos
       </h2>
-      <p className="fade-in max-w-2xl text-base md:text-xl mt-2 text-white">
+      <p className="fade-in max-w-2xl leading-relaxed text-xl mt-2 text-white">
         Conheça alguns dos principais projetos executados pela Homsi Engenharia. Nossa experiência abrange obras residenciais, comerciais e industriais com excelência e qualidade garantidas.
       </p>
     </div>
@@ -637,7 +410,7 @@ const ProductCard = ({
         x: translate,
       }}
       key={product.title}
-      className="group/product h-40 w-52 md:h-48 md:w-64 lg:h-52 lg:w-72 relative flex-shrink-0"
+      className="group/product h-32 w-40 md:h-40 md:w-52 lg:h-40 lg:w-52 relative flex-shrink-0"
     >
       <a
         href={product.link}
@@ -684,8 +457,9 @@ export default function ProjectsSection() {
     const gallery = projectGalleries[projectId as keyof typeof projectGalleries];
     const initialIndex = gallery.findIndex(img => img === clickedThumbnail);
     
-    // Encontrar o título do projeto
-    const product = products.find(p => p.thumbnail === clickedThumbnail);
+    // Encontrar o título do projeto usando generateProducts()
+    const allProducts = generateProducts();
+    const product = allProducts.find(p => p.thumbnail === clickedThumbnail);
     const projectTitle = product?.title || "Projeto";
 
     setGalleryState({
@@ -707,7 +481,8 @@ export default function ProjectsSection() {
 
   // Embaralha o array de produtos uma vez quando o componente monta
   const shuffledProducts = React.useMemo(() => {
-    const shuffled = [...products];
+    const allProducts = generateProducts();
+    const shuffled = [...allProducts];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -715,23 +490,32 @@ export default function ProjectsSection() {
     return shuffled;
   }, []);
 
-  // Desktop: 9 fotos por linha
-  const firstRow = shuffledProducts.slice(0, 9);
-  const secondRow = shuffledProducts.slice(9, 18);
-  const thirdRow = shuffledProducts.slice(18, 27);
-  const fourthRow = shuffledProducts.slice(27, 36);
+  // Desktop: 12 fotos por linha (7 linhas)
+  const firstRow = shuffledProducts.slice(0, 12);
+  const secondRow = shuffledProducts.slice(12, 24);
+  const thirdRow = shuffledProducts.slice(24, 36);
+  const fourthRow = shuffledProducts.slice(36, 48);
+  const fifthRow = shuffledProducts.slice(48, 60);
+  const sixthRow = shuffledProducts.slice(60, 72);
+  const seventhRow = shuffledProducts.slice(72, 84);
   
-  // Tablet: 6 fotos por linha
-  const firstRowTablet = shuffledProducts.slice(0, 6);
-  const secondRowTablet = shuffledProducts.slice(6, 12);
-  const thirdRowTablet = shuffledProducts.slice(12, 18);
-  const fourthRowTablet = shuffledProducts.slice(18, 24);
+  // Tablet: 8 fotos por linha (7 linhas)
+  const firstRowTablet = shuffledProducts.slice(0, 8);
+  const secondRowTablet = shuffledProducts.slice(8, 16);
+  const thirdRowTablet = shuffledProducts.slice(16, 24);
+  const fourthRowTablet = shuffledProducts.slice(24, 32);
+  const fifthRowTablet = shuffledProducts.slice(32, 40);
+  const sixthRowTablet = shuffledProducts.slice(40, 48);
+  const seventhRowTablet = shuffledProducts.slice(48, 56);
   
-  // Mobile: 3 fotos por linha
-  const firstRowMobile = shuffledProducts.slice(0, 3);
-  const secondRowMobile = shuffledProducts.slice(3, 6);
-  const thirdRowMobile = shuffledProducts.slice(6, 9);
-  const fourthRowMobile = shuffledProducts.slice(9, 12);
+  // Mobile: 4 fotos por linha (7 linhas)
+  const firstRowMobile = shuffledProducts.slice(0, 4);
+  const secondRowMobile = shuffledProducts.slice(4, 8);
+  const thirdRowMobile = shuffledProducts.slice(8, 12);
+  const fourthRowMobile = shuffledProducts.slice(12, 16);
+  const fifthRowMobile = shuffledProducts.slice(16, 20);
+  const sixthRowMobile = shuffledProducts.slice(20, 24);
+  const seventhRowMobile = shuffledProducts.slice(24, 28);
   
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -781,7 +565,7 @@ export default function ProjectsSection() {
 
       <div
         ref={ref}
-        className="h-[163vh] py-40 overflow-hidden antialiased relative flex flex-col justify-center self-auto [perspective:1000px] [transform-style:preserve-3d]"
+        className="h-[200vh] md:h-[210vh] lg:h-[190vh] py-20 overflow-hidden antialiased relative flex flex-col justify-center self-auto [perspective:1000px] [transform-style:preserve-3d]"
       >
         <Header />
         <motion.div
@@ -793,7 +577,7 @@ export default function ProjectsSection() {
           }}
           className=""
         >
-          {/* Desktop: 9 fotos - hidden on tablet/mobile */}
+          {/* Desktop: 12 fotos - hidden on tablet/mobile */}
           <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
             {firstRow.map((product) => (
               <ProductCard
@@ -824,7 +608,7 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
-          <motion.div className="hidden lg:flex flex-row space-x-2">
+          <motion.div className="hidden lg:flex flex-row space-x-2 mb-2">
             {fourthRow.map((product) => (
               <ProductCard
                 product={product}
@@ -834,8 +618,38 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
+          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
+            {fifthRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden lg:flex flex-row space-x-2 mb-2">
+            {sixthRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
+            {seventhRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
 
-          {/* Tablet: 6 fotos - hidden on desktop/mobile */}
+          {/* Tablet: 8 fotos - hidden on desktop/mobile */}
           <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
             {firstRowTablet.map((product) => (
               <ProductCard
@@ -866,7 +680,7 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3">
+          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3 mb-3">
             {fourthRowTablet.map((product) => (
               <ProductCard
                 product={product}
@@ -876,9 +690,39 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
+          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
+            {fifthRowTablet.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3 mb-3">
+            {sixthRowTablet.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
+            {seventhRowTablet.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
 
-          {/* Mobile: 3 fotos - hidden on tablet/desktop */}
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-4 mb-4">
+          {/* Mobile: 4 fotos - hidden on tablet/desktop */}
+          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
             {firstRowMobile.map((product) => (
               <ProductCard
                 product={product}
@@ -888,7 +732,7 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
-          <motion.div className="flex md:hidden flex-row mb-4 space-x-4">
+          <motion.div className="flex md:hidden flex-row mb-2 space-x-2">
             {secondRowMobile.map((product) => (
               <ProductCard
                 product={product}
@@ -898,7 +742,7 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-4 mb-4">
+          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
             {thirdRowMobile.map((product) => (
               <ProductCard
                 product={product}
@@ -908,11 +752,41 @@ export default function ProjectsSection() {
               />
             ))}
           </motion.div>
-          <motion.div className="flex md:hidden flex-row space-x-4">
+          <motion.div className="flex md:hidden flex-row space-x-2 mb-2">
             {fourthRowMobile.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
+            {fifthRowMobile.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="flex md:hidden flex-row space-x-2 mb-2">
+            {sixthRowMobile.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                onOpenGallery={handleOpenGallery}
+                key={product.title}
+              />
+            ))}
+          </motion.div>
+          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
+            {seventhRowMobile.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
                 onOpenGallery={handleOpenGallery}
                 key={product.title}
               />
