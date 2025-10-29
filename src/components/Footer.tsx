@@ -194,17 +194,17 @@ function Footer() {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a 
-                          href="https://www.tiktok.com/@homsiengenharia" 
+                          href="https://www.linkedin.com/in/kemel-amir-el-homsi-a2709425/" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
                         >
-                          <img src="/icons/tiktok.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
-                          <span className="sr-only">TikTok</span>
+                          <img src="/icons/linkedin.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <span className="sr-only">LinkedIn</span>
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Siga-nos no TikTok</p>
+                        <p>Conecte-se no LinkedIn</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
