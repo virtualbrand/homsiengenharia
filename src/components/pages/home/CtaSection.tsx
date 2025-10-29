@@ -146,17 +146,38 @@ export default function CtaSection() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Salvar dados para o WhatsApp
-    setSubmittedData(data);
-    
-    // Aqui você pode integrar com seu serviço de envio de email
-    console.log("Form submitted:", data);
-    
-    // Mostrar mensagem de agradecimento
-    setIsFormSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      // Enviar dados para o Trello
+      const response = await fetch('/api/trello', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Salvar dados para o WhatsApp
+        setSubmittedData(data);
+        
+        // Mostrar mensagem de agradecimento
+        setIsFormSubmitted(true);
+        console.log("Lead enviado para o Trello com sucesso:", result.cardId);
+      } else {
+        // Mostrar erro
+        alert(`Erro ao enviar: ${result.message || 'Tente novamente mais tarde.'}`);
+        console.error("Erro do servidor:", result.message);
+      }
+    } catch (error) {
+      // Erro de rede ou outro
+      alert('Erro de conexão. Verifique sua internet e tente novamente.');
+      console.error("Erro ao enviar para Trello:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
     const handleWhatsAppRedirect = () => {
@@ -327,7 +348,7 @@ export default function CtaSection() {
                     </h3>
                     
                     <p className="text-lg text-white/90 leading-relaxed max-w-md mx-auto">
-                      Responderemos sua mensagem em breve.<br />
+                      Seu lead foi registrado com sucesso e responderemos em breve.<br />
                       Para agilizar o seu atendimento, encaminhe sua mensagem por WhatsApp clicando no botão abaixo.
                     </p>
                   </div>
