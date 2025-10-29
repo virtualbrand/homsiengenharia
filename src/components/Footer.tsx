@@ -73,7 +73,7 @@ function Footer() {
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-5 right-2 z-50">
         <a 
-          href="https://wa.me/5531992261911" 
+          href="https://wa.link/g3qqjr" 
           target="_blank" 
           rel="noopener noreferrer"
           className="block"
@@ -105,19 +105,37 @@ function Footer() {
               <address className="space-y-2 text-lg text-gray-300 leading-relaxed mb-6">
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <svg className="w-5 h-5 mr-3 mt-0.5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                    <div>
-                      <p>Rua Tenente Brito Melo - Barro Preto</p>
-                      <p>Belo Horizonte - MG, 30180-072</p>
-                    </div>
+                    <a 
+                      href="https://www.google.com/maps/place/HOMSI+SERVI%C3%87OS+DE+ENGENHARIA/@-19.9201375,-43.9590652,17z/data=!3m1!4b1!4m6!3m5!1s0xa697ff7eea8925:0x492704329e8c7ea1!8m2!3d-19.9201376!4d-43.9541943!16s%2Fg%2F11xmvwn62b?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start group cursor-pointer"
+                    >
+                      <svg className="w-5 h-5 mr-3 mt-0.5 text-gray-300 flex-shrink-0 group-hover:text-[#D6BDAA] transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      <div>
+                        <p className="group-hover:text-[#D6BDAA] transition-colors">
+                          Rua Tenente Brito Melo - Barro Preto<br />
+                          Belo Horizonte - MG, 30180-072
+                        </p>
+                      </div>
+                    </a>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 mr-3 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                    <p>(31) 99226-1911</p>
+                    <p>
+                      <a 
+                        href="https://wa.link/g3qqjr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#D6BDAA] transition-colors"
+                      >
+                        (31) 99226-1911
+                      </a>
+                    </p>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 mr-3 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

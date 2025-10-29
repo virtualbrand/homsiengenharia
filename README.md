@@ -1,6 +1,6 @@
-# A Confeiteira Próspera - Landing Pages
+# Homsi Engenharia - Website Institucional
 
-Este projeto consiste em landing pages para divulgar os infoprodutos de Duda Berger, Mentora/Professora de confeiteiras.
+Este projeto é o website institucional da Homsi Engenharia, empresa especializada em construção e reformas de alto padrão em Belo Horizonte, Nova Lima e Lagoa Santa / MG.
 
 ## Tecnologias Utilizadas
 

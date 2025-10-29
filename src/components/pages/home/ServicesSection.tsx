@@ -47,7 +47,7 @@ export default function ServicesSection() {
   useScrollAnimation();
   
   return (
-    <section id="servicos" className="relative min-h-screen">
+    <section id="servicos" className="relative min-h-screen py-20 md:py-32">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div 

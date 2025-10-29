@@ -1,6 +1,81 @@
 import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+
+  useEffect(() => {
+    // Detect iOS
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+    const video = videoRef.current
+    if (video && !iOS) {
+      // Try autoplay for non-iOS devices
+      const playVideo = async () => {
+        try {
+          await video.play()
+          setIsVideoPlaying(true)
+        } catch (error) {
+          console.log('Autoplay prevented:', error)
+        }
+      }
+      
+      if (video.readyState >= 3) {
+        playVideo()
+      } else {
+        video.addEventListener('canplay', playVideo)
+      }
+    }
+
+    // iOS-specific behavior: play on scroll or click
+    if (iOS && video) {
+      const playVideoOnInteraction = async () => {
+        if (!isVideoPlaying) {
+          try {
+            await video.play()
+            setIsVideoPlaying(true)
+          } catch (error) {
+            console.log('Video play failed:', error)
+          }
+        }
+      }
+
+      // Play on scroll
+      const handleScroll = () => {
+        if (window.scrollY > 50) { // After scrolling 50px
+          playVideoOnInteraction()
+          window.removeEventListener('scroll', handleScroll)
+        }
+      }
+
+      // Play on click anywhere in hero section
+      const handleHeroClick = () => {
+        playVideoOnInteraction()
+        if (sectionRef.current) {
+          sectionRef.current.removeEventListener('click', handleHeroClick)
+          sectionRef.current.removeEventListener('touchstart', handleHeroClick)
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      
+      if (sectionRef.current) {
+        sectionRef.current.addEventListener('click', handleHeroClick)
+        sectionRef.current.addEventListener('touchstart', handleHeroClick)
+      }
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+        if (sectionRef.current) {
+          sectionRef.current.removeEventListener('click', handleHeroClick)
+          sectionRef.current.removeEventListener('touchstart', handleHeroClick)
+        }
+      }
+    }
+  }, [isVideoPlaying])
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
     const target = document.querySelector(targetId)
@@ -25,13 +100,18 @@ const HeroSection = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden cursor-pointer"
+    >
       {/* Video Background */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero-home.mp4" type="video/mp4" />

@@ -23,7 +23,7 @@ export default function CtaSection() {
   };
 
   return (
-    <section id="contato" className="relative w-full h-screen">
+    <section id="contato" className="relative w-full h-screen py-20 md:py-32">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
