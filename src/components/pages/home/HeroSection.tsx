@@ -152,7 +152,8 @@ const HeroSection = () => {
             <a 
               href="#projetos"
               onClick={(e) => handleAnchorClick(e, '#projetos')}
-              className="btn-primary rounded-xl px-8 py-4 text-lg font-semibold shadow-2xl group flex items-center justify-center"
+              className="btn-primary rounded-xl text-lg font-semibold shadow-2xl group flex items-center justify-center w-full max-w-[200px] sm:w-auto sm:max-w-none"
+              style={{ padding: '0.67rem 1.5rem' }}
             >
               Ver projetos
             </a>
@@ -160,7 +161,7 @@ const HeroSection = () => {
             <a 
               href="#sobre"
               onClick={(e) => handleAnchorClick(e, '#sobre')}
-              className="btn-secondary rounded-xl px-8 py-4 text-lg font-semibold group flex items-center justify-center"
+              className="btn-secondary rounded-xl px-8 py-4 text-lg font-semibold group flex items-center justify-center w-full max-w-[200px] sm:w-auto sm:max-w-none"
             >
               Sobre
             </a>

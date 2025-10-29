@@ -97,7 +97,7 @@ function Footer() {
           <div className="relative">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-white">Homsi Engenharia</h2>
             <p className="mb-6 text-lg text-gray-300 leading-relaxed">
-              A Homsi Engenharia é uma empresa especializada em construção e reformas de alto padrão, atuando com excelência em Belo Horizonte, Nova Lima e Lagoa Santa / MG.
+              A Homsi Engenharia é uma empresa especializada em construção e reformas de alto padrão, atuando com excelência exclusivamente em Belo Horizonte, Nova Lima e Lagoa Santa / MG.
             </p>
             
             <div className="mt-8">

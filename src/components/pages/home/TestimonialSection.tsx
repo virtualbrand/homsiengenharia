@@ -77,15 +77,15 @@ const TestimonialSection = () => {
           <h2 className="fade-in text-3xl md:text-4xl lg:text-5xl font-black text-center mb-4 text-gray-900">
             O que nossos clientes dizem
           </h2>
-          <p className="fade-in text-xl leading-relaxed mb-2 text-gray-700">
+          <p className="fade-in text-xl leading-relaxed mb-2 text-gray-700 text-center">
             Veja o que nossos clientes têm a dizer sobre nossos serviços
           </p>
         </motion.div>
 
         <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+          <TestimonialsColumn testimonials={firstColumn} duration={20} />
+          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={20} />
+          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={20} />
         </div>
       </div>
     </section>
