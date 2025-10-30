@@ -6,9 +6,21 @@ const AboutSection = () => {
   return (
     <section id="sobre" className="relative py-20 md:py-32 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-12 gap-8 items-center">
-          {/* Content Side - 5 colunas */}
-          <div className="col-span-12 md:col-start-2 md:col-span-5">
+        <div className="flex flex-col md:block">
+          {/* Image Side - Aparece primeiro no mobile, float right no desktop */}
+          <div className="w-full mb-6 md:mb-8 md:float-right md:w-5/12 md:ml-8 lg:ml-10">
+            <div className="fade-in">
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-2xl opacity-20 blur-2xl" />
+              <img
+                src="/images/kemel.webp"
+                alt="Kemel Homsi - Engenheiro Civil"
+                className="relative rounded-2xl w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Content Side - Flui ao redor da imagem */}
+          <div className="w-full">
             <div>
               <span className="fade-in font-bold text-sm uppercase tracking-wider block text-[var(--color-secondary-700)]">
                 A Engenharia construída pela Experiência
@@ -35,18 +47,6 @@ const AboutSection = () => {
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-8">
                 Na Homsi Engenharia, cada projeto é uma extensão dessa expertise. Somos a voz da obra bem feita, pautada na integridade inegociável e no cuidado artesanal. Nosso foco na solução prática e na proatividade garante que cada detalhe, desde o conceito à entrega das chaves e ao pós-obra, seja impecável. Kemel Amir El Homsi imprime na Homsi a garantia de que seu investimento será materializado em um sonho, com a assistência e competência que só uma vida inteira dedicada à engenharia pode oferecer. Para nós, sua satisfação não é apenas um objetivo; é a nossa palavra.
               </p>
-            </div>
-          </div>
-
-          {/* Image Side - 5 colunas com 1 coluna de espaçamento à esquerda */}
-          <div className="col-span-12 md:col-start-8 md:col-span-4 relative">
-            <div className="fade-in">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-2xl opacity-20 blur-2xl" />
-              <img
-                src="/images/kemel.webp"
-                alt="Kemel Homsi - Engenheiro Civil"
-                className="relative rounded-2xl shadow-2xl w-full h-auto object-cover"
-              />
             </div>
           </div>
         </div>

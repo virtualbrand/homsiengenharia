@@ -1,7 +1,7 @@
 import './App.css'
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HomePage from './pages/HomePage';
