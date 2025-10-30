@@ -6,6 +6,7 @@ import ServicesSection from '../components/pages/home/ServicesSection'
 import ProjectsSection from '../components/pages/home/ProjectsSection'
 import TestimonialSection from '../components/pages/home/TestimonialSection'
 import CtaSection from '../components/pages/home/CtaSection'
+import BlogSection from '../components/pages/home/BlogSection'
 import Footer from '@/components/Footer'
 
 const HomePage = () => {
@@ -92,6 +93,7 @@ const HomePage = () => {
         <ProjectsSection />
         <TestimonialSection />
         <CtaSection />
+        <BlogSection />
         <Footer />
       </div>
     </>
