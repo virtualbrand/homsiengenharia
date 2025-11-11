@@ -3,7 +3,7 @@
 
 type AppRoutes = "/" | "/links"
 type AppRouteHandlerRoutes = "/api/trello"
-type PageRoutes = "/HomePage" | "/LinksPage"
+type PageRoutes = never
 type LayoutRoutes = "/"
 type RedirectRoutes = never
 type RewriteRoutes = never
@@ -13,9 +13,7 @@ type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRo
 interface ParamMap {
   "/": {}
   "/api/trello": {}
-  "/HomePage": {}
   "/links": {}
-  "/LinksPage": {}
 }
 
 

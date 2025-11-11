@@ -1,14 +1,15 @@
 {
-  "components/Footer.tsx -> @/components/ui/footer-map": {
-    "id": "components/Footer.tsx -> @/components/ui/footer-map",
+  "src/components/Footer.tsx -> @/components/ui/footer-map": {
+    "id": 1940,
     "files": [
-      "static/chunks/_app-pages-browser_src_components_ui_footer-map_tsx.js"
+      "static/chunks/d0deef33.cac6acee3fffe7af.js",
+      "static/chunks/940.f6417b0f959fb00a.js"
     ]
   },
-  "components/Footer.tsx -> lottie-web": {
-    "id": "components/Footer.tsx -> lottie-web",
+  "src/components/Footer.tsx -> lottie-web": {
+    "id": 9081,
     "files": [
-      "static/chunks/_app-pages-browser_node_modules_lottie-web_build_player_lottie_js.js"
+      "static/chunks/dc112a36.3de4dce187b30263.js"
     ]
   }
 }
