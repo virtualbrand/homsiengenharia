@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -14,10 +16,10 @@ export const Header = () => {
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
-    const target = document.querySelector(targetId)
+    const target = document.querySelector(targetId) as HTMLElement
     if (target) {
       // Get Lenis instance from window
-      const lenis = (window as any).lenis
+      const lenis = window.lenis
       if (lenis) {
         lenis.scrollTo(target, {
           offset: 0, // Sem offset para aparecer no topo exato
@@ -37,10 +39,10 @@ export const Header = () => {
   }
 
   const handleCtaClick = () => {
-    const target = document.querySelector('#contato')
+    const target = document.querySelector('#contato') as HTMLElement
     if (target) {
       // Get Lenis instance from window
-      const lenis = (window as any).lenis
+      const lenis = window.lenis
       if (lenis) {
         lenis.scrollTo(target, {
           offset: 0, // Sem offset para aparecer no topo exato

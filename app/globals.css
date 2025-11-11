@@ -1,0 +1,475 @@
+@import "tailwindcss";
+
+/* ================================
+   FONT FACE DECLARATIONS
+   ================================ */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================
+   RESET & BASE STYLES
+   ================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  font-family: 'Satoshi', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ================================
+     PALETA DE CORES - CORES DO SISTEMA
+     ================================ */
+
+  /* Primário - #1C1C1C (Eerie black) */
+  --color-primary-50: #f8f8f8;
+  --color-primary-100: #f0f0f0;
+  --color-primary-200: #e0e0e0;
+  --color-primary-300: #d0d0d0;
+  --color-primary-400: #a0a0a0;
+  --color-primary-500: #1C1C1C;
+  --color-primary-600: #161616;
+  --color-primary-700: #101010;
+  --color-primary-800: #0b0b0b;
+  --color-primary-900: #050505;
+
+  /* Secundário - #D6D6D6 (Timberwolf) */
+  --color-secondary-50: #fdfdfd;
+  --color-secondary-100: #fafafa;
+  --color-secondary-200: #f5f5f5;
+  --color-secondary-300: #efefef;
+  --color-secondary-400: #e5e5e5;
+  --color-secondary-500: #D6D6D6;
+  --color-secondary-600: #ababab;
+  --color-secondary-700: #808080;
+  --color-secondary-800: #555555;
+  --color-secondary-900: #2b2b2b;
+
+  /* Texto - #1C1C1C (Eerie black) */
+  --color-text-50: #f8f8f8;
+  --color-text-100: #f0f0f0;
+  --color-text-200: #e0e0e0;
+  --color-text-300: #d0d0d0;
+  --color-text-400: #a0a0a0;
+  --color-text-500: #808080;
+  --color-text-600: #606060;
+  --color-text-700: #404040;
+  --color-text-800: #2e2e2e;
+  --color-text-900: #1C1C1C;
+
+  /* Acento - #9C7248 (Chamoisee) */
+  --color-accent-50: #faf8f6;
+  --color-accent-100: #f5f1ed;
+  --color-accent-200: #ebe3db;
+  --color-accent-300: #e0d5c9;
+  --color-accent-400: #d6c7b7;
+  --color-accent-500: #9C7248;
+  --color-accent-600: #7d5b3a;
+  --color-accent-700: #5e442b;
+  --color-accent-800: #3f2e1d;
+  --color-accent-900: #1f170e;
+
+  /* ================================
+     CORES PERSONALIZADAS
+     ================================ */
+
+  /* White - #FEFEFE */
+  --color-white: #FEFEFE;
+
+  /* Tan - #CCAD8F */
+  --color-tan-50: #fdfcfa;
+  --color-tan-100: #fbf9f5;
+  --color-tan-200: #f7f3eb;
+  --color-tan-300: #f3ede1;
+  --color-tan-400: #efe7d7;
+  --color-tan-500: #CCAD8F;
+  --color-tan-600: #a38a72;
+  --color-tan-700: #7a6855;
+  --color-tan-800: #524538;
+  --color-tan-900: #29231c;
+
+  /* Off White - #FEFEFE */
+  --color-off-white: #FEFEFE;
+
+  /* Text White - #FFFFFF */
+  --color-text-white: #FFFFFF;
+
+  /* Light Background - #F5F5F5 */
+  --color-light-background: #F5F5F5;
+
+  /* ================================
+     CONFIGURAÇÕES GLOBAIS
+     ================================ */
+  color: var(--color-text-900);
+  background-color: var(--color-off-white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --hu-font-geist: var(--font-geist);
+  --hu-font-jetbrains: var(--font-jetbrains-mono);
+  --radius: 0.8rem;
+  --card-radius: 1rem;
+  --hu-background: hsl(0, 0%, 100%);
+  --hu-foreground: hsl(0, 0%, 14%);
+  --hu-card: hsl(0, 0%, 99%);
+  --hu-card-foreground: hsl(0, 0%, 14%);
+  --hu-primary: hsl(235, 100%, 60%);
+  --hu-primary-foreground: hsl(0, 0%, 98%);
+  --hu-secondary: hsl(0, 0%, 97%);
+  --hu-secondary-foreground: hsl(0, 0%, 20%);
+  --hu-muted: hsl(0, 0%, 97%);
+  --hu-muted-foreground: hsl(0, 0%, 56%);
+  --hu-accent: hsl(0, 0%, 96%);
+  --hu-accent-foreground: hsl(0, 0%, 20%);
+  --hu-destructive: hsl(9, 96%, 47%);
+  --hu-destructive-foreground: hsl(0, 0%, 98%);
+  --hu-border: hsl(0, 0%, 92%);
+  --hu-input: hsl(0, 0%, 100%);
+  --hu-ring: hsl(0, 0%, 71%);
+  --color-fd-background: hsl(var(--hu-background));
+  --color-fd-card: hsl(var(--hu-background));
+}
+
+/* ================================
+   ESTILOS BASE DE ELEMENTOS
+   ================================ */
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-off-white);
+  color: var(--color-text-900);
+  overflow-x: hidden;
+  font-family: 'Satoshi', sans-serif;
+}
+
+a {
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-600);
+}
+
+/* ================================
+   HEADER NAVIGATION OVERRIDES
+   ================================ */
+/* Default hover color for dark sections */
+header nav a:hover {
+  color: var(--color-accent-400) !important;
+}
+
+/* Light section hover color */
+header.light-section nav a:hover {
+  color: var(--color-accent-500) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.5em;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: normal;
+}
+
+/* ================================
+   COMPONENTES DE BOTÃO
+   ================================ */
+button {
+  border-radius: 2px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 900;
+  font-family: 'Satoshi', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-accent-500);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #B8906A 0%, #D6BDAA 100%) !important;
+  color: var(--color-primary-500) !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: all 0.4s ease !important;
+  border: none !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #D6BDAA 0%, #D6BDAA 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(156, 114, 72, 0.3) !important;
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  padding: 0.62rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ================================
+   CLASSES UTILITÁRIAS DE COR
+   ================================ */
+.text-primary {
+  color: var(--color-primary-500);
+}
+
+.text-secondary {
+  color: var(--color-secondary-500);
+}
+
+.text-accent {
+  color: var(--color-accent-500);
+}
+
+.text-rose {
+  color: var(--color-rose-500);
+}
+
+.text-pink {
+  color: var(--color-pink-500);
+}
+
+.text-lavender {
+  color: var(--color-lavender-500);
+}
+
+.text-amaranth {
+  color: var(--color-amaranth-500);
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+}
+
+.bg-secondary-gradient {
+  background: linear-gradient(135deg, var(--color-secondary-500) 0%, var(--color-secondary-600) 100%);
+}
+
+.bg-accent-gradient {
+  background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-600) 100%);
+}
+
+/* ================================
+   CLASSES SEMÂNTICAS PARA SHADCN/UI
+   ================================ */
+.text-foreground {
+  color: var(--color-text-900);
+}
+
+.text-muted-foreground {
+  color: var(--color-text-600);
+}
+
+.bg-muted {
+  background-color: var(--color-white-light-brown);
+}
+
+/* ================================
+   COMPONENTES CUSTOMIZADOS
+   ================================ */
+
+/* Accordion customizado */
+.accordion-trigger {
+  background-color: transparent !important;
+  border: none !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+}
+
+.accordion-trigger:hover {
+  background-color: transparent !important;
+  transform: none !important;
+  color: inherit !important;
+}
+
+.accordion-trigger:focus,
+.accordion-trigger:focus-visible {
+  outline: none !important;
+  background-color: transparent !important;
+}
+
+/* Carousel scrollbar hide */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Glass morphism effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px -15px rgba(156, 114, 72, 0.5);
+}
+
+/* Glass effect for service cards */
+.glass-effect {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+/* Glass card shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.glass-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.dark {
+  --hu-background: hsl(0, 0%, 7%);
+  --hu-foreground: hsl(0, 0%, 100%);
+  --hu-card: hsl(0, 0%, 9%);
+  --hu-card-foreground: hsl(0, 0%, 100%);
+  --hu-primary: hsl(235, 100%, 60%);
+  --hu-primary-foreground: hsl(0, 0%, 98%);
+  --hu-secondary: hsl(0, 0%, 15%);
+  --hu-secondary-foreground: hsl(0, 0%, 100%);
+  --hu-muted: hsl(0, 0%, 15%);
+  --hu-muted-foreground: hsl(0, 0%, 71%);
+  --hu-accent: hsl(0, 0%, 15%);
+  --hu-accent-foreground: hsl(0, 0%, 100%);
+  --hu-destructive: hsl(0, 84%, 50%);
+  --hu-destructive-foreground: hsl(0, 0%, 98%);
+  --hu-border: hsl(0, 0%, 92%);
+  --hu-input: hsl(0, 0%, 100%);
+  --hu-ring: hsl(0, 0%, 56%);
+  --color-fd-background: hsl(var(--hu-background));
+  --color-fd-card: hsl(var(--hu-background));
+}
+
+/* ================================
+   STACKING CARDS STYLES (GSAP)
+   ================================ */
+.cards-section {
+  position: relative;
+}
+
+.cards {
+  display: grid;
+  place-items: center;
+}
+
+.cards > * {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.card {
+  will-change: transform, background-color;
+  position: relative;
+}
+
+/* Sticky title para a seção de cards */
+.sticky-title {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .sticky-title > div {
+    position: sticky;
+    top: 8rem;
+  }
+}

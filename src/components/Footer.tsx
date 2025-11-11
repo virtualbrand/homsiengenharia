@@ -2,29 +2,36 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef } from "react"
+import dynamic from "next/dynamic"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ServiceAreaMap } from "@/components/ui/footer-map"
+
+// Carregar o mapa dinamicamente apenas no cliente
+const ServiceAreaMap = dynamic(
+  () => import("@/components/ui/footer-map").then((mod) => mod.ServiceAreaMap),
+  { ssr: false }
+)
 
 function Footer() {
   const lottieRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let animation: any = null
+    let animation: ReturnType<typeof import('lottie-web').default.loadAnimation> | null = null
+    const container = lottieRef.current
     
     const loadLottie = async () => {
       try {
         const lottie = await import('lottie-web')
-        if (lottieRef.current) {
+        if (container) {
           // Limpa completamente o container
-          lottieRef.current.innerHTML = ''
+          container.innerHTML = ''
           
           animation = lottie.default.loadAnimation({
-            container: lottieRef.current,
+            container: container,
             renderer: 'svg',
             loop: true,
             autoplay: true,
@@ -41,8 +48,8 @@ function Footer() {
           
           // Remove qualquer SVG duplicado após carregar
           setTimeout(() => {
-            if (lottieRef.current) {
-              const svgs = lottieRef.current.querySelectorAll('svg')
+            if (container) {
+              const svgs = container.querySelectorAll('svg')
               if (svgs.length > 1) {
                 for (let i = 1; i < svgs.length; i++) {
                   svgs[i].remove()
@@ -62,8 +69,8 @@ function Footer() {
       if (animation) {
         animation.destroy()
       }
-      if (lottieRef.current) {
-        lottieRef.current.innerHTML = ''
+      if (container) {
+        container.innerHTML = ''
       }
     }
   }, [])

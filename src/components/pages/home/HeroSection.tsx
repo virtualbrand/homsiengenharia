@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
@@ -62,26 +64,27 @@ const HeroSection = () => {
 
       window.addEventListener('scroll', handleScroll, { passive: true })
       
-      if (sectionRef.current) {
-        sectionRef.current.addEventListener('click', handleHeroClick)
-        sectionRef.current.addEventListener('touchstart', handleHeroClick)
+      const section = sectionRef.current
+      if (section) {
+        section.addEventListener('click', handleHeroClick)
+        section.addEventListener('touchstart', handleHeroClick)
       }
 
       return () => {
         window.removeEventListener('scroll', handleScroll)
-        if (sectionRef.current) {
-          sectionRef.current.removeEventListener('click', handleHeroClick)
-          sectionRef.current.removeEventListener('touchstart', handleHeroClick)
+        if (section) {
+          section.removeEventListener('click', handleHeroClick)
+          section.removeEventListener('touchstart', handleHeroClick)
         }
       }
     }
   }, [isVideoPlaying])
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
-    const target = document.querySelector(targetId)
+    const target = document.querySelector(targetId) as HTMLElement
     if (target) {
       // Get Lenis instance from window
-      const lenis = (window as any).lenis
+      const lenis = window.lenis
       if (lenis) {
         lenis.scrollTo(target, {
           offset: 0, // Sem offset para aparecer no topo exato - igual ao header

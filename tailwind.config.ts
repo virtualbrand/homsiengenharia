@@ -1,0 +1,119 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        'sans': ['Satoshi', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+        'satoshi': ['Satoshi', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+      colors: {
+        // Cores do Sistema
+        primary: {
+          50: '#f0f5f5',
+          100: '#d9e7e6',
+          200: '#b3cfcd',
+          300: '#8db7b4',
+          400: '#679f9b',
+          500: '#6C8C8A',
+          600: '#567070',
+          700: '#415456',
+          800: '#2b383c',
+          900: '#161c22',
+        },
+        secondary: {
+          50: '#fef2f0',
+          100: '#fce4df',
+          200: '#f8c9bf',
+          300: '#f4ae9f',
+          400: '#f0937f',
+          500: '#CC4C31',
+          600: '#a33d28',
+          700: '#7a2e1e',
+          800: '#511f14',
+          900: '#28100a',
+        },
+        text: {
+          50: '#f7f6f6',
+          100: '#efedec',
+          200: '#dfdbd9',
+          300: '#cfc9c6',
+          400: '#bfb7b3',
+          500: '#afa5a0',
+          600: '#7f756f',
+          700: '#4f453e',
+          800: '#1f1b19',
+          900: '#0E0604',
+        },
+        accent: {
+          50: '#fef6f0',
+          100: '#fdede0',
+          200: '#fbdbc1',
+          300: '#f9c9a2',
+          400: '#f7b783',
+          500: '#E68830',
+          600: '#b86d26',
+          700: '#8a521d',
+          800: '#5c3713',
+          900: '#2e1c0a',
+        },
+        // Cores Personalizadas
+        brown: {
+          50: '#f5f1ef',
+          100: '#ebe3df',
+          200: '#d7c7bf',
+          300: '#c3ab9f',
+          400: '#af8f7f',
+          500: '#8D412A',
+          600: '#713422',
+          700: '#552719',
+          800: '#391a11',
+          900: '#1c0d08',
+        },
+        'light-brown': {
+          50: '#f5f5f4',
+          100: '#ebeae9',
+          200: '#d7d5d3',
+          300: '#c3c0bd',
+          400: '#afaba7',
+          500: '#8A8D7F',
+          600: '#6e7166',
+          700: '#53554c',
+          800: '#373933',
+          900: '#1c1c19',
+        },
+        // Cores especiais
+        'off-white': '#FFFFF8',
+        'text-white': '#FFFFFF',
+        'white-light-brown': '#F3ECE9',
+        // Cores do sistema shadcn
+        'border': 'hsl(0 0% 89%)',
+        'ring': 'hsl(222.2 84% 4.9%)',
+        'background': 'hsl(0 0% 100%)',
+        'foreground': 'hsl(222.2 84% 4.9%)',
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

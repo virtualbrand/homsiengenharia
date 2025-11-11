@@ -1,0 +1,14 @@
+{
+  "components/Footer.tsx -> @/components/ui/footer-map": {
+    "id": "components/Footer.tsx -> @/components/ui/footer-map",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_ui_footer-map_tsx.js"
+    ]
+  },
+  "components/Footer.tsx -> lottie-web": {
+    "id": "components/Footer.tsx -> lottie-web",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_lottie-web_build_player_lottie_js.js"
+    ]
+  }
+}

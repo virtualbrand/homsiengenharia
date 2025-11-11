@@ -185,12 +185,12 @@ const generateProducts = (): Array<{
 
   // Para cada projeto na galeria, adiciona todas as suas imagens
   Object.entries(projectGalleries).forEach(([projectId, images]) => {
-    images.forEach((imagePath) => {
+    images.forEach((imagePath, index) => {
       allProducts.push({
         title: projectTitles[projectId as keyof typeof projectTitles] || "Projeto",
         link: "#",
         thumbnail: imagePath,
-        projectId: projectId,
+        projectId: `${projectId}-${index}`, // ID único para cada imagem
       });
     });
   });
@@ -409,11 +409,10 @@ const ProductCard = ({
       style={{
         x: translate,
       }}
-      key={product.title}
+      key={product.projectId}
       className="group/product h-32 w-40 md:h-40 md:w-52 lg:h-40 lg:w-52 relative flex-shrink-0"
     >
-      <a
-        href={product.link}
+      <div
         onClick={handleClick}
         className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer"
       >
@@ -429,7 +428,7 @@ const ProductCard = ({
         <h3 className="absolute bottom-4 left-4 text-white font-bold text-base !md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
           {product.title}
         </h3>
-      </a>
+      </div>
     </motion.div>
   );
 };
@@ -584,7 +583,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -594,7 +593,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -604,7 +603,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -614,7 +613,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -624,7 +623,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -634,7 +633,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -644,7 +643,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -656,7 +655,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -666,7 +665,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -676,7 +675,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -686,7 +685,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -696,7 +695,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -706,7 +705,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -716,7 +715,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -728,7 +727,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -738,7 +737,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -748,7 +747,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -758,7 +757,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -768,7 +767,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -778,7 +777,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateXReverse}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
@@ -788,7 +787,7 @@ export default function ProjectsSection() {
                 product={product}
                 translate={translateX}
                 onOpenGallery={handleOpenGallery}
-                key={product.title}
+                key={product.projectId}
               />
             ))}
           </motion.div>
