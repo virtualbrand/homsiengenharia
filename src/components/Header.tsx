@@ -237,6 +237,20 @@ export const Header = () => {
                   Projetos
                 </a>
               </li>
+              <li>
+                <a 
+                  href="/artigos" 
+                  title="Artigos e insights sobre engenharia"
+                  className={cn(
+                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase hover:text-[#f3ede1]",
+                    isDarkSection 
+                      ? "text-white" 
+                      : "text-gray-900"
+                  )}
+                >
+                  Artigos
+                </a>
+              </li>
             </ul>
           </nav>
           
@@ -312,6 +326,18 @@ export const Header = () => {
                   )}
                 >
                   Projetos
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/artigos" 
+                  title="Artigos e insights sobre engenharia"
+                  className={cn(
+                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
+                >
+                  Artigos
                 </a>
               </li>
               <li>

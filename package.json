@@ -36,7 +36,7 @@
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.81.1",
     "@tabler/icons-react": "^3.35.0",
-    "@tailwindcss/postcss": "^4.1.12",
+    "@tailwindcss/postcss": "^4.1.17",
     "@tiptap/extension-highlight": "^3.10.5",
     "@tiptap/extension-horizontal-rule": "^3.10.5",
     "@tiptap/extension-image": "^3.10.5",
@@ -91,7 +91,7 @@
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2",
     "sass": "^1.94.0",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.17",
     "typescript": "~5.8.3"
   }
 }
