@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Homsi Engenharia - Soluções em Engenharia Civil",
-    template: "%s | Homsi Engenharia",
+    template: "%s - Homsi Engenharia",
   },
   description: "A Homsi Engenharia oferece soluções completas em engenharia civil com projetos inovadores, seguros e sustentáveis. Transformamos suas ideias em realidade.",
   keywords: ["engenharia civil", "projetos arquitetônicos", "construção civil", "projetos estruturais", "Homsi Engenharia"],
@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://homsiengenharia.com"),
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
   },
   openGraph: {
     type: "website",

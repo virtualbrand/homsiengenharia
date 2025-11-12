@@ -105,7 +105,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden cursor-pointer"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Video Background */}
       <video

@@ -184,7 +184,9 @@ const generateProducts = (): Array<{
   };
 
   // Para cada projeto na galeria, adiciona todas as suas imagens
-  Object.entries(projectGalleries).forEach(([projectId, images]) => {
+  // Garantindo ordem consistente com Object.keys().sort()
+  Object.keys(projectGalleries).sort().forEach((projectId) => {
+    const images = projectGalleries[projectId as keyof typeof projectGalleries];
     images.forEach((imagePath, index) => {
       allProducts.push({
         title: projectTitles[projectId as keyof typeof projectTitles] || "Projeto",
@@ -197,6 +199,9 @@ const generateProducts = (): Array<{
 
   return allProducts;
 };
+
+// Memoizar a lista de produtos para evitar inconsistências entre servidor e cliente
+const memoizedProducts = generateProducts();
 
 const Header = () => {
   return (
@@ -425,7 +430,7 @@ const ProductCard = ({
         />
         {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
         <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300" />
-        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base !md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
+        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
           {product.title}
         </h3>
       </div>
@@ -456,9 +461,8 @@ export default function ProjectsSection() {
     const gallery = projectGalleries[projectId as keyof typeof projectGalleries];
     const initialIndex = gallery.findIndex(img => img === clickedThumbnail);
     
-    // Encontrar o título do projeto usando generateProducts()
-    const allProducts = generateProducts();
-    const product = allProducts.find(p => p.thumbnail === clickedThumbnail);
+    // Encontrar o título do projeto usando memoizedProducts
+    const product = memoizedProducts.find(p => p.thumbnail === clickedThumbnail);
     const projectTitle = product?.title || "Projeto";
 
     setGalleryState({
@@ -478,16 +482,9 @@ export default function ProjectsSection() {
     });
   };
 
-  // Embaralha o array de produtos uma vez quando o componente monta
-  const shuffledProducts = React.useMemo(() => {
-    const allProducts = generateProducts();
-    const shuffled = [...allProducts];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }, []);
+  // Usa a lista memoizada de produtos diretamente (sem embaralhamento)
+  // para evitar inconsistências entre servidor e cliente
+  const shuffledProducts = React.useMemo(() => memoizedProducts, []);
 
   // Desktop: 12 fotos por linha (7 linhas)
   const firstRow = shuffledProducts.slice(0, 12);
