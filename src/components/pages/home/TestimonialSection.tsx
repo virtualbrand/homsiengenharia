@@ -64,7 +64,7 @@ const TestimonialSection = () => {
   useScrollAnimation();
   
   return (
-    <section id="depoimentos" className="bg-background pt-20 pb-10 md:pt-32 md:pb-12 relative">
+    <section id="depoimentos" className="bg-gray-50 pt-20 pb-10 md:pt-32 md:pb-12 relative">
 
       <div className="container z-10 mx-auto">
         <motion.div

@@ -18,6 +18,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Redirect /blog to /artigos
+  async redirects() {
+    return [
+      {
+        source: '/blog',
+        destination: '/artigos',
+        permanent: true,
+      },
+      {
+        source: '/blog/:slug*',
+        destination: '/artigos/:slug*',
+        permanent: true,
+      },
+    ];
+  },
   // Transpile packages que precisam ser processados
   transpilePackages: [
     '@react-three/fiber',

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { AdminHeader } from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -22,27 +22,9 @@ export default async function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-900">
-                HOMSI Engenharia - Admin
-              </h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">{user.email}</span>
-              <form action="/api/auth/signout" method="post">
-                <Button variant="outline" type="submit">
-                  Sair
-                </Button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <AdminHeader />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Link
             href="/admin/blog"

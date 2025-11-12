@@ -3,9 +3,10 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { AdminHeader } from '@/components/admin/AdminHeader'
 
 export const metadata: Metadata = {
-  title: 'Blog - Admin - HOMSI Engenharia',
+  title: 'Painel - Homsi Engenharia',
   description: 'Gerencie os posts do blog',
   robots: 'noindex, nofollow',
 }
@@ -28,28 +29,22 @@ export default async function BlogAdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/admin"
-                className="text-gray-600 hover:text-gray-900"
-              >
-                ← Voltar
-              </Link>
-              <h1 className="text-xl font-bold text-gray-900">
-                Gerenciar Blog
-              </h1>
-            </div>
-            <Link href="/admin/blog/new">
-              <Button>+ Novo Post</Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <AdminHeader />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Artigos
+          </h1>
+          <Link href="/admin/blog/new">
+            <button className="btn-primary rounded-xl px-6 py-2 shadow-lg flex items-center gap-2">
+              + Artigo
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      <main className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {!posts || posts.length === 0 ? (
           <div className="text-center py-12">
             <svg
@@ -78,61 +73,91 @@ export default async function BlogAdminPage() {
             </div>
           </div>
         ) : (
-          <div className="bg-white shadow overflow-hidden sm:rounded-md">
-            <ul className="divide-y divide-gray-200">
-              {posts.map((post) => (
-                <li key={post.id}>
-                  <Link
-                    href={`/admin/blog/${post.id}`}
-                    className="block hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="px-4 py-4 sm:px-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">
-                            {post.title}
-                          </p>
-                          <p className="mt-1 text-sm text-gray-500">
+          <div className="space-y-3">
+            {posts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/admin/blog/${post.id}`}
+                className="block bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all p-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-[#9b7b6b] flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-5 h-5 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900">
+                          {post.title}
+                        </h3>
+                        {post.excerpt && (
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                             {post.excerpt}
                           </p>
-                        </div>
-                        <div className="ml-4 flex-shrink-0 flex items-center gap-2">
-                          {post.published ? (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Publicado
-                            </span>
-                          ) : (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                              Rascunho
-                            </span>
-                          )}
-                          <svg
-                            className="h-5 w-5 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="mt-2 flex items-center text-sm text-gray-500">
-                        <time dateTime={post.created_at}>
-                          {new Date(post.created_at).toLocaleDateString(
-                            'pt-BR'
-                          )}
-                        </time>
+                        )}
                       </div>
                     </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                  </div>
+                  <div className="flex items-center gap-4 flex-shrink-0">
+                    {post.published ? (
+                      <span className="inline-flex items-center gap-1.5 text-sm text-gray-700">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        publicado
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 text-sm text-gray-500">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        rascunho
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-3 text-xs text-gray-500">
+                  Cliente desde{' '}
+                  {new Date(post.created_at).toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })}
+                </div>
+              </Link>
+            ))}
           </div>
         )}
       </main>

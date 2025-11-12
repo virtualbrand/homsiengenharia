@@ -90,11 +90,9 @@ export function LoginForm() {
                 : 'border-white/20 focus:ring-primary-500 focus:border-transparent'
             }`}
           />
-          <button
-            type="button"
+          <div
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/90 transition-colors"
-            tabIndex={-1}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 cursor-pointer"
           >
             {showPassword ? (
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,10 +104,10 @@ export function LoginForm() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
             )}
-          </button>
+          </div>
         </div>
         {passwordError && (
-          <p className="text-red-400 text-xs mt-1">A senha deve ter pelo menos 6 caracteres</p>
+          <p className="text-sm mt-1 text-red-300">A senha deve ter pelo menos 6 caracteres</p>
         )}
       </div>
 

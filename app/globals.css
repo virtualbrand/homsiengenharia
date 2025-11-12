@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tiptap UI Styles */
+@import '../src/styles/_variables.scss';
+@import '../src/styles/_keyframe-animations.scss';
+
 /* ================================
    FONT FACE DECLARATIONS
    ================================ */
@@ -159,6 +163,9 @@ html {
   --hu-ring: hsl(0, 0%, 71%);
   --color-fd-background: hsl(var(--hu-background));
   --color-fd-card: hsl(var(--hu-background));
+  
+  /* Stepper component */
+  --color-destructive-foreground: hsl(0, 0%, 98%);
 }
 
 /* ================================
@@ -472,4 +479,106 @@ button:focus-visible {
     position: sticky;
     top: 8rem;
   }
+}
+
+/* ================================
+   TIPTAP EDITOR STYLES
+   ================================ */
+.ProseMirror {
+  outline: none;
+  min-height: 400px;
+  padding: 1rem;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.ProseMirror h4 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.75rem;
+  color: #374151;
+  line-height: 1.75;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror li {
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #9b7b6b;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-bottom: 0.75rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.ProseMirror a {
+  color: #9b7b6b;
+  text-decoration: underline;
+}
+
+.ProseMirror code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #9b7b6b;
+}
+
+.ProseMirror pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
 }

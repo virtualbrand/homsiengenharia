@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -9,20 +10,40 @@ export const Header = () => {
   const [isDarkSection, setIsDarkSection] = useState(true)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const router = useRouter()
+  const pathname = usePathname()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (pathname !== '/') {
+      router.push('/')
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
+    
+    // If not on home page, navigate to home first, then scroll
+    if (pathname !== '/') {
+      // Store target in sessionStorage to scroll after navigation
+      sessionStorage.setItem('scrollTarget', targetId)
+      router.push('/')
+      return
+    }
+
     const target = document.querySelector(targetId) as HTMLElement
     if (target) {
       // Get Lenis instance from window
       const lenis = window.lenis
       if (lenis) {
         lenis.scrollTo(target, {
-          offset: 0, // Sem offset para aparecer no topo exato
+          offset: 0,
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         })
@@ -39,13 +60,20 @@ export const Header = () => {
   }
 
   const handleCtaClick = () => {
+    // If not on home page, navigate to home first, then scroll
+    if (pathname !== '/') {
+      sessionStorage.setItem('scrollTarget', '#contato')
+      router.push('/')
+      return
+    }
+
     const target = document.querySelector('#contato') as HTMLElement
     if (target) {
       // Get Lenis instance from window
       const lenis = window.lenis
       if (lenis) {
         lenis.scrollTo(target, {
-          offset: 0, // Sem offset para aparecer no topo exato
+          offset: 0,
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         })
@@ -60,6 +88,37 @@ export const Header = () => {
     }
     setIsMenuOpen(false)
   }
+
+  // Handle scroll after navigation from another page
+  useEffect(() => {
+    if (pathname === '/') {
+      const scrollTarget = sessionStorage.getItem('scrollTarget')
+      if (scrollTarget) {
+        sessionStorage.removeItem('scrollTarget')
+        
+        // Wait for page to be fully loaded
+        setTimeout(() => {
+          const target = document.querySelector(scrollTarget) as HTMLElement
+          if (target) {
+            const lenis = window.lenis
+            if (lenis) {
+              lenis.scrollTo(target, {
+                offset: 0,
+                duration: 1.5,
+                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              })
+            } else {
+              const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              })
+            }
+          }
+        }, 100)
+      }
+    }
+  }, [pathname])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +168,11 @@ export const Header = () => {
         <div className="container mx-auto px-4 py-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-8">
           {/* Logo */}
-          <div className="flex items-center space-x-3 flex-shrink-0">
+          <a 
+            href="/" 
+            onClick={handleLogoClick}
+            className="flex items-center space-x-3 flex-shrink-0 cursor-pointer"
+          >
             <img 
               src="/images/icon-white.svg"
               alt="Homsi Engenharia" 
@@ -124,7 +187,7 @@ export const Header = () => {
                 isDarkSection ? "text-white" : "text-gray-900"
               )}>Homsi Engenharia</h1>
             </div>
-          </div>
+          </a>
           
           {/* Navigation Menu - Desktop */}
           <nav className="hidden lg:flex flex-1 justify-center" aria-label="Menu principal">
