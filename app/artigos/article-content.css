@@ -50,19 +50,34 @@
 }
 
 .article-content p {
-  margin-bottom: 2rem;
-  line-height: 2;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .article-content ul,
 .article-content ol {
   margin-bottom: 2.5rem;
   margin-top: 2.5rem;
+}
+
+.article-content ul {
+  list-style: none;
+}
+
+.article-content ul li {
+  position: relative;
   padding-left: 1.5rem;
 }
 
+.article-content ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  top: -6px;
+  color: #374151;
+}
+
 .article-content li {
-  margin-bottom: 1rem;
   line-height: 2;
 }
 
