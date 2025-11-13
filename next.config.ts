@@ -16,8 +16,11 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', '@tabler/icons-react'],
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', '@tabler/icons-react', 'sonner', 'embla-carousel-react'],
   },
+  // Otimizar CSS com PostCSS
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
