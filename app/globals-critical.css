@@ -23,11 +23,26 @@ html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; ove
   line-height: 1.5;
   font-weight: 400;
   
-  /* Core colors */
+  /* Core colors - Complete palette for critical elements */
   --color-primary-500: #1C1C1C;
+  --color-primary-600: #161616;
+  --color-primary-800: #0b0b0b;
+  --color-accent-400: #d6c7b7;
   --color-accent-500: #9C7248;
+  --color-accent-600: #7d5b3a;
+  --color-secondary-500: #D6D6D6;
   --color-off-white: #FEFEFE;
+  --color-white: #FEFEFE;
   --color-text-900: #1C1C1C;
+  --color-text-600: #606060;
+  --color-text-300: #d0d0d0;
+  
+  /* Shadcn/UI variables for components */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 14%;
+  --border: 0 0% 92%;
   
   color: var(--color-text-900);
   background-color: var(--color-off-white);
@@ -53,10 +68,27 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-satoshi), sans-serif;
   font-weight: 900;
   text-transform: uppercase;
+  color: inherit;
 }
 
-p { line-height: 1.5em; font-family: var(--font-satoshi), sans-serif; font-weight: normal; }
-a { text-decoration: inherit; transition: color 0.3s ease; }
+p { 
+  line-height: 1.5em; 
+  font-family: var(--font-satoshi), sans-serif; 
+  font-weight: normal;
+  color: inherit;
+}
+
+a { 
+  text-decoration: inherit; 
+  transition: color 0.3s ease;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-satoshi), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
 
 /* Critical buttons */
 .btn-primary {
@@ -64,10 +96,18 @@ a { text-decoration: inherit; transition: color 0.3s ease; }
   color: var(--color-primary-500) !important;
   padding: 0.75rem 1.5rem;
   border-radius: 5px;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
   transition: all 0.4s ease !important;
   border: none !important;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #D6BDAA 0%, #D6BDAA 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(156, 114, 72, 0.3) !important;
 }
 
 .btn-secondary {
@@ -76,8 +116,26 @@ a { text-decoration: inherit; transition: color 0.3s ease; }
   color: white !important;
   padding: 0.62rem 1.5rem;
   border-radius: 5px;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
   transition: all 0.4s ease !important;
   backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Header styles */
+header nav a:hover {
+  color: var(--color-accent-400) !important;
+}
+
+header.light-section nav a:hover {
+  color: var(--color-accent-500) !important;
 }

@@ -7,38 +7,13 @@ export default function CriticalCSS() {
     <style
       dangerouslySetInnerHTML={{
         __html: `
-          /* Critical styles for above-the-fold content */
-          html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
-          }
-          
-          body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #1C1C1C;
-            color: #ffffff;
-          }
-          
-          * {
-            box-sizing: border-box;
-          }
-          
-          /* Critical animation for hero */
-          @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          
-          .animate-fade-in {
-            animation: fade-in 0.6s ease-out forwards;
+          /* Critical font preload hint */
+          @font-face {
+            font-family: 'Satoshi';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Satoshi');
           }
           
           /* Prevent layout shift */

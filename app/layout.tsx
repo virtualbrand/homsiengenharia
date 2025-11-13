@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
 import { satoshi } from "@/components/OptimizedFonts";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import CriticalCSS from "@/components/CriticalCSS";
-import DeferredStyles from "@/components/DeferredStyles";
-import "./globals-critical.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,9 +85,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Critical CSS inline para prevenir render blocking */}
-        <CriticalCSS />
-        
         {/* Preconnect para otimização de performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -121,7 +116,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${satoshi.variable} antialiased`}
       >
         <ServiceWorkerRegistration />
-        <DeferredStyles />
         <LenisProvider>
           {children}
         </LenisProvider>
