@@ -121,74 +121,54 @@ export const Header = () => {
   }, [pathname])
 
   useEffect(() => {
-    let ticking = false
-    
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY
-          const scrollDifference = Math.abs(currentScrollY - lastScrollY)
-          
-          // Only change visibility if scroll difference is significant (more than 5px)
-          if (scrollDifference > 5) {
-            // Show header when scrolling up, hide when scrolling down
-            if (currentScrollY < lastScrollY || currentScrollY < 10) {
-              setIsVisible(true)
-            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-              setIsVisible(false)
-            }
-            
-            setLastScrollY(currentScrollY)
-          }
-          
-          // Get all sections
-          const aboutSection = document.querySelector('#sobre')
-          const testimonialsSection = document.querySelector('#depoimentos')
-          const blogSection = document.querySelector('#blog')
-          
-          if (aboutSection || testimonialsSection || blogSection) {
-            const aboutRect = aboutSection?.getBoundingClientRect()
-            const testimonialsRect = testimonialsSection?.getBoundingClientRect()
-            const blogRect = blogSection?.getBoundingClientRect()
-            
-            // Check if we're in the about section (light background)
-            const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
-            
-            // Check if we're in the testimonials section (light background)
-            const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
-            
-            // Check if we're in the blog section (light background)
-            const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
-            
-            // Projects section has dark background, so we keep it as dark section
-            setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
-          }
-          
-          ticking = false
-        })
+      const currentScrollY = window.scrollY
+      
+      // Show header when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      }
+      
+      setLastScrollY(currentScrollY)
+      
+      // Get all sections
+      const aboutSection = document.querySelector('#sobre')
+      const testimonialsSection = document.querySelector('#depoimentos')
+      const blogSection = document.querySelector('#blog')
+      
+      if (aboutSection || testimonialsSection || blogSection) {
+        const aboutRect = aboutSection?.getBoundingClientRect()
+        const testimonialsRect = testimonialsSection?.getBoundingClientRect()
+        const blogRect = blogSection?.getBoundingClientRect()
         
-        ticking = true
+        // Check if we're in the about section (light background)
+        const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
+        
+        // Check if we're in the testimonials section (light background)
+        const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
+        
+        // Check if we're in the blog section (light background)
+        const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
+        
+        // Projects section has dark background, so we keep it as dark section
+        setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll)
     handleScroll() // Check initial position
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 z-50 w-full",
-        isVisible ? "translate-y-0" : "-translate-y-full",
-        !isDarkSection && "light-section"
-      )}
-      style={{
-        transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-        willChange: "transform"
-      }}
-    >
+    <header className={cn(
+      "fixed top-0 left-0 z-50 w-full transition-transform duration-700 ease-out",
+      isVisible ? "translate-y-0" : "-translate-y-full",
+      !isDarkSection && "light-section"
+    )}>
       <div className="backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-2xl">
         <div className="container mx-auto px-4 py-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-8">

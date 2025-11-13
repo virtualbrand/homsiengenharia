@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useEffect, useRef } from "react"
 import dynamic from "next/dynamic"
 import {
@@ -92,12 +91,8 @@ function Footer() {
         </a>
       </div>
 
-      <motion.footer 
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      className="relative border-t border-gray-800 bg-[var(--color-primary-800)] text-white transition-colors duration-300"
+      <footer 
+      className="relative border-t border-gray-800 bg-[var(--color-primary-800)] text-white transition-colors duration-300 animate-fade-in"
     >
       <div className="container mx-auto px-4 pt-20 pb-12 md:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-1 lg:grid-cols-[2fr_3fr]">
@@ -239,7 +234,7 @@ function Footer() {
           </nav>
         </div>
       </div>
-    </motion.footer>
+    </footer>
     </>
   )
 }
