@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'Login',
   description: 'Acesse o painel administrativo da Homsi Engenharia',
   robots: 'noindex, nofollow',
+  alternates: {
+    canonical: 'https://homsiengenharia.com.br/login',
+  },
 }
 
 export default function LoginPage() {
