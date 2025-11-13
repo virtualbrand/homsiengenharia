@@ -3,6 +3,21 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
+// Dinamically load Leaflet CSS only when this component is used
+if (typeof window !== 'undefined') {
+  // Load Leaflet CSS
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+  link.crossOrigin = '';
+  
+  // Only add if not already present
+  if (!document.querySelector('link[href*="leaflet.css"]')) {
+    document.head.appendChild(link);
+  }
+}
+
 // Fix for default markers in React-Leaflet
 interface IconDefaultPrototype {
   _getIconUrl?: string;
