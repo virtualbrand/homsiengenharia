@@ -30,6 +30,9 @@ export default function LenisProvider({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
       prevent: (node) => {
         // Previne Lenis em elementos específicos se necessário
         return node.classList.contains('no-lenis');
@@ -48,7 +51,30 @@ export default function LenisProvider({
 
     gsap.ticker.lagSmoothing(0);
 
+    // Força o Lenis a recalcular quando o conteúdo muda
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    });
+
+    resizeObserver.observe(document.body);
+
+    // Recalcula após carregamento de imagens
+    window.addEventListener('load', () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    });
+
+    // Recalcula em mudanças de orientação
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 100);
+    });
+
     return () => {
+      resizeObserver.disconnect();
       lenis.destroy();
       delete window.lenis;
       gsap.ticker.remove((time) => {

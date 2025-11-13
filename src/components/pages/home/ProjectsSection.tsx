@@ -319,9 +319,11 @@ const GalleryModal = ({
                         src={image}
                         alt={`${projectTitle} - Imagem ${index + 1}`}
                         fill
+                        quality={85}
                         className="object-contain"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
                         priority={index === 0}
+                        loading={index === 0 ? "eager" : "lazy"}
                       />
                     </div>
                   </div>
@@ -379,6 +381,8 @@ const GalleryModal = ({
                         src={image} 
                         alt={`Thumbnail ${index + 1}`}
                         fill
+                        quality={60}
+                        loading="lazy"
                         className="object-contain transition-transform duration-300 group-hover:scale-110"
                         sizes="100px"
                       />
@@ -433,6 +437,10 @@ const ProductCard = ({
           src={product.thumbnail}
           height={600}
           width={600}
+          quality={75}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzFhMWExYSIvPjwvc3ZnPg=="
           className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-300 group-hover/product:scale-105"
           alt={product.title}
           sizes="(max-width: 768px) 160px, (max-width: 1024px) 208px, 208px"

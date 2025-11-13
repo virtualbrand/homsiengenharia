@@ -19,8 +19,12 @@ const AboutSection = () => {
                 alt="Kemel Homsi - Engenheiro Civil"
                 width={1000}
                 height={1239}
+                quality={80}
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMjM5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEyMzkiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4="
                 className="relative rounded-2xl w-full h-auto object-cover"
-                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
               />
             </div>
           </div>
