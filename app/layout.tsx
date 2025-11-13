@@ -4,6 +4,7 @@ import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
 import { satoshi } from "@/components/OptimizedFonts";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,6 +95,7 @@ export default function RootLayout({
         
         {/* Preload de recursos críticos do hero */}
         <link rel="preload" href="/images/hero-home.webp" as="image" />
+        <link rel="preload" href="/images/icon-white.svg" as="image" type="image/svg+xml" />
         
         {/* SEO: Verificação de propriedade e tags meta adicionais */}
         <meta name="theme-color" content="#1C1C1C" />
@@ -113,6 +115,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${satoshi.variable} antialiased`}
       >
+        <ServiceWorkerRegistration />
         <LenisProvider>
           {children}
         </LenisProvider>

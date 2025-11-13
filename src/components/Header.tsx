@@ -175,7 +175,8 @@ export const Header = () => {
           >
             <img 
               src="/images/icon-white.svg"
-              alt="Homsi Engenharia" 
+              alt="Homsi Engenharia"
+              fetchPriority="high"
               className={cn(
                 "w-8 h-8 transition-all duration-300",
                 !isDarkSection && "brightness-0"
