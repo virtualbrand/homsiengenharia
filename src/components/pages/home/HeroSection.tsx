@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 const HeroSection = () => {
@@ -114,7 +113,8 @@ const HeroSection = () => {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
+        poster="/images/hero-home.webp"
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero-home.mp4" type="video/mp4" />
@@ -127,30 +127,21 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         <div>
-          <motion.h2 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight"
+          <h2 
+            className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in"
           >
             Soluções em Engenharia
-          </motion.h2>
+          </h2>
           
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto"
+          <p 
+            className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto animate-fade-in-delay-1"
           >
             Transformamos ideias em realidade com projetos de engenharia inovadores, 
             seguros e sustentáveis.
-          </motion.p>
+          </p>
           
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          <div 
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2"
           >
             <a 
               href="#projetos"
@@ -168,7 +159,7 @@ const HeroSection = () => {
             >
               Sobre
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
