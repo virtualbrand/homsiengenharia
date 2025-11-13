@@ -85,16 +85,23 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Preconnect para otimização de performance */}
+        {/* DNS Prefetch para domínios externos - resolve DNS antes da conexão */}
+        <link rel="dns-prefetch" href="https://cloudflare-static.com" />
+        <link rel="dns-prefetch" href="https://homsiengenharia.com.br" />
+        
+        {/* Preconnect apenas para recursos críticos (fonts) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload de CSS crítico - prioridade máxima */}
+        <link rel="preload" href="/globals-critical.css" as="style" />
         
         {/* Preload de fontes críticas */}
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
         {/* Preload de recursos críticos do hero */}
-        <link rel="preload" href="/images/hero-home.webp" as="image" />
+        <link rel="preload" href="/images/hero-home.webp" as="image" fetchPriority="high" />
         <link rel="preload" href="/images/icon-white.svg" as="image" type="image/svg+xml" fetchPriority="high" />
         
         {/* SEO: Verificação de propriedade e tags meta adicionais */}

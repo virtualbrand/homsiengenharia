@@ -52,6 +52,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/:path*',
+        headers: [
+          // Early Hints (103) para resource hints críticos
+          {
+            key: 'Link',
+            value: '</fonts/Satoshi-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous, </fonts/Satoshi-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous, <https://fonts.googleapis.com>; rel=preconnect, <https://fonts.gstatic.com>; rel=preconnect; crossorigin, <https://cloudflare-static.com>; rel=dns-prefetch',
+          },
+        ],
+      },
+      {
         source: '/sw.js',
         headers: [
           {
