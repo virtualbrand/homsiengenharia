@@ -7,8 +7,25 @@ import Footer from '@/components/Footer'
 import SearchBox from '@/components/blog/SearchBox'
 
 export const metadata: Metadata = {
-  title: 'Artigos',
-  description: 'Artigos e insights sobre engenharia, construção e design',
+  title: 'Artigos - Homsi Engenharia',
+  description: 'Artigos, insights e novidades sobre engenharia civil, projetos estruturais, construção sustentável e arquitetura. Mantenha-se atualizado com as últimas tendências do setor.',
+  keywords: ['artigos de engenharia', 'blog de construção civil', 'dicas de engenharia', 'projetos estruturais', 'construção sustentável'],
+  alternates: {
+    canonical: 'https://homsiengenharia.com.br/artigos',
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Artigos - Homsi Engenharia',
+    description: 'Artigos, insights e novidades sobre engenharia civil, projetos estruturais e construção sustentável.',
+    url: 'https://homsiengenharia.com.br/artigos',
+    siteName: 'Homsi Engenharia',
+    images: [{
+      url: '/images/hero-blog.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Blog Homsi Engenharia',
+    }],
+  },
 }
 
 export default async function ArtigosPage({

@@ -27,12 +27,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const publishedTime = post.created_at ? new Date(post.created_at).toISOString() : undefined
+  const modifiedTime = post.updated_at ? new Date(post.updated_at).toISOString() : undefined
+
   return {
     title: `${post.title} - Artigos - Homsi Engenharia`,
-    description: post.excerpt || undefined,
+    description: post.excerpt || post.meta_description || undefined,
+    keywords: post.tags?.join(', ') || undefined,
+    authors: [{ name: post.author || 'Homsi Engenharia' }],
+    alternates: {
+      canonical: `https://homsiengenharia.com.br/artigos/${post.slug}`,
+    },
     openGraph: {
+      type: 'article',
       title: post.title,
-      description: post.excerpt || undefined,
+      description: post.excerpt || post.meta_description || undefined,
+      url: `https://homsiengenharia.com.br/artigos/${post.slug}`,
+      siteName: 'Homsi Engenharia',
+      images: post.cover_image ? [{
+        url: post.cover_image,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }] : [],
+      publishedTime,
+      modifiedTime,
+      authors: [post.author || 'Homsi Engenharia'],
+      section: post.category || undefined,
+      tags: post.tags || undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || post.meta_description || undefined,
       images: post.cover_image ? [post.cover_image] : [],
     },
   }
@@ -108,8 +135,43 @@ export default async function ArtigoPage({ params }: Props) {
     }
   }
 
+  // Structured Data para SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt || post.meta_description,
+    "image": post.cover_image,
+    "datePublished": post.created_at,
+    "dateModified": post.updated_at || post.created_at,
+    "author": {
+      "@type": "Organization",
+      "name": post.author || "Homsi Engenharia",
+      "url": "https://homsiengenharia.com.br"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Homsi Engenharia",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://homsiengenharia.com.br/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://homsiengenharia.com.br/artigos/${post.slug}`
+    },
+    "keywords": post.tags?.join(', '),
+    "articleSection": post.category,
+    "inLanguage": "pt-BR"
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Header />
       <main className="min-h-screen bg-gray-50">
         {/* Hero Section with Background Image */}

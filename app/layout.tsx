@@ -84,10 +84,28 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* Preconnect para otimização de performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload de fontes críticas */}
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* SEO: Verificação de propriedade e tags meta adicionais */}
+        <meta name="theme-color" content="#1C1C1C" />
+        <meta name="format-detection" content="telephone=no" />
+        
+        {/* Open Graph adicional */}
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:site_name" content="Homsi Engenharia" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@homsiengenharia" />
+        
+        {/* Canonical URL será definido por página */}
+        <link rel="canonical" href="https://homsiengenharia.com.br" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${satoshi.variable} antialiased`}
