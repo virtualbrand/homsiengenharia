@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://homsiengenharia.com/sitemap.xml
+Sitemap: https://homsiengenharia.com.br/sitemap.xml
 
 User-agent: Googlebot
 Disallow: /private

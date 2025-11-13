@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 import SearchBox from '@/components/blog/SearchBox'
 
 export const metadata: Metadata = {
-  title: 'Artigos - HOMSI Engenharia',
+  title: 'Artigos',
   description: 'Artigos e insights sobre engenharia, construção e design',
 }
 
@@ -70,9 +70,9 @@ export default async function ArtigosPage({
             className="object-contain"
             priority
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/70" />
           <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-white mt-16 leading-tight">
               Artigos
             </h1>
           </div>
@@ -102,58 +102,64 @@ export default async function ArtigosPage({
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-6">
                   {posts.map((post) => (
                     <Link
                       key={post.id}
                       href={`/artigos/${post.slug}`}
-                      className="group"
+                      className="group block"
                     >
                       <article className="bg-white rounded-lg overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_30px_rgba(155,123,107,0.3)] transition-all duration-300">
-                        {/* Image */}
-                        {post.cover_image && (
-                          <div className="relative aspect-video bg-gray-200">
-                            <Image
-                              src={post.cover_image}
-                              alt={post.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                        <div className="flex flex-col md:flex-row">
+                          {/* Content - Lado Esquerdo */}
+                          <div className="flex-1 p-6 flex flex-col justify-between">
+                            {/* Category */}
                             {post.category && (
-                              <div className="absolute top-4 left-4">
+                              <div className="mb-3">
                                 <span className="inline-block px-3 py-1 text-xs font-semibold text-white bg-[#9b7b6b] rounded-full">
                                   {post.category}
                                 </span>
                               </div>
                             )}
+                            
+                            {/* Title */}
+                            <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#9b7b6b] transition-colors line-clamp-2">
+                              {post.title}
+                            </h2>
+                            
+                            {/* Excerpt */}
+                            {post.excerpt && (
+                              <p className="text-gray-600 text-base line-clamp-3 mb-4 flex-1">
+                                {post.excerpt}
+                              </p>
+                            )}
+                            
+                            {/* Date */}
+                            <div className="flex items-center text-sm text-gray-500">
+                              <time dateTime={post.published_at}>
+                                Criado em {new Date(post.published_at).toLocaleDateString(
+                                  'pt-BR',
+                                  {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                  }
+                                )}
+                              </time>
+                            </div>
                           </div>
-                        )}
 
-                        {/* Content */}
-                        <div className="p-6">
-                          <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#9b7b6b] transition-colors line-clamp-2">
-                            {post.title}
-                          </h2>
-                          {post.excerpt && (
-                            <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                              {post.excerpt}
-                            </p>
+                          {/* Image - Lado Direito */}
+                          {post.cover_image && (
+                            <div className="relative w-full md:w-80 h-64 md:h-auto flex-shrink-0 bg-gray-200">
+                              <Image
+                                src={post.cover_image}
+                                alt={post.title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
                           )}
-                          <div className="flex items-center justify-between text-xs text-gray-500">
-                            <time dateTime={post.published_at}>
-                              {new Date(post.published_at).toLocaleDateString(
-                                'pt-BR',
-                                {
-                                  day: '2-digit',
-                                  month: 'long',
-                                  year: 'numeric',
-                                }
-                              )}
-                            </time>
-                            <span className="text-[#9b7b6b] group-hover:underline">
-                              Leia mais »
-                            </span>
-                          </div>
                         </div>
                       </article>
                     </Link>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     canonical: "/links",
   },
   openGraph: {
-    url: "https://homsiengenharia.com/links",
+    url: "https://homsiengenharia.com.br/links",
   },
 };
 

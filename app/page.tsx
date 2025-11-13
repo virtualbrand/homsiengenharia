@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    url: "https://homsiengenharia.com/",
+    url: "https://homsiengenharia.com.br/",
   },
 };
 
@@ -26,12 +26,12 @@ const structuredData = {
   "@type": "Organization",
   "name": "Homsi Engenharia",
   "legalName": "Homsi Engenharia",
-  "url": "https://homsiengenharia.com",
-  "logo": "https://homsiengenharia.com/logo.png",
-  "image": "https://homsiengenharia.com/hero-provisoria.jpg",
+  "url": "https://homsiengenharia.com.br",
+  "logo": "https://homsiengenharia.com.br/logo.png",
+  "image": "https://homsiengenharia.com.br/hero-provisoria.jpg",
   "description": "Empresa de engenharia civil especializada em projetos inovadores, seguros e sustentáveis.",
   "taxID": "55.155.900/0001-08",
-  "email": "contato@homsiengenharia.com",
+  "email": "contato@homsiengenharia.com.br",
   "telephone": "+55-31-99226-1911",
   "address": {
     "@type": "PostalAddress",

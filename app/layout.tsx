@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Homsi Engenharia" }],
   creator: "Homsi Engenharia",
   publisher: "Homsi Engenharia",
-  metadataBase: new URL("https://homsiengenharia.com"),
+  metadataBase: new URL("https://homsiengenharia.com.br"),
   alternates: {
     canonical: "/",
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://homsiengenharia.com",
+    url: "https://homsiengenharia.com.br",
     siteName: "Homsi Engenharia",
     title: "Homsi Engenharia - Soluções em Engenharia Civil",
     description: "A Homsi Engenharia oferece soluções completas em engenharia civil com projetos inovadores, seguros e sustentáveis.",

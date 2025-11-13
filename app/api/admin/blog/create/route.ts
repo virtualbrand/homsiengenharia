@@ -31,9 +31,9 @@ export async function POST(request: Request) {
     console.log('Content length:', content?.length)
 
     // Validate required fields
-    if (!title || !slug || !excerpt || !content) {
+    if (!title || !slug || !content) {
       return NextResponse.json(
-        { error: 'Campos obrigatórios faltando: título, slug, resumo e conteúdo são necessários' },
+        { error: 'Campos obrigatórios faltando: título, slug, e conteúdo são necessários' },
         { status: 400 }
       )
     }
@@ -42,6 +42,20 @@ export async function POST(request: Request) {
     const tags = tagsString
       ? tagsString.split(',').map((t) => t.trim()).filter(Boolean)
       : []
+
+    // Check if slug already exists
+    const { data: existingPost } = await supabase
+      .from('blog_posts')
+      .select('slug')
+      .eq('slug', slug)
+      .single()
+
+    if (existingPost) {
+      return NextResponse.json(
+        { error: `O slug "${slug}" já está em uso. Por favor, escolha outro slug.` },
+        { status: 400 }
+      )
+    }
 
     const postData = {
       title,
@@ -54,6 +68,9 @@ export async function POST(request: Request) {
       published,
       published_at: published ? new Date().toISOString() : null,
       author_id: user.id,
+      meta_title: formData.get('meta_title') as string || null,
+      meta_description: formData.get('meta_description') as string || null,
+      og_image: formData.get('og_image') as string || null,
     }
 
     console.log('Inserting post:', postData)

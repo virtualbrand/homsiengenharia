@@ -235,12 +235,6 @@ button:hover {
   background-color: var(--color-accent-500);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 2px solid var(--color-accent-500);
-  outline-offset: 2px;
-}
-
 .btn-primary {
   background: linear-gradient(135deg, #B8906A 0%, #D6BDAA 100%) !important;
   color: var(--color-primary-500) !important;
@@ -581,4 +575,32 @@ button:focus-visible {
   background-color: transparent;
   color: inherit;
   padding: 0;
+}
+
+/* ================================
+   TABS OVERRIDE STYLES
+   ================================ */
+button[data-override-button="true"] {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border: none !important;
+  outline: none !important;
+}
+
+button[data-override-button="true"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgb(255, 255, 255) !important;
+  outline: none !important;
+}
+
+button[data-override-button="true"][data-state="active"] {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgb(255, 255, 255) !important;
+  outline: none !important;
+}
+
+button[data-override-button="true"]:focus,
+button[data-override-button="true"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }

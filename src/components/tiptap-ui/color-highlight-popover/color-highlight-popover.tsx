@@ -72,8 +72,8 @@ export const ColorHighlightPopoverButton = forwardRef<
     data-appearance="default"
     role="button"
     tabIndex={-1}
-    aria-label="Highlight text"
-    tooltip="Highlight"
+    aria-label="Destacar texto"
+    tooltip="Destaque"
     ref={ref}
     {...props}
   >
@@ -143,8 +143,8 @@ export function ColorHighlightPopoverContent({
           <ButtonGroup orientation="horizontal">
             <Button
               onClick={handleRemoveHighlight}
-              aria-label="Remove highlight"
-              tooltip="Remove highlight"
+              aria-label="Remover destaque"
+              tooltip="Remover destaque"
               tabIndex={selectedIndex === colors.length ? 0 : -1}
               type="button"
               role="menuitem"

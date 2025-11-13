@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://homsiengenharia.com';
+export const BASE_URL = 'https://homsiengenharia.com.br';
 
 export const dynamicRoutes = async () => {
   // Fetch dynamic routes from API or database if required

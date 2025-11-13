@@ -50,7 +50,6 @@ export async function POST(request: NextRequest) {
     // SEO fields
     const meta_title = formData.get('meta_title') as string
     const meta_description = formData.get('meta_description') as string
-    const meta_keywords = formData.get('meta_keywords') as string
     const og_image = formData.get('og_image') as string
 
     // Parse tags
@@ -61,13 +60,13 @@ export async function POST(request: NextRequest) {
     // Check if post exists and user is the author
     const { data: existingPost, error: fetchError } = await supabase
       .from('blog_posts')
-      .select('author_id')
+      .select('author_id, slug, old_slug')
       .eq('id', id)
       .single()
 
     if (fetchError || !existingPost) {
       return NextResponse.json(
-        { error: 'Post não encontrado' },
+        { error: 'Artigo não encontrado' },
         { status: 404 }
       )
     }
@@ -77,6 +76,18 @@ export async function POST(request: NextRequest) {
         { error: 'Você não tem permissão para editar este post' },
         { status: 403 }
       )
+    }
+
+    // Se o slug mudou, salva o slug anterior como old_slug
+    let oldSlug: string | null = null
+    if (existingPost.slug !== slug) {
+      // Salva apenas o slug atual como old_slug
+      oldSlug = existingPost.slug
+      console.log(`Slug alterado de "${existingPost.slug}" para "${slug}"`)
+      console.log(`Old slug atualizado para: "${oldSlug}"`)
+    } else {
+      // Se o slug não mudou, mantém o old_slug existente
+      oldSlug = existingPost.old_slug || null
     }
 
     // Update post
@@ -90,12 +101,12 @@ export async function POST(request: NextRequest) {
       tags: tags.length > 0 ? tags : null,
       published,
       published_at: published ? new Date().toISOString() : null,
+      old_slug: oldSlug,
     }
 
     // Add SEO fields if provided
     if (meta_title) updateData.meta_title = meta_title
     if (meta_description) updateData.meta_description = meta_description
-    if (meta_keywords) updateData.meta_keywords = meta_keywords
     if (og_image) updateData.og_image = og_image
 
     const { data: post, error: updateError } = await supabase

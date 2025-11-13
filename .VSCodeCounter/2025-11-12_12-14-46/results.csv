@@ -1,0 +1,21 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "PostCSS", "comment", "blank", "total"
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/admin/blog/[id]/page.tsx", "TypeScript JSX", 0, 56, 0, 2, 10, 68
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/admin/blog/new/page.tsx", "TypeScript JSX", 0, 43, 0, 1, 8, 52
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/admin/blog/page.tsx", "TypeScript JSX", 0, 29, 0, 1, 6, 36
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/admin/layout.tsx", "TypeScript JSX", 0, 17, 0, 2, 5, 24
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/admin/page.tsx", "TypeScript JSX", 0, 18, 0, 1, 5, 24
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/api/admin/blog/create/route.ts", "TypeScript", 66, 0, 0, 5, 15, 86
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/api/admin/blog/update/route.ts", "TypeScript", 97, 0, 0, 9, 19, 125
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/api/auth/signout/route.ts", "TypeScript", 7, 0, 0, 0, 2, 9
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/api/trello/route.ts", "TypeScript", 81, 0, 0, 4, 12, 97
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/artigos/[slug]/not-found.tsx", "TypeScript JSX", 0, 28, 0, 0, 2, 30
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/artigos/[slug]/page.tsx", "TypeScript JSX", 0, 181, 0, 8, 14, 203
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/artigos/page.tsx", "TypeScript JSX", 0, 211, 0, 11, 16, 238
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/globals.css", "PostCSS", 0, 0, 444, 58, 83, 585
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/layout.tsx", "TypeScript JSX", 0, 95, 0, 0, 5, 100
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/links/page.tsx", "TypeScript JSX", 0, 19, 0, 0, 3, 22
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/login/page.tsx", "TypeScript JSX", 0, 38, 0, 4, 5, 47
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/page.tsx", "TypeScript JSX", 0, 66, 0, 1, 4, 71
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/robots.ts", "TypeScript", 11, 0, 0, 0, 2, 13
+"/Users/jsonribeiro/Documents/workspace/virtualbrand/clientes/homsiengenharia/app/sitemap.ts", "TypeScript", 17, 0, 0, 0, 2, 19
+"Total", "-", 279, 801, 444, 107, 218, 1849

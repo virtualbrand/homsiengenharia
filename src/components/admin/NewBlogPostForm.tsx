@@ -83,7 +83,7 @@ export default function NewBlogPostForm() {
             <Link href="/admin/blog" className="text-gray-600 hover:text-gray-900">
               ← Voltar
             </Link>
-            <h1 className="text-3xl font-bold text-gray-900">Novo Post</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Novo Artigo</h1>
           </div>
         </div>
       </div>

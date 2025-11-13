@@ -39,13 +39,12 @@ import { HeadingDropdownMenu } from '@/components/tiptap-ui/heading-dropdown-men
 import { ImageUploadButton } from '@/components/tiptap-ui/image-upload-button'
 import { ListDropdownMenu } from '@/components/tiptap-ui/list-dropdown-menu'
 import { BlockquoteButton } from '@/components/tiptap-ui/blockquote-button'
-import { CodeBlockButton } from '@/components/tiptap-ui/code-block-button'
 import {
   ColorHighlightPopover,
   ColorHighlightPopoverContent,
   ColorHighlightPopoverButton,
 } from '@/components/tiptap-ui/color-highlight-popover'
-import { LinkPopover, LinkContent, LinkButton } from '@/components/tiptap-ui/link-popover'
+import { LinkPopover } from '@/components/tiptap-ui/link-popover'
 import { MarkButton } from '@/components/tiptap-ui/mark-button'
 import { TextAlignButton } from '@/components/tiptap-ui/text-align-button'
 import { UndoRedoButton } from '@/components/tiptap-ui/undo-redo-button'
@@ -113,7 +112,9 @@ export default function BlogEditor({ content, onChange }: BlogEditorProps) {
 
   return (
     <div className="simple-editor" ref={editorRef}>
-      <Toolbar className="toolbar">
+      {/* Fixed Menu - Sticky no topo */}
+      <div className="sticky top-0 z-10 bg-white/10 backdrop-blur-md border-b border-white/20">
+        <Toolbar className="toolbar">
         <ToolbarGroup>
           <UndoRedoButton action="undo" editor={editor} />
           <UndoRedoButton action="redo" editor={editor} />
@@ -132,7 +133,6 @@ export default function BlogEditor({ content, onChange }: BlogEditorProps) {
           <MarkButton type="italic" editor={editor} />
           <MarkButton type="underline" editor={editor} />
           <MarkButton type="strike" editor={editor} />
-          <MarkButton type="code" editor={editor} />
         </ToolbarGroup>
 
         <ToolbarSeparator />
@@ -147,10 +147,7 @@ export default function BlogEditor({ content, onChange }: BlogEditorProps) {
         <ToolbarSeparator />
 
         <ToolbarGroup>
-          <LinkPopover editor={editor}>
-            <LinkButton />
-            <LinkContent />
-          </LinkPopover>
+          <LinkPopover editor={editor} />
         </ToolbarGroup>
 
         <ToolbarSeparator />
@@ -158,7 +155,6 @@ export default function BlogEditor({ content, onChange }: BlogEditorProps) {
         <ToolbarGroup>
           <ListDropdownMenu editor={editor} />
           <BlockquoteButton editor={editor} />
-          <CodeBlockButton editor={editor} />
         </ToolbarGroup>
 
         <ToolbarSeparator />
@@ -178,8 +174,9 @@ export default function BlogEditor({ content, onChange }: BlogEditorProps) {
 
         <Spacer />
       </Toolbar>
+      </div>
 
-      <div className="editor-content">
+      <div className="editor-content max-h-[600px] overflow-y-auto">
         <EditorContent editor={editor} />
       </div>
     </div>

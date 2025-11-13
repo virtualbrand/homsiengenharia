@@ -3,8 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
-  title: 'Admin - HOMSI Engenharia',
-  description: 'Painel administrativo da HOMSI Engenharia',
+  title: 'Admin - Homsi Engenharia',
+  description: 'Painel administrativo da Homsi Engenharia',
   robots: 'noindex, nofollow',
 }
 
