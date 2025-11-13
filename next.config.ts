@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
     // Aviso: Isso permite que o build de produção seja concluído com sucesso mesmo com erros de TypeScript.
     ignoreBuildErrors: true,
   },
+  // Otimizações de performance
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', '@tabler/icons-react'],
+  },
   images: {
     remotePatterns: [
       {

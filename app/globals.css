@@ -5,33 +5,6 @@
 @import '../src/styles/_keyframe-animations.scss';
 
 /* ================================
-   FONT FACE DECLARATIONS
-   ================================ */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ================================
    RESET & BASE STYLES
    ================================ */
 * {
@@ -46,7 +19,7 @@ html {
 }
 
 :root {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -180,7 +153,7 @@ body {
   background-color: var(--color-off-white);
   color: var(--color-text-900);
   overflow-x: hidden;
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
 }
 
 a {
@@ -206,14 +179,14 @@ header.light-section nav a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   font-weight: 900;
   text-transform: uppercase;
 }
 
 p {
   line-height: 1.5em;
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   font-weight: normal;
 }
 
@@ -226,7 +199,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 900;
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
 }
