@@ -1,6 +1,7 @@
 'use client';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import Image from 'next/image'
 
 const AboutSection = () => {
   useScrollAnimation()
@@ -13,10 +14,13 @@ const AboutSection = () => {
           <div className="w-full mb-6 md:mb-8 md:float-right md:w-5/12 md:ml-8 lg:ml-10">
             <div className="fade-in">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-2xl opacity-20 blur-2xl" />
-              <img
+              <Image
                 src="/images/kemel.webp"
                 alt="Kemel Homsi - Engenheiro Civil"
+                width={1000}
+                height={1239}
                 className="relative rounded-2xl w-full h-auto object-cover"
+                priority
               />
             </div>
           </div>

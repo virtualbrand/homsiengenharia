@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback, useEffect } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -313,11 +314,14 @@ const GalleryModal = ({
               <div className="flex">
                 {images.map((image, index) => (
                   <div key={index} className="flex-[0_0_100%] min-w-0">
-                    <div className="flex items-center justify-center h-[70vh]">
-                      <img
+                    <div className="flex items-center justify-center h-[70vh] relative">
+                      <Image
                         src={image}
                         alt={`${projectTitle} - Imagem ${index + 1}`}
-                        className="max-w-full max-h-full object-contain"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
+                        priority={index === 0}
                       />
                     </div>
                   </div>
@@ -370,11 +374,15 @@ const GalleryModal = ({
                         : "rounded-[5px] opacity-50 hover:opacity-100 hover:scale-105"
                     }`}
                   >
-                    <img 
-                      src={image} 
-                      alt={`Thumbnail ${index + 1}`} 
-                      className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
-                    />
+                    <div className="relative h-20 w-24">
+                      <Image 
+                        src={image} 
+                        alt={`Thumbnail ${index + 1}`}
+                        fill
+                        className="object-contain transition-transform duration-300 group-hover:scale-110"
+                        sizes="100px"
+                      />
+                    </div>
                     {/* Overlay de hover */}
                     <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 ${
                       index === selectedIndex ? "opacity-0" : "opacity-0 group-hover:opacity-100"
@@ -421,12 +429,13 @@ const ProductCard = ({
         onClick={handleClick}
         className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer"
       >
-        <img
+        <Image
           src={product.thumbnail}
-          height="600"
-          width="600"
+          height={600}
+          width={600}
           className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-300 group-hover/product:scale-105"
           alt={product.title}
+          sizes="(max-width: 768px) 160px, (max-width: 1024px) 208px, 208px"
         />
         {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
         <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300" />
