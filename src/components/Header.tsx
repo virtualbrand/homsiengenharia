@@ -136,10 +136,12 @@ export const Header = () => {
       // Get all sections
       const aboutSection = document.querySelector('#sobre')
       const testimonialsSection = document.querySelector('#depoimentos')
+      const blogSection = document.querySelector('#blog')
       
-      if (aboutSection || testimonialsSection) {
+      if (aboutSection || testimonialsSection || blogSection) {
         const aboutRect = aboutSection?.getBoundingClientRect()
         const testimonialsRect = testimonialsSection?.getBoundingClientRect()
+        const blogRect = blogSection?.getBoundingClientRect()
         
         // Check if we're in the about section (light background)
         const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
@@ -147,8 +149,11 @@ export const Header = () => {
         // Check if we're in the testimonials section (light background)
         const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
         
+        // Check if we're in the blog section (light background)
+        const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
+        
         // Projects section has dark background, so we keep it as dark section
-        setIsDarkSection(!isInAboutSection && !isInTestimonialsSection)
+        setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
       }
     }
 
@@ -160,7 +165,7 @@ export const Header = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 z-50 w-full transition-transform duration-300 ease-in-out",
+      "fixed top-0 left-0 z-50 w-full transition-transform duration-500 ease-out",
       isVisible ? "translate-y-0" : "-translate-y-full",
       !isDarkSection && "light-section"
     )}>
