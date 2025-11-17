@@ -426,8 +426,9 @@ const ProductCard = ({
   translate: MotionValue<number>;
   onOpenGallery: (projectId: string | null, thumbnail: string) => void;
 }) => {
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     onOpenGallery(product.projectId, product.thumbnail);
   };
 
@@ -441,7 +442,9 @@ const ProductCard = ({
     >
       <div
         onClick={handleClick}
-        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer"
+        onTouchEnd={handleClick}
+        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer touch-manipulation"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
       >
         <Image
           src={product.thumbnail}
@@ -451,13 +454,13 @@ const ProductCard = ({
           loading="lazy"
           placeholder="blur"
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzFhMWExYSIvPjwvc3ZnPg=="
-          className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-300 group-hover/product:scale-105"
+          className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-300 group-hover/product:scale-105 pointer-events-none"
           alt={product.title}
           sizes="(max-width: 768px) 160px, (max-width: 1024px) 208px, 208px"
         />
         {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
-        <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300" />
-        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300">
+        <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none">
           {product.title}
         </h3>
       </div>
