@@ -47,7 +47,7 @@ const AboutSection = () => {
               </p>
 
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
-                Sua passagem pela SUDECAP, fiscalizando e garantindo a normativa de obras, e sua experiência em pavimentação asfáltica, incluindo a revitalização de estradas no interior de Minas e a criação de estacionamentos emblemáticos como os do Del Rey e BH Shopping, consolidaram uma visão abrangente. Até mesmo na montagem de estruturas temporárias tão desafiadoras quanto as do Circo de Solé em São Paulo e Rio de Janeiro, Kemel deixou sua marca de competência e proatividade.
+                Sua passagem pela SUDECAP, fiscalizando e garantindo a normativa de obras, e sua experiência em pavimentação asfáltica, incluindo a revitalização de estradas no interior de Minas e a criação de estacionamentos emblemáticos como os do Del Rey e BH Shopping, consolidaram uma visão abrangente. Até mesmo na montagem de estruturas temporárias tão desafiadoras quanto as do Cirque du Soleil em São Paulo e Rio de Janeiro, Kemel deixou sua marca de competência e proatividade.
               </p>
 
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
