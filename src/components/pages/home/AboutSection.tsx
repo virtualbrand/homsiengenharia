@@ -51,7 +51,7 @@ const AboutSection = () => {
               </p>
 
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-6">
-                A habilidade de Kemel em gerir complexidades foi testada até mesmo em projetos tão singulares quanto a montagem do Circo de Solé em São Paulo e Rio de Janeiro. Contudo, foi a partir de 2014 que ele encontrou sua verdadeira paixão e especialização: <span className="font-bold text-gray-900">a construção civil de alto padrão</span>. Em condomínios de luxo como Vale dos Cristais, Vila Del Rey e Riviera, Kemel já transformou mais de 16 visões em lares de tirar o fôlego, consolidando uma reputação de precisão, qualidade e, acima de tudo, compromisso com a excelência.
+                A habilidade de Kemel em gerir complexidades foi testada até mesmo em projetos tão singulares quanto a montagem do Cirque du Soleil em São Paulo e Rio de Janeiro. Contudo, foi a partir de 2014 que ele encontrou sua verdadeira paixão e especialização: <span className="font-bold text-gray-900">a construção civil de alto padrão</span>. Em condomínios de luxo como Vale dos Cristais, Vila Del Rey e Riviera, Kemel já transformou mais de 16 visões em lares de tirar o fôlego, consolidando uma reputação de precisão, qualidade e, acima de tudo, compromisso com a excelência.
               </p>
 
               <p className="fade-in text-lg text-gray-700 leading-relaxed mb-8">
