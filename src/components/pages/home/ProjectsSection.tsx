@@ -162,6 +162,16 @@ const projectGalleries = {
   ],
 };
 
+// Função para embaralhar array usando Fisher-Yates
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 // Função para gerar os produtos dinamicamente baseado nas galerias
 const generateProducts = (): Array<{
   title: string;
@@ -201,8 +211,8 @@ const generateProducts = (): Array<{
   return allProducts;
 };
 
-// Memoizar a lista de produtos para evitar inconsistências entre servidor e cliente
-const memoizedProducts = generateProducts();
+// Gerar produtos sem embaralhar (para evitar hydration mismatch)
+const baseProducts = generateProducts();
 
 const Header = () => {
   return (
@@ -471,20 +481,26 @@ export default function ProjectsSection() {
 
   // Função para abrir a galeria
   const handleOpenGallery = (projectId: string | null, clickedThumbnail: string) => {
-    if (!projectId || !projectGalleries[projectId as keyof typeof projectGalleries]) {
+    if (!projectId) return;
+    
+    // Extrair o nome do projeto do projectId (remove o índice)
+    // Ex: "apto-felipe-0" -> "apto-felipe"
+    const projectName = projectId.substring(0, projectId.lastIndexOf('-'));
+    
+    if (!projectGalleries[projectName as keyof typeof projectGalleries]) {
       return;
     }
 
-    const gallery = projectGalleries[projectId as keyof typeof projectGalleries];
+    const gallery = projectGalleries[projectName as keyof typeof projectGalleries];
     const initialIndex = gallery.findIndex(img => img === clickedThumbnail);
     
-    // Encontrar o título do projeto usando memoizedProducts
-    const product = memoizedProducts.find(p => p.thumbnail === clickedThumbnail);
+    // Encontrar o título do projeto usando baseProducts
+    const product = baseProducts.find(p => p.thumbnail === clickedThumbnail);
     const projectTitle = product?.title || "Projeto";
 
     setGalleryState({
       isOpen: true,
-      projectId,
+      projectId: projectName,
       initialIndex: initialIndex >= 0 ? initialIndex : 0,
       projectTitle,
     });
@@ -499,9 +515,13 @@ export default function ProjectsSection() {
     });
   };
 
-  // Usa a lista memoizada de produtos diretamente (sem embaralhamento)
-  // para evitar inconsistências entre servidor e cliente
-  const shuffledProducts = React.useMemo(() => memoizedProducts, []);
+  // Embaralhar produtos apenas no cliente para evitar hydration mismatch
+  const [shuffledProducts, setShuffledProducts] = useState(baseProducts);
+  
+  useEffect(() => {
+    // Embaralhar apenas no cliente após a hidratação
+    setShuffledProducts(shuffleArray(baseProducts));
+  }, []);
 
   // Desktop: 12 fotos por linha (7 linhas)
   const firstRow = shuffledProducts.slice(0, 12);
