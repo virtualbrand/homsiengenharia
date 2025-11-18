@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "./globals-critical.css";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
@@ -92,9 +93,6 @@ export default function RootLayout({
         {/* Preconnect apenas para recursos críticos (fonts) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload de CSS crítico - prioridade máxima */}
-        <link rel="preload" href="/globals-critical.css" as="style" />
         
         {/* Preload de fontes críticas */}
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />

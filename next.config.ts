@@ -93,6 +93,19 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/:path*.css',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Content-Type',
+            value: 'text/css; charset=utf-8',
+          },
+        ],
+      },
+      {
         source: '/videos/:path*',
         headers: [
           {

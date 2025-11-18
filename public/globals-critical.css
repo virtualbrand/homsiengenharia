@@ -1,0 +1,141 @@
+/* ================================
+   CRITICAL CSS - ABOVE THE FOLD
+   ================================ */
+
+@import "tailwindcss";
+
+/* Performance optimized animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+.animate-fade-in-delay-1 { animation: fade-in 0.6s ease-out 0.15s forwards; opacity: 0; }
+.animate-fade-in-delay-2 { animation: fade-in 0.6s ease-out 0.3s forwards; opacity: 0; }
+
+/* Reset & Base */
+* { box-sizing: border-box; }
+html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; }
+
+:root {
+  font-family: var(--font-satoshi), sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Core colors - Complete palette for critical elements */
+  --color-primary-500: #1C1C1C;
+  --color-primary-600: #161616;
+  --color-primary-800: #0b0b0b;
+  --color-accent-400: #d6c7b7;
+  --color-accent-500: #9C7248;
+  --color-accent-600: #7d5b3a;
+  --color-secondary-500: #D6D6D6;
+  --color-off-white: #FEFEFE;
+  --color-white: #FEFEFE;
+  --color-text-900: #1C1C1C;
+  --color-text-600: #606060;
+  --color-text-300: #d0d0d0;
+  
+  /* Shadcn/UI variables for components */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 14%;
+  --border: 0 0% 92%;
+  
+  color: var(--color-text-900);
+  background-color: var(--color-off-white);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-off-white);
+  color: var(--color-text-900);
+  font-family: var(--font-satoshi), sans-serif;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-satoshi), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+p { 
+  line-height: 1.5em; 
+  font-family: var(--font-satoshi), sans-serif; 
+  font-weight: normal;
+  color: inherit;
+}
+
+a { 
+  text-decoration: inherit; 
+  transition: color 0.3s ease;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-satoshi), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Critical buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #B8906A 0%, #D6BDAA 100%) !important;
+  color: var(--color-primary-500) !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  transition: all 0.4s ease !important;
+  border: none !important;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #D6BDAA 0%, #D6BDAA 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(156, 114, 72, 0.3) !important;
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  padding: 0.62rem 1.5rem;
+  border-radius: 5px;
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Header styles */
+header nav a:hover {
+  color: var(--color-accent-400) !important;
+}
+
+header.light-section nav a:hover {
+  color: var(--color-accent-500) !important;
+}
