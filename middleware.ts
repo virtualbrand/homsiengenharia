@@ -1,7 +1,16 @@
 import { updateSession } from '@/lib/supabase/middleware'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  // Add aggressive caching for map tiles
+  if (request.nextUrl.pathname.startsWith('/api/map-tiles')) {
+    const response = NextResponse.next()
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+    response.headers.set('CDN-Cache-Control', 'public, max-age=31536000, immutable')
+    response.headers.set('Cloudflare-CDN-Cache-Control', 'public, max-age=31536000')
+    return response
+  }
+
   // Protect admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
     return await updateSession(request)

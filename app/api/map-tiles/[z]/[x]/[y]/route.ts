@@ -35,7 +35,7 @@ export async function GET(
         'User-Agent': 'HomsiEngenharia/1.0', // OSM requires User-Agent
       },
       next: {
-        revalidate: 2592000, // Cache for 30 days
+        revalidate: 31536000, // Cache for 1 year (365 days)
       },
     });
 
@@ -50,9 +50,11 @@ export async function GET(
       status: 200,
       headers: {
         'Content-Type': 'image/png',
-        'Cache-Control': 'public, max-age=2592000, immutable', // 30 days
-        'CDN-Cache-Control': 'public, max-age=2592000',
-        'Vercel-CDN-Cache-Control': 'public, max-age=2592000',
+        'Cache-Control': 'public, max-age=31536000, immutable', // 1 year - máximo permitido
+        'CDN-Cache-Control': 'public, max-age=31536000, immutable',
+        'Vercel-CDN-Cache-Control': 'public, max-age=31536000, immutable',
+        'Surrogate-Control': 'public, max-age=31536000, immutable',
+        'Expires': new Date(Date.now() + 31536000000).toUTCString(),
       },
     });
   } catch (error) {
