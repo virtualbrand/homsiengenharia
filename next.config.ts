@@ -16,8 +16,25 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', '@tabler/icons-react', 'sonner', 'embla-carousel-react'],
+    optimizePackageImports: [
+      '@radix-ui/react-icons',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-popover',
+      '@radix-ui/react-tooltip',
+      'lucide-react', 
+      '@tabler/icons-react', 
+      'sonner', 
+      'embla-carousel-react',
+      'framer-motion',
+      'react-leaflet',
+      'leaflet',
+      'lottie-web',
+      'gsap',
+      '@gsap/react',
+    ],
   },
+  // Code splitting otimizado (removido swcMinify - deprecated no Next.js 15)
   // Otimizar CSS com PostCSS
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
@@ -123,13 +140,47 @@ const nextConfig: NextConfig = {
     'three',
     'lottie-web',
   ],
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     // Configuração para shader files e outros assets
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
       exclude: /node_modules/,
       use: ['raw-loader'],
     });
+    
+    // Otimizações de bundle size no cliente
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks?.cacheGroups,
+            // Chunk separado para framer-motion (biblioteca pesada)
+            framerMotion: {
+              name: 'framer-motion',
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+            // Chunk para leaflet e mapa
+            leaflet: {
+              name: 'leaflet',
+              test: /[\\/]node_modules[\\/](leaflet|react-leaflet)[\\/]/,
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+            // Chunk para carousel
+            carousel: {
+              name: 'carousel',
+              test: /[\\/]node_modules[\\/]embla-carousel[\\/]/,
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
     
     return config;
   },

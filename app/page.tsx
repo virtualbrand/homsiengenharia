@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import HeroSection from "@/components/pages/home/HeroSection";
 import AboutSection from "@/components/pages/home/AboutSection";
 import ServicesSection from "@/components/pages/home/ServicesSection";
-import ProjectsSection from "@/components/pages/home/ProjectsSection";
-import TestimonialSection from "@/components/pages/home/TestimonialSection";
 import CtaSection from "@/components/pages/home/CtaSection";
 import BlogSection from "@/components/pages/home/BlogSection";
 import Footer from "@/components/Footer";
+
+// Lazy load componentes pesados que não são above the fold
+const ProjectsSection = dynamic(
+  () => import("@/components/pages/home/ProjectsSection")
+);
+
+const TestimonialSection = dynamic(
+  () => import("@/components/pages/home/TestimonialSection")
+);
 
 export const metadata: Metadata = {
   title: "Homsi Engenharia - Soluções em Engenharia Civil",
