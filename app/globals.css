@@ -130,6 +130,12 @@ html {
   /* Text White - #FFFFFF */
   --color-text-white: #FFFFFF;
 
+  /* ================================
+     HEADER COLORS - DYNAMIC VARIABLES
+     ================================ */
+  --header-text-color: #FFFFFF;
+  --header-text-hover: #d6c7b7;
+
   /* Light Background - #F5F5F5 */
   --color-light-background: #F5F5F5;
 
@@ -197,14 +203,30 @@ a:hover {
 /* ================================
    HEADER NAVIGATION OVERRIDES
    ================================ */
-/* Default hover color for dark sections */
-header nav a:hover {
-  color: var(--color-accent-400) !important;
+/* Header default colors (dark sections) */
+header {
+  --header-text-color: #FFFFFF;
+  --header-text-hover: #d6c7b7;
 }
 
-/* Light section hover color */
-header.light-section nav a:hover {
-  color: var(--color-accent-500) !important;
+/* Header light section colors */
+header.light-section {
+  --header-text-color: #1C1C1C;
+  --header-text-hover: #9C7248;
+}
+
+/* Apply dynamic colors to header links */
+header nav a {
+  color: var(--header-text-color) !important;
+}
+
+header nav a:hover {
+  color: var(--header-text-hover) !important;
+}
+
+/* Apply dynamic colors only to logo h1 */
+header h1 {
+  color: var(--header-text-color) !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

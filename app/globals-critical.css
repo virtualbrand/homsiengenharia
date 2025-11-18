@@ -37,6 +37,10 @@ html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; ove
   --color-text-600: #606060;
   --color-text-300: #d0d0d0;
   
+  /* Header colors - Dynamic based on section */
+  --header-text-color: #FFFFFF;
+  --header-text-hover: #d6c7b7;
+  
   /* Shadcn/UI variables for components */
   --background: 0 0% 100%;
   --foreground: 0 0% 14%;
@@ -131,11 +135,25 @@ button {
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Header styles */
-header nav a:hover {
-  color: var(--color-accent-400) !important;
+/* Header styles - Dynamic colors */
+header {
+  --header-text-color: #FFFFFF;
+  --header-text-hover: #d6c7b7;
 }
 
-header.light-section nav a:hover {
-  color: var(--color-accent-500) !important;
+header.light-section {
+  --header-text-color: #1C1C1C;
+  --header-text-hover: #9C7248;
+}
+
+header nav a {
+  color: var(--header-text-color) !important;
+}
+
+header nav a:hover {
+  color: var(--header-text-hover) !important;
+}
+
+header h1 {
+  color: var(--header-text-color) !important;
 }

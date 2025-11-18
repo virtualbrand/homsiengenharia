@@ -152,7 +152,7 @@ export const Header = () => {
         // Check if we're in the blog section (light background)
         const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
         
-        // Projects section has dark background, so we keep it as dark section
+        // Hero and Projects sections have dark background, so we keep it as dark section
         setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
       }
     }
@@ -182,10 +182,16 @@ export const Header = () => {
               src="/images/icon-white.svg"
               alt="Homsi Engenharia"
               fetchPriority="high"
-              className="w-8 h-8 transition-all duration-300"
+              className={cn(
+                "w-8 h-8 transition-all duration-300",
+                !isDarkSection && "brightness-0"
+              )}
             />
             <div className="hidden sm:block">
-              <h1 className="text-2xl font-bold transition-colors duration-300 text-white">Homsi Engenharia</h1>
+              <h1 className={cn(
+                "text-2xl font-bold transition-colors duration-300",
+                isDarkSection ? "text-white" : "text-gray-900"
+              )}>Homsi Engenharia</h1>
             </div>
           </a>
           
@@ -197,7 +203,12 @@ export const Header = () => {
                   href="#sobre" 
                   title="Sobre a Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#sobre')}
-                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
+                  className={cn(
+                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white" 
+                      : "text-gray-900"
+                  )}
                 >
                   Sobre
                 </a>
@@ -207,7 +218,12 @@ export const Header = () => {
                   href="#servicos" 
                   title="Serviços de engenharia civil"
                   onClick={(e) => handleAnchorClick(e, '#servicos')}
-                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
+                  className={cn(
+                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white" 
+                      : "text-gray-900"
+                  )}
                 >
                   Serviços
                 </a>
@@ -217,7 +233,12 @@ export const Header = () => {
                   href="#projetos" 
                   title="Projetos de engenharia realizados pela Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#projetos')}
-                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
+                  className={cn(
+                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white" 
+                      : "text-gray-900"
+                  )}
                 >
                   Projetos
                 </a>
@@ -226,7 +247,12 @@ export const Header = () => {
                 <a 
                   href="/artigos" 
                   title="Artigos e insights sobre engenharia"
-                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
+                  className={cn(
+                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase",
+                    isDarkSection 
+                      ? "text-white" 
+                      : "text-gray-900"
+                  )}
                 >
                   Artigos
                 </a>
@@ -245,7 +271,10 @@ export const Header = () => {
             
             {/* Mobile Menu Button */}
             <button 
-              className="lg:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg text-white"
+              className={cn(
+                "lg:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg",
+                isDarkSection ? "text-white" : "text-gray-900"
+              )}
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
@@ -271,7 +300,10 @@ export const Header = () => {
                   href="#sobre" 
                   title="Sobre a Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#sobre')}
-                  className="hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
+                  className={cn(
+                    "hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
                 >
                   Sobre
                 </a>
@@ -281,7 +313,10 @@ export const Header = () => {
                   href="#servicos" 
                   title="Serviços de engenharia civil"
                   onClick={(e) => handleAnchorClick(e, '#servicos')}
-                  className="hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
+                  className={cn(
+                    "hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
                 >
                   Serviços
                 </a>
@@ -291,7 +326,10 @@ export const Header = () => {
                   href="#projetos" 
                   title="Projetos de engenharia realizados pela Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#projetos')}
-                  className="hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
+                  className={cn(
+                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
                 >
                   Projetos
                 </a>
@@ -300,7 +338,10 @@ export const Header = () => {
                 <a 
                   href="/artigos" 
                   title="Artigos e insights sobre engenharia"
-                  className="hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
+                  className={cn(
+                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
+                    isDarkSection ? "text-white" : "text-gray-900"
+                  )}
                 >
                   Artigos
                 </a>
