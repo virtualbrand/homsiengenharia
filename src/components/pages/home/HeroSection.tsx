@@ -122,21 +122,19 @@ const HeroSection = () => {
       {/* Background container - garante que absolute fique contido */}
       <div className="absolute inset-0 -z-10">
         {/* Poster Image - sempre visível até o vídeo carregar */}
-        <picture>
-          <source 
-            media="(max-width: 768px)" 
-            srcSet="/images/hero-home-mobile.webp?v=2"
-          />
-          <img
-            src="/images/hero-home.webp?v=2"
-            alt="Homsi Engenharia"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ 
-              opacity: isVideoPlaying ? 0 : 1,
-              transition: 'opacity 0.5s ease-in-out'
-            }}
-          />
-        </picture>
+        <img
+          srcSet="/images/hero-home-mobile.webp?v=3 768w, /images/hero-home.webp?v=3 1920w"
+          sizes="100vw"
+          src="/images/hero-home.webp?v=3"
+          alt="Homsi Engenharia"
+          width="1920"
+          height="1280"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ 
+            opacity: isVideoPlaying ? 0 : 1,
+            transition: 'opacity 0.5s ease-in-out'
+          }}
+        />
         
         {/* Video Background - lazy loaded */}
         {shouldLoadVideo && (
@@ -147,7 +145,6 @@ const HeroSection = () => {
             muted
             playsInline
             preload="none"
-            poster="/images/hero-home.webp?v=2"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ 
               opacity: isVideoPlaying ? 1 : 0,
