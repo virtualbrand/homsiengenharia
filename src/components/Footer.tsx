@@ -83,6 +83,7 @@ function Footer() {
           target="_blank" 
           rel="noopener noreferrer"
           className="block"
+          aria-label="Fale conosco pelo WhatsApp"
         >
           <div 
             ref={lottieRef}
