@@ -123,9 +123,9 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10">
         {/* Poster Image - sempre visível até o vídeo carregar */}
         <img
-          srcSet="/images/hero-home-mobile.webp?v=3 768w, /images/hero-home.webp?v=3 1920w"
+          srcSet="/images/hero-home-mobile.webp?v=4 810w, /images/hero-home.webp?v=4 1920w"
           sizes="100vw"
-          src="/images/hero-home.webp?v=3"
+          src="/images/hero-home.webp?v=4"
           alt="Homsi Engenharia"
           width="1920"
           height="1280"
