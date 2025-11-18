@@ -121,43 +121,54 @@ export const Header = () => {
   }, [pathname])
 
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // Show header when scrolling up, hide when scrolling down
-      if (currentScrollY < lastScrollY || currentScrollY < 10) {
-        setIsVisible(true)
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false)
-      }
-      
-      setLastScrollY(currentScrollY)
-      
-      // Get all sections
-      const aboutSection = document.querySelector('#sobre')
-      const testimonialsSection = document.querySelector('#depoimentos')
-      const blogSection = document.querySelector('#blog')
-      
-      if (aboutSection || testimonialsSection || blogSection) {
-        const aboutRect = aboutSection?.getBoundingClientRect()
-        const testimonialsRect = testimonialsSection?.getBoundingClientRect()
-        const blogRect = blogSection?.getBoundingClientRect()
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          
+          // Show header when scrolling up, hide when scrolling down
+          if (currentScrollY < lastScrollY || currentScrollY < 10) {
+            setIsVisible(true)
+          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            setIsVisible(false)
+          }
+          
+          setLastScrollY(currentScrollY)
+          
+          // Get all sections
+          const aboutSection = document.querySelector('#sobre')
+          const testimonialsSection = document.querySelector('#depoimentos')
+          const blogSection = document.querySelector('#blog')
+          
+          if (aboutSection || testimonialsSection || blogSection) {
+            // Batch all layout reads together
+            const aboutRect = aboutSection?.getBoundingClientRect()
+            const testimonialsRect = testimonialsSection?.getBoundingClientRect()
+            const blogRect = blogSection?.getBoundingClientRect()
+            
+            // Check if we're in the about section (light background)
+            const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
+            
+            // Check if we're in the testimonials section (light background)
+            const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
+            
+            // Check if we're in the blog section (light background)
+            const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
+            
+            // Hero and Projects sections have dark background, so we keep it as dark section
+            setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
+          }
+          
+          ticking = false
+        })
         
-        // Check if we're in the about section (light background)
-        const isInAboutSection = aboutRect && aboutRect.top <= 100 && aboutRect.bottom >= 100
-        
-        // Check if we're in the testimonials section (light background)
-        const isInTestimonialsSection = testimonialsRect && testimonialsRect.top <= 100 && testimonialsRect.bottom >= 100
-        
-        // Check if we're in the blog section (light background)
-        const isInBlogSection = blogRect && blogRect.top <= 100 && blogRect.bottom >= 100
-        
-        // Hero and Projects sections have dark background, so we keep it as dark section
-        setIsDarkSection(!isInAboutSection && !isInTestimonialsSection && !isInBlogSection)
+        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Check initial position
 
     return () => window.removeEventListener('scroll', handleScroll)
