@@ -120,7 +120,7 @@ const HeroSection = () => {
     >
       {/* Poster Image - sempre visível até o vídeo carregar */}
       <img
-        src="/images/hero-home.webp"
+        src="/images/hero-home.webp?v=2"
         alt="Homsi Engenharia"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ 
@@ -138,15 +138,15 @@ const HeroSection = () => {
           muted
           playsInline
           preload="none"
-          poster="/images/hero-home.webp"
+          poster="/images/hero-home.webp?v=2"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ 
             opacity: isVideoPlaying ? 1 : 0,
             transition: 'opacity 0.5s ease-in-out'
           }}
         >
-          <source src="/videos/hero-home.webm" type="video/webm" />
-          <source src="/videos/hero-home.mp4" type="video/mp4" />
+          <source src="/videos/hero-home.webm?v=2" type="video/webm" />
+          <source src="/videos/hero-home.mp4?v=2" type="video/mp4" />
           <track kind="captions" />
         </video>
       )}
