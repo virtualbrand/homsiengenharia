@@ -117,45 +117,55 @@ const HeroSection = () => {
     <section 
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden isolate"
+      style={{ position: 'relative', zIndex: 0 }}
     >
-      {/* Poster Image - sempre visível até o vídeo carregar */}
-      <img
-        src="/images/hero-home.webp?v=2"
-        alt="Homsi Engenharia"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ 
-          opacity: isVideoPlaying ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out'
-        }}
-      />
-      
-      {/* Video Background - lazy loaded */}
-      {shouldLoadVideo && (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          poster="/images/hero-home.webp?v=2"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ 
-            opacity: isVideoPlaying ? 1 : 0,
-            transition: 'opacity 0.5s ease-in-out'
-          }}
-        >
-          <source src="/videos/hero-home.webm?v=2" type="video/webm" />
-          <source src="/videos/hero-home.mp4?v=2" type="video/mp4" />
-          <track kind="captions" />
-        </video>
-      )}
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-[1]" />
+      {/* Background container - garante que absolute fique contido */}
+      <div className="absolute inset-0 -z-10">
+        {/* Poster Image - sempre visível até o vídeo carregar */}
+        <picture>
+          <source 
+            media="(max-width: 768px)" 
+            srcSet="/images/hero-home-mobile.webp?v=2"
+          />
+          <img
+            src="/images/hero-home.webp?v=2"
+            alt="Homsi Engenharia"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ 
+              opacity: isVideoPlaying ? 0 : 1,
+              transition: 'opacity 0.5s ease-in-out'
+            }}
+          />
+        </picture>
+        
+        {/* Video Background - lazy loaded */}
+        {shouldLoadVideo && (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            poster="/images/hero-home.webp?v=2"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ 
+              opacity: isVideoPlaying ? 1 : 0,
+              transition: 'opacity 0.5s ease-in-out'
+            }}
+          >
+            <source src="/videos/hero-home.webm?v=2" type="video/webm" />
+            <source src="/videos/hero-home.mp4?v=2" type="video/mp4" />
+            <track kind="captions" />
+          </video>
+        )}
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
       
       {/* Content */}
-      <div className="relative z-[2] text-center max-w-4xl mx-auto px-4">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         <div>
           <h2 
             className="text-3xl md:text-5xl font-bold mb-6 leading-tight animate-fade-in"
