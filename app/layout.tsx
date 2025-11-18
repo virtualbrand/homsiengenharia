@@ -1,25 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals-critical.css";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
 import { satoshi } from "@/components/OptimizedFonts";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: 'swap',
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: 'swap',
-  preload: true,
-});
 
 export const metadata: Metadata = {
   title: {
@@ -86,21 +71,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* DNS Prefetch para domínios externos - resolve DNS antes da conexão */}
+        {/* DNS Prefetch para domínios externos */}
         <link rel="dns-prefetch" href="https://cloudflare-static.com" />
-        <link rel="dns-prefetch" href="https://homsiengenharia.com.br" />
         
-        {/* Preconnect apenas para recursos críticos (fonts) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload de fontes críticas */}
+        {/* Preload de fontes críticas locais */}
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
         {/* Preload de recursos críticos do hero */}
-        <link rel="preload" href="/images/hero-home.webp" as="image" fetchPriority="high" />
-        <link rel="preload" href="/images/icon-white.svg" as="image" type="image/svg+xml" fetchPriority="high" />
+        <link rel="preload" href="/images/hero-home-mobile.webp" as="image" media="(max-width: 810px)" fetchPriority="high" />
+        <link rel="preload" href="/images/hero-home.webp" as="image" media="(min-width: 811px)" fetchPriority="high" />
         
         {/* SEO: Verificação de propriedade e tags meta adicionais */}
         <meta name="theme-color" content="#1C1C1C" />
@@ -118,7 +98,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://homsiengenharia.com.br" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${satoshi.variable} antialiased`}
+        className={`${satoshi.variable} antialiased`}
       >
         <ServiceWorkerRegistration />
         <LenisProvider>
