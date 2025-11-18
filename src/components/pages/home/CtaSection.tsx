@@ -239,10 +239,10 @@ export default function CtaSection() {
           {/* CTA Header */}
           {!isFormSubmitted && (
             <div className="text-center mb-8">
-              <h2 className="fade-in text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4">
+              <h2 className="fade-in text-xl md:text-2xl lg:text-3xl font-bold mb-4" style={{ color: '#FFFFFF' }}>
                 Pronto para Começar seu Projeto?
               </h2>
-              <p className="fade-in text-xl text-white leading-relaxed">
+              <p className="fade-in text-xl leading-relaxed" style={{ color: '#FFFFFF' }}>
                 Entre em contato conosco e transforme suas ideias em realidade
               </p>
             </div>

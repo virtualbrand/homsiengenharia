@@ -50,7 +50,7 @@ const BlogSection = () => {
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="fade-in text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="fade-in text-2xl md:text-4xl font-bold text-gray-900 mb-6">
             Tendências e Insights
           </h2>
           <p className="fade-in text-lg text-gray-700 leading-relaxed">
@@ -96,12 +96,12 @@ const BlogSection = () => {
 
                     {/* Post Content */}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
                         {post.title}
                       </h3>
                       
                       {post.excerpt && (
-                        <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                        <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
                           {post.excerpt}
                         </p>
                       )}

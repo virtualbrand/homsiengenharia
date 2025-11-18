@@ -66,10 +66,10 @@ export default function ServicesSection() {
           <div className="flex flex-col gap-8 py-8 md:py-12 lg:py-16">
             {/* Section Header */}
             <div className="text-center mb-2 fade-in">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4" style={{ color: '#FFFFFF' }}>
                 Serviços
               </h2>
-              <p className="fade-in text-xl leading-relaxed text-white">
+              <p className="fade-in text-xl leading-relaxed" style={{ color: '#FFFFFF' }}>
                 Transformamos projetos em realidade, do início ao fim, com a segurança de quem conhece cada detalhe da construção
               </p>
             </div>
@@ -90,17 +90,17 @@ export default function ServicesSection() {
                     
                     <div className="relative space-y-4">
                       <div>
-                        <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+                        <h3 className="text-xl md:text-2xl font-bold drop-shadow-lg" style={{ color: '#FFFFFF' }}>
                           {service.title}
                         </h3>
                         <div className="w-16 h-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full mt-2" />
-                        <p className="text-white text-base md:text-lg mt-2">
+                        <p className="text-base md:text-lg mt-2" style={{ color: '#FFFFFF' }}>
                           {service.subtitle}
                         </p>
                       </div>
                       
                       {service.description && (
-                        <p className="text-white/90 text-base leading-relaxed">
+                        <p className="text-base leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                           {service.description}
                         </p>
                       )}
@@ -108,8 +108,8 @@ export default function ServicesSection() {
                       {service.features && (
                         <ul className="space-y-1">
                           {service.features.map((feature, index) => (
-                            <li key={index} className="flex items-start text-white/90 text-base">
-                              <span className="text-white mr-2 mt-0.5">•</span>
+                            <li key={index} className="flex items-start text-base" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                              <span className="mr-2 mt-0.5" style={{ color: '#FFFFFF' }}>•</span>
                               <span>{feature}</span>
                             </li>
                           ))}
@@ -117,7 +117,7 @@ export default function ServicesSection() {
                       )}
                       
                       {service.footer && (
-                        <p className="text-white text-base font-medium italic pt-2 border-t border-white/20">
+                        <p className="text-base font-medium italic pt-2 border-t border-white/20" style={{ color: '#FFFFFF' }}>
                           {service.footer}
                         </p>
                       )}

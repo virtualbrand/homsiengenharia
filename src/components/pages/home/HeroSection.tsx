@@ -129,13 +129,15 @@ const HeroSection = () => {
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         <div>
           <h2 
-            className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in"
+            className="text-3xl md:text-5xl font-bold mb-6 leading-tight animate-fade-in"
+            style={{ color: '#FFFFFF' }}
           >
             Soluções em Engenharia
           </h2>
           
           <p 
-            className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto animate-fade-in-delay-1"
+            className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto animate-fade-in-delay-1"
+            style={{ color: 'rgba(255, 255, 255, 0.9)' }}
           >
             Transformamos ideias em realidade com projetos de engenharia inovadores, 
             seguros e sustentáveis.

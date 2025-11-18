@@ -217,10 +217,10 @@ const baseProducts = generateProducts();
 const Header = () => {
   return (
     <div className="container mx-auto py-5 md:py-5 lg:py-20 px-4 md:px-6 lg:px-8">
-      <h2 className="fade-in text-3xl md:text-5xl text-white font-bold leading-tight">
+      <h2 className="fade-in text-3xl md:text-5xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
         Nossos Projetos
       </h2>
-      <p className="fade-in max-w-2xl leading-relaxed text-xl mt-2 text-white">
+      <p className="fade-in max-w-2xl leading-relaxed text-xl mt-2" style={{ color: '#FFFFFF' }}>
         Conheça alguns dos principais projetos executados pela Homsi Engenharia. Nossa experiência abrange obras residenciais, comerciais e industriais com excelência e qualidade garantidas.
       </p>
     </div>
@@ -460,7 +460,7 @@ const ProductCard = ({
         />
         {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
         <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
-        <h3 className="absolute bottom-4 left-4 text-white font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <h3 className="absolute bottom-4 left-4 font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ color: '#FFFFFF' }}>
           {product.title}
         </h3>
       </div>
