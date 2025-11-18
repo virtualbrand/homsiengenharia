@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -49,6 +50,33 @@ const createCustomIcon = (color: string) => {
 
 // Service Area Map Component for Footer
 export const ServiceAreaMap = () => {
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+
+  useEffect(() => {
+    // Lazy load map when it becomes visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !shouldLoadMap) {
+            setShouldLoadMap(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '200px', // Start loading 200px before it's visible
+        threshold: 0.1
+      }
+    );
+
+    if (mapContainerRef.current) {
+      observer.observe(mapContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [shouldLoadMap]);
+
   // Coordinates for the three cities
   const serviceMarkers = [
     {
@@ -84,39 +112,59 @@ export const ServiceAreaMap = () => {
   const mapCenter: [number, number] = [-19.8, -43.9];
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-gray-700 bg-gray-800">
-      <MapContainer
-        center={mapCenter}
-        zoom={10}
-        style={{ height: '400px', width: '100%' }}
-        scrollWheelZoom={true}
-        zoomControl={true}
-        doubleClickZoom={true}
-        dragging={true}
-        attributionControl={false}
-        className="filter grayscale hover:grayscale-0 transition-all duration-300"
-      >
-        <TileLayer
-          attribution=''
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <div 
+      ref={mapContainerRef}
+      className="relative overflow-hidden rounded-lg border border-gray-700 bg-gray-800"
+      style={{ minHeight: '400px' }}
+    >
+      {!shouldLoadMap && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+          <div className="text-center text-gray-400">
+            <svg className="animate-spin h-8 w-8 mx-auto mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p className="text-sm">Carregando mapa...</p>
+          </div>
+        </div>
+      )}
+      
+      {shouldLoadMap && (
+        <MapContainer
+          center={mapCenter}
+          zoom={10}
+          style={{ height: '400px', width: '100%' }}
+          scrollWheelZoom={true}
+          zoomControl={true}
+          doubleClickZoom={true}
+          dragging={true}
+          attributionControl={false}
+          className="filter grayscale hover:grayscale-0 transition-all duration-300"
+        >
+          <TileLayer
+            attribution=''
+            url="/api/map-tiles/{z}/{x}/{y}"
+            maxZoom={18}
+            keepBuffer={2}
+          />
 
-        {/* City markers */}
-        {serviceMarkers.map((marker) => (
-          <Marker
-            key={marker.id}
-            position={marker.position}
-            icon={marker.icon}
-          >
-            <Popup>
-              <div className="text-center">
-                <h3 className="font-semibold text-gray-800">{marker.popup.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">{marker.popup.content}</p>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+          {/* City markers */}
+          {serviceMarkers.map((marker) => (
+            <Marker
+              key={marker.id}
+              position={marker.position}
+              icon={marker.icon}
+            >
+              <Popup>
+                <div className="text-center">
+                  <h3 className="font-semibold text-gray-800">{marker.popup.title}</h3>
+                  <p className="text-sm text-gray-600 mt-1">{marker.popup.content}</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      )}
     </div>
   );
 };
