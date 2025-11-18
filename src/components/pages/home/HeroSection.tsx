@@ -6,8 +6,20 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
 
   useEffect(() => {
+    // Lazy load video after page load
+    const loadVideoTimer = setTimeout(() => {
+      setShouldLoadVideo(true)
+    }, 100)
+
+    return () => clearTimeout(loadVideoTimer)
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoadVideo) return
+
     // Detect iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
@@ -77,7 +89,7 @@ const HeroSection = () => {
         }
       }
     }
-  }, [isVideoPlaying])
+  }, [isVideoPlaying, shouldLoadVideo])
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
     const target = document.querySelector(targetId) as HTMLElement
@@ -104,29 +116,46 @@ const HeroSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden isolate"
     >
-      {/* Video Background */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        poster="/images/hero-home.webp"
+      {/* Poster Image - sempre visível até o vídeo carregar */}
+      <img
+        src="/images/hero-home.webp"
+        alt="Homsi Engenharia"
         className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/hero-home.mp4" type="video/mp4" />
-        <source src="/videos/hero-home.webm" type="video/webm" />
-        <track kind="captions" />
-      </video>
+        style={{ 
+          opacity: isVideoPlaying ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out'
+        }}
+      />
+      
+      {/* Video Background - lazy loaded */}
+      {shouldLoadVideo && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          poster="/images/hero-home.webp"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ 
+            opacity: isVideoPlaying ? 1 : 0,
+            transition: 'opacity 0.5s ease-in-out'
+          }}
+        >
+          <source src="/videos/hero-home.webm" type="video/webm" />
+          <source src="/videos/hero-home.mp4" type="video/mp4" />
+          <track kind="captions" />
+        </video>
+      )}
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/40 z-[1]" />
       
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+      <div className="relative z-[2] text-center max-w-4xl mx-auto px-4">
         <div>
           <h2 
             className="text-3xl md:text-5xl font-bold mb-6 leading-tight animate-fade-in"
