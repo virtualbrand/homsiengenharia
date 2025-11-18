@@ -59,15 +59,18 @@ function AppInput({
     }
   };
 
+  const inputId = `input-${name || register?.name || ''}`;
+
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-white font-semibold mb-2">
+        <label htmlFor={inputId} className="block text-white font-semibold mb-2">
           {label}
         </label>
       )}
       <div className="relative w-full">
         <input
+          id={inputId}
           type={type}
           className={`w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all ${error ? 'border-red-400 focus:ring-1 focus:ring-red-400' : ''} ${className}`}
           placeholder={placeholder}
@@ -88,14 +91,17 @@ function AppInput({
 function AppTextarea({
   label, placeholder, register, error, className = "", ...rest
 }: any) {
+  const textareaId = `textarea-${register.name}`;
+  
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-white font-semibold mb-2">
+        <label htmlFor={textareaId} className="block text-white font-semibold mb-2">
           {label}
         </label>
       )}
       <textarea
+        id={textareaId}
         className={`w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all resize-none ${error ? 'border-red-400 focus:ring-1 focus:ring-red-400' : ''} ${className}`}
         placeholder={placeholder}
         {...register}
@@ -109,15 +115,18 @@ function AppTextarea({
 function AppSelect({
   label, options, register, error, className = "", ...rest
 }: any) {
+  const selectId = `select-${register.name}`;
+  
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-white font-semibold mb-2">
+        <label htmlFor={selectId} className="block text-white font-semibold mb-2">
           {label}
         </label>
       )}
       <div className="relative">
         <select
+          id={selectId}
           className={`w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none ${error ? 'border-red-400 focus:ring-1 focus:ring-red-400' : ''} ${className}`}
           {...register}
           {...rest}

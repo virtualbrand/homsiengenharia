@@ -182,16 +182,10 @@ export const Header = () => {
               src="/images/icon-white.svg"
               alt="Homsi Engenharia"
               fetchPriority="high"
-              className={cn(
-                "w-8 h-8 transition-all duration-300",
-                !isDarkSection && "brightness-0"
-              )}
+              className="w-8 h-8 transition-all duration-300"
             />
             <div className="hidden sm:block">
-              <h1 className={cn(
-                "text-2xl font-bold transition-colors duration-300",
-                isDarkSection ? "text-white" : "text-gray-900"
-              )}>Homsi Engenharia</h1>
+              <h1 className="text-2xl font-bold transition-colors duration-300 text-white">Homsi Engenharia</h1>
             </div>
           </a>
           
@@ -203,12 +197,7 @@ export const Header = () => {
                   href="#sobre" 
                   title="Sobre a Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#sobre')}
-                  className={cn(
-                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase hover:text-[#f3ede1]",
-                    isDarkSection 
-                      ? "text-white" 
-                      : "text-gray-900"
-                  )}
+                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
                 >
                   Sobre
                 </a>
@@ -218,12 +207,7 @@ export const Header = () => {
                   href="#servicos" 
                   title="Serviços de engenharia civil"
                   onClick={(e) => handleAnchorClick(e, '#servicos')}
-                  className={cn(
-                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase hover:text-[#f3ede1]",
-                    isDarkSection 
-                      ? "text-white" 
-                      : "text-gray-900"
-                  )}
+                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
                 >
                   Serviços
                 </a>
@@ -233,12 +217,7 @@ export const Header = () => {
                   href="#projetos" 
                   title="Projetos de engenharia realizados pela Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#projetos')}
-                  className={cn(
-                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase hover:text-[#f3ede1]",
-                    isDarkSection 
-                      ? "text-white" 
-                      : "text-gray-900"
-                  )}
+                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
                 >
                   Projetos
                 </a>
@@ -247,12 +226,7 @@ export const Header = () => {
                 <a 
                   href="/artigos" 
                   title="Artigos e insights sobre engenharia"
-                  className={cn(
-                    "px-4 py-2 text-base font-black transition-all duration-300 uppercase hover:text-[#f3ede1]",
-                    isDarkSection 
-                      ? "text-white" 
-                      : "text-gray-900"
-                  )}
+                  className="px-4 py-2 text-base font-black transition-all duration-300 uppercase text-white hover:text-[#f3ede1]"
                 >
                   Artigos
                 </a>
@@ -271,10 +245,7 @@ export const Header = () => {
             
             {/* Mobile Menu Button */}
             <button 
-              className={cn(
-                "lg:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg",
-                isDarkSection ? "text-white" : "text-gray-900"
-              )}
+              className="lg:hidden hover:opacity-80 transition-all duration-300 p-2 rounded-lg text-white"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
@@ -300,10 +271,7 @@ export const Header = () => {
                   href="#sobre" 
                   title="Sobre a Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#sobre')}
-                  className={cn(
-                    "hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
+                  className="hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
                 >
                   Sobre
                 </a>
@@ -313,10 +281,7 @@ export const Header = () => {
                   href="#servicos" 
                   title="Serviços de engenharia civil"
                   onClick={(e) => handleAnchorClick(e, '#servicos')}
-                  className={cn(
-                    "hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
+                  className="hover:text-[#f3ede1] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
                 >
                   Serviços
                 </a>
@@ -326,10 +291,7 @@ export const Header = () => {
                   href="#projetos" 
                   title="Projetos de engenharia realizados pela Homsi Engenharia"
                   onClick={(e) => handleAnchorClick(e, '#projetos')}
-                  className={cn(
-                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
+                  className="hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
                 >
                   Projetos
                 </a>
@@ -338,10 +300,7 @@ export const Header = () => {
                 <a 
                   href="/artigos" 
                   title="Artigos e insights sobre engenharia"
-                  className={cn(
-                    "hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase",
-                    isDarkSection ? "text-white" : "text-gray-900"
-                  )}
+                  className="hover:text-[#D6BDAA] transition-all duration-300 block py-3 px-4 rounded-xl font-black uppercase text-white"
                 >
                   Artigos
                 </a>

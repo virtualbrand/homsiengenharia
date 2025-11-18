@@ -165,7 +165,7 @@ function Footer() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
                         >
-                          <img src="/icons/instagram.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <img src="/icons/instagram.svg" alt="Instagram Homsi Engenharia" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
                           <span className="sr-only">Instagram</span>
                         </a>
                       </TooltipTrigger>
@@ -183,7 +183,7 @@ function Footer() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
                         >
-                          <img src="/icons/youtube.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <img src="/icons/youtube.svg" alt="YouTube Homsi Engenharia" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
                           <span className="sr-only">YouTube</span>
                         </a>
                       </TooltipTrigger>
@@ -201,7 +201,7 @@ function Footer() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-[var(--color-primary-800)] border border-white/30 hover:bg-[#D6BDAA] hover:border-[#D6BDAA] hover:scale-110 transition-all duration-500 group"
                         >
-                          <img src="/icons/linkedin.svg" alt="" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
+                          <img src="/icons/linkedin.svg" alt="LinkedIn Homsi Engenharia" className="h-4 w-4 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" />
                           <span className="sr-only">LinkedIn</span>
                         </a>
                       </TooltipTrigger>

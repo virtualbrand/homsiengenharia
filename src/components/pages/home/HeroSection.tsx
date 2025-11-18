@@ -119,6 +119,7 @@ const HeroSection = () => {
       >
         <source src="/videos/hero-home.mp4" type="video/mp4" />
         <source src="/videos/hero-home.webm" type="video/webm" />
+        <track kind="captions" />
       </video>
       
       {/* Overlay */}
