@@ -89,7 +89,7 @@ export default async function ArtigosPage({
           />
           <div className="absolute inset-0 bg-black/70" />
           <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-xl md:text-2xl font-bold text-white mt-16 leading-tight">
+            <h1 className="text-xl md:text-2xl font-bold mt-16 leading-tight" style={{ color: '#FFFFFF' }}>
               Artigos
             </h1>
           </div>
