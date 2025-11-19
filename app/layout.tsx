@@ -4,7 +4,6 @@ import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
 import { satoshi } from "@/components/OptimizedFonts";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import DeferredCSS from "@/components/DeferredCSS";
 
 export const metadata: Metadata = {
   title: {
@@ -100,7 +99,6 @@ export default function RootLayout({
       <body
         className={`${satoshi.variable} antialiased`}
       >
-        <DeferredCSS />
         <ServiceWorkerRegistration />
         <LenisProvider>
           {children}
