@@ -2,7 +2,7 @@
    CRITICAL CSS - ABOVE THE FOLD
    ================================ */
 
-@import "tailwindcss" layer(base, components);
+@import "tailwindcss";
 
 /* Performance optimized animations */
 @keyframes fade-in {
