@@ -2,8 +2,6 @@
    CRITICAL CSS - ABOVE THE FOLD
    ================================ */
 
-@import "tailwindcss";
-
 /* Performance optimized animations */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }

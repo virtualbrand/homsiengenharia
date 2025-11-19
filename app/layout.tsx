@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals-critical.css";
-import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { Toaster } from "sonner";
 import { satoshi } from "@/components/OptimizedFonts";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import DeferredCSS from "@/components/DeferredCSS";
 
 export const metadata: Metadata = {
   title: {
@@ -78,7 +78,7 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
-        {/* Preload de recursos críticos do hero */}
+        {/* Preload de imagens críticas do hero */}
         <link rel="preload" href="/images/hero-home-mobile.webp" as="image" media="(max-width: 810px)" fetchPriority="high" />
         <link rel="preload" href="/images/hero-home.webp" as="image" media="(min-width: 811px)" fetchPriority="high" />
         
@@ -100,6 +100,7 @@ export default function RootLayout({
       <body
         className={`${satoshi.variable} antialiased`}
       >
+        <DeferredCSS />
         <ServiceWorkerRegistration />
         <LenisProvider>
           {children}
