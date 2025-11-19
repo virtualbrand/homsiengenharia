@@ -279,7 +279,7 @@ export default async function ArtigoPage({ params }: Props) {
                               {relatedPost.title}
                             </h3>
                             {relatedPost.excerpt && (
-                              <p className="text-xs text-gray-600 line-clamp-2">
+                              <p className="text-sm text-gray-600 line-clamp-2">
                                 {relatedPost.excerpt}
                               </p>
                             )}
