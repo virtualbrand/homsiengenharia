@@ -180,7 +180,7 @@ export default async function ArtigoPage({ params }: Props) {
             src="/images/hero-blog.webp"
             alt="Blog Homsi Engenharia"
             fill
-            className="object-contain"
+            className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-black/70" />
@@ -239,7 +239,7 @@ export default async function ArtigoPage({ params }: Props) {
                       <Link
                         key={tag}
                         href={`/artigos?tag=${tag}`}
-                        className="inline-block px-3 py-1 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-full hover:border-[#9b7b6b] hover:text-[#9b7b6b] transition-colors"
+                        className="inline-block px-3 py-0.5 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:border-[#9b7b6b] hover:text-[#9b7b6b] transition-colors"
                       >
                         {tag}
                       </Link>
@@ -263,7 +263,7 @@ export default async function ArtigoPage({ params }: Props) {
                         href={`/artigos/${relatedPost.slug}`}
                         className="group block"
                       >
-                        <article className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-[#9b7b6b] transition-all shadow-sm">
+                        <article className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all">
                           {relatedPost.cover_image && (
                             <div className="relative aspect-video bg-gray-200">
                               <Image

@@ -13,6 +13,22 @@ export const Header = () => {
   const router = useRouter()
   const pathname = usePathname()
 
+  // Detectar se estamos em página de artigos (fundo claro)
+  useEffect(() => {
+    // Páginas que sempre terão fundo claro após a hero
+    const isArticlePage = pathname.startsWith('/artigos') || pathname.startsWith('/links')
+    
+    // Se for página de artigo, iniciar como escuro (hero) mas mudar no scroll
+    if (isArticlePage) {
+      // Verifica a posição inicial
+      if (window.scrollY > 250) {
+        setIsDarkSection(false)
+      }
+    } else {
+      setIsDarkSection(true)
+    }
+  }, [pathname])
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -136,6 +152,14 @@ export const Header = () => {
           }
           
           setLastScrollY(currentScrollY)
+          
+          // Para páginas de artigos/links: mudar cor baseado na posição do scroll
+          if (pathname.startsWith('/artigos') || pathname.startsWith('/links')) {
+            // Hero tem ~300px, após isso é fundo claro
+            setIsDarkSection(currentScrollY <= 250)
+            ticking = false
+            return
+          }
           
           // Get all sections
           const aboutSection = document.querySelector('#sobre')

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import SearchBox from '@/components/blog/SearchBox'
+import TagFilter from '@/components/blog/TagFilter'
 
 export const metadata: Metadata = {
   title: 'Artigos - Homsi Engenharia',
@@ -31,9 +32,15 @@ export const metadata: Metadata = {
 export default async function ArtigosPage({
   searchParams,
 }: {
-  searchParams: { category?: string; tag?: string; search?: string }
+  searchParams: Promise<{ category?: string; tag?: string | string[]; search?: string }>
 }) {
   const supabase = await createClient()
+  const params = await searchParams
+
+  // Normalizar tags para array
+  const selectedTags = params.tag 
+    ? (Array.isArray(params.tag) ? params.tag : [params.tag])
+    : []
 
   // Build query
   let query = supabase
@@ -43,18 +50,21 @@ export default async function ArtigosPage({
     .order('published_at', { ascending: false })
 
   // Apply filters
-  if (searchParams.search) {
+  if (params.search) {
     query = query.or(
-      `title.ilike.%${searchParams.search}%,excerpt.ilike.%${searchParams.search}%,content.ilike.%${searchParams.search}%`
+      `title.ilike.%${params.search}%,excerpt.ilike.%${params.search}%,content.ilike.%${params.search}%`
     )
   }
 
-  if (searchParams.category) {
-    query = query.eq('category', searchParams.category)
+  if (params.category) {
+    query = query.eq('category', params.category)
   }
 
-  if (searchParams.tag) {
-    query = query.contains('tags', [searchParams.tag])
+  if (selectedTags.length > 0) {
+    // Filtrar posts que contenham qualquer uma das tags selecionadas
+    query = query.or(
+      selectedTags.map(tag => `tags.cs.{${tag}}`).join(',')
+    )
   }
 
   const { data: posts } = await query
@@ -84,7 +94,7 @@ export default async function ArtigosPage({
             src="/images/hero-blog.webp"
             alt="Blog Homsi Engenharia"
             fill
-            className="object-contain"
+            className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-black/70" />
@@ -185,7 +195,7 @@ export default async function ArtigosPage({
                       <Link
                         href="/artigos"
                         className={`block text-sm hover:text-[#9b7b6b] transition-colors ${
-                          !searchParams.category
+                          !params.category
                             ? 'text-[#9b7b6b] font-semibold'
                             : 'text-gray-600'
                         }`}
@@ -198,7 +208,7 @@ export default async function ArtigosPage({
                         <Link
                           href={`/artigos?category=${category}`}
                           className={`block text-sm hover:text-[#9b7b6b] transition-colors ${
-                            searchParams.category === category
+                            params.category === category
                               ? 'text-[#9b7b6b] font-semibold'
                               : 'text-gray-600'
                           }`}
@@ -213,26 +223,7 @@ export default async function ArtigosPage({
 
               {/* Tags */}
               {allTags.length > 0 && (
-                <div className="bg-white rounded-lg p-6 shadow-[0_0_20px_rgba(0,0,0,0.1)]">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Tags
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {allTags.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/artigos?tag=${tag}`}
-                        className={`inline-block px-3 py-1 text-xs rounded-full border transition-colors ${
-                          searchParams.tag === tag
-                            ? 'bg-[#9b7b6b] text-white border-[#9b7b6b]'
-                            : 'bg-[#1a2332] text-gray-400 border-gray-700 hover:border-[#9b7b6b] hover:text-[#9b7b6b]'
-                        }`}
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <TagFilter allTags={allTags} />
               )}
             </aside>
           </div>
