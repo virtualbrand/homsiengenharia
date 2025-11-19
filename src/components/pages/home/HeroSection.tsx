@@ -64,8 +64,13 @@ const HeroSection = () => {
         }
       }
 
-      // Play on click anywhere in hero section
-      const handleHeroClick = () => {
+      // Play on click anywhere in hero section, EXCETO nos botões
+      const handleHeroClick = (e: Event) => {
+        const target = e.target as HTMLElement
+        // Ignorar cliques em botões e links
+        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a, button')) {
+          return // Não interferir com os botões
+        }
         playVideoOnInteraction()
         if (sectionRef.current) {
           sectionRef.current.removeEventListener('click', handleHeroClick)
@@ -78,7 +83,7 @@ const HeroSection = () => {
       const section = sectionRef.current
       if (section) {
         section.addEventListener('click', handleHeroClick)
-        section.addEventListener('touchstart', handleHeroClick)
+        section.addEventListener('touchstart', handleHeroClick, { passive: true })
       }
 
       return () => {
@@ -92,6 +97,17 @@ const HeroSection = () => {
   }, [isVideoPlaying, shouldLoadVideo])
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
+    
+    // Tentar dar play no vídeo ao clicar no botão (iOS)
+    const video = videoRef.current
+    if (video && !isVideoPlaying) {
+      video.play().then(() => {
+        setIsVideoPlaying(true)
+      }).catch(() => {
+        // Silently fail if autoplay is blocked
+      })
+    }
+    
     const target = document.querySelector(targetId) as HTMLElement
     if (target) {
       // Get Lenis instance from window
