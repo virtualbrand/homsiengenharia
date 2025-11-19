@@ -277,6 +277,34 @@ const GalleryModal = ({
     emblaApi.scrollTo(initialIndex, true);
   }, [emblaApi, initialIndex]);
 
+  // Reinicializar carousel quando abrir no mobile (fix iOS)
+  useEffect(() => {
+    if (!emblaApi || !isOpen) return;
+    
+    const timer = setTimeout(() => {
+      emblaApi.reInit();
+      emblaApi.scrollTo(initialIndex, true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [isOpen, emblaApi, initialIndex]);
+
+  // Prevenir scroll do body quando modal estiver aberto (fix iOS)
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen || !emblaApi) return;
@@ -324,16 +352,17 @@ const GalleryModal = ({
               <div className="flex">
                 {images.map((image, index) => (
                   <div key={index} className="flex-[0_0_100%] min-w-0">
-                    <div className="flex items-center justify-center h-[70vh] relative">
+                    <div className="flex items-center justify-center h-[70vh] relative select-none">
                       <Image
                         src={image}
                         alt={`${projectTitle} - Imagem ${index + 1}`}
                         fill
                         quality={85}
-                        className="object-contain"
+                        className="object-contain pointer-events-none"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
-                        priority={index === 0}
-                        loading={index === 0 ? "eager" : "lazy"}
+                        priority={index <= 2}
+                        loading={index <= 2 ? "eager" : "lazy"}
+                        unselectable="on"
                       />
                     </div>
                   </div>
@@ -393,8 +422,10 @@ const GalleryModal = ({
                         fill
                         quality={60}
                         loading="lazy"
-                        className="object-contain transition-transform duration-300 group-hover:scale-110"
+                        className="object-contain transition-transform duration-300 group-hover:scale-110 pointer-events-none select-none"
                         sizes="100px"
+                        draggable={false}
+                        unselectable="on"
                       />
                     </div>
                     {/* Overlay de hover */}
@@ -442,9 +473,8 @@ const ProductCard = ({
     >
       <div
         onClick={handleClick}
-        onTouchEnd={handleClick}
-        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer touch-manipulation"
-        style={{ WebkitTapHighlightColor: 'transparent' }}
+        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer touch-manipulation select-none"
+        style={{ WebkitTapHighlightColor: 'transparent', userSelect: 'none' }}
       >
         <Image
           src={product.thumbnail}
