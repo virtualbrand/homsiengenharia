@@ -9,6 +9,7 @@ import { formatBrazilianDateTime } from '@/lib/date-utils'
 type Post = {
   id: string
   title: string
+  slug: string
   excerpt: string | null
   published: boolean
   created_at: string
@@ -76,7 +77,7 @@ export function BlogAdminContent({ posts }: Props) {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-6">
         {/* Header */}
         <div className="flex justify-between items-center mt-10 mb-6">
-          <h1 className="text-3xl font-bold text-white">Artigos</h1>
+          <h1 className="text-3xl font-bold !text-white">Artigos</h1>
           <Link href="/admin/blog/new">
             <button className="btn-primary rounded-xl px-6 py-2 shadow-lg flex items-center gap-2">
               + Artigo
@@ -94,10 +95,10 @@ export function BlogAdminContent({ posts }: Props) {
                 placeholder="Buscar artigos..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-10 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 pl-10 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               />
               <svg
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 !text-white/60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,14 +118,14 @@ export function BlogAdminContent({ posts }: Props) {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as 'all' | 'published' | 'draft')}
-              className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+              className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
             >
               <option value="all" className="bg-gray-800 text-white">Status</option>
               <option value="published" className="bg-gray-800 text-white">Publicados</option>
               <option value="draft" className="bg-gray-800 text-white">Rascunhos</option>
             </select>
             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-              <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 !text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -136,7 +137,7 @@ export function BlogAdminContent({ posts }: Props) {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+                className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
               >
                 <option value="all" className="bg-gray-800 text-white">Categoria</option>
                 {categories.map(category => (
@@ -159,7 +160,7 @@ export function BlogAdminContent({ posts }: Props) {
               <select
                 value={tagFilter}
                 onChange={(e) => setTagFilter(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+                className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
               >
                 <option value="all" className="bg-gray-800 text-white">Tag</option>
                 {tags.map(tag => (
@@ -194,10 +195,10 @@ export function BlogAdminContent({ posts }: Props) {
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            <h3 className="mt-2 text-sm font-medium text-white">
+            <h3 className="mt-2 text-sm font-medium !text-white">
               {posts.length === 0 ? 'Nenhum artigo' : 'Nenhum resultado encontrado'}
             </h3>
-            <p className="mt-1 text-sm text-white/70">
+            <p className="mt-1 text-sm !text-white/70">
               {posts.length === 0
                 ? 'Comece criando um novo artigo.'
                 : 'Tente ajustar os filtros ou a busca.'}
@@ -213,33 +214,57 @@ export function BlogAdminContent({ posts }: Props) {
         ) : (
           <div className="space-y-3">
             {filteredPosts.map((post) => (
-              <Link
+              <div
                 key={post.id}
-                href={`/admin/blog/${post.id}`}
-                className="block backdrop-blur-md bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all p-6 shadow-lg"
+                className="block backdrop-blur-md bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all p-6 shadow-lg cursor-pointer"
+                onClick={() => window.location.href = `/admin/blog/${post.id}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-semibold text-white mb-1">
+                    <h3 className="text-base font-semibold !text-white mb-1">
                       {post.title}
                     </h3>
                     {post.excerpt && (
-                      <p className="text-sm text-white/80 mb-3 line-clamp-2">
+                      <p className="text-sm !text-white/80 mb-3 line-clamp-2">
                         {post.excerpt}
                       </p>
                     )}
                     
                     {/* Status */}
-                    <div className="mb-3">
+                    <div className="mb-3 flex items-center gap-2">
                       <StatusBadge 
                         status={post.published ? 'published' : 'draft'} 
                         size="sm"
                       />
+                      {post.published && (
+                        <a
+                          href={`/artigos/${post.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-xs !text-white/70 hover:!text-white transition-colors"
+                        >
+                          <svg
+                            className="w-3.5 h-3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                          Ver no site
+                        </a>
+                      )}
                     </div>
 
                     {/* Data de criação ou última alteração */}
                     <div>
-                      <span className="text-xs text-white/60">
+                      <span className="text-xs !text-white/60">
                         {post.updated_at && post.updated_at !== post.created_at
                           ? `Alterado em ${formatBrazilianDateTime(post.updated_at)}`
                           : `Criado em ${formatBrazilianDateTime(post.created_at)}`
@@ -259,7 +284,7 @@ export function BlogAdminContent({ posts }: Props) {
                     </div>
                   )}
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}

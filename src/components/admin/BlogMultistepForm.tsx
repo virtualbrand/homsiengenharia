@@ -162,9 +162,9 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                   <AlertDialogTrigger asChild>
                     <button
                       type="button"
-                      className="bg-transparent text-red-300 border-2 border-transparent hover:!border-red-300 hover:!bg-transparent rounded px-4 py-2 !text-xs !font-semibold flex items-center gap-2 transition-all"
+                      className="bg-transparent !text-red-300 border-2 border-transparent hover:!border-red-300 hover:!bg-transparent rounded px-4 py-2 !text-xs !font-semibold flex items-center gap-2 transition-all"
                     >
-                      <svg className="w-4 h-4 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 !text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                       </svg>
                       Excluir artigo
@@ -172,17 +172,17 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                   </AlertDialogTrigger>
                   <AlertDialogContent className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl">
                     <AlertDialogHeader>
-                      <AlertDialogTitle className="text-white text-xl font-bold">EXCLUIR ARTIGO?</AlertDialogTitle>
-                      <AlertDialogDescription className="text-white/70 text-sm">
+                      <AlertDialogTitle className="!text-white text-xl font-bold">EXCLUIR ARTIGO?</AlertDialogTitle>
+                      <AlertDialogDescription className="!text-white/70 text-sm">
                         Tem certeza que deseja excluir este artigo? Esta ação não pode ser desfeita e todos os dados serão permanentemente removidos.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="backdrop-blur-sm bg-white/10 text-white border border-white/20 hover:!bg-white/20 !rounded-sm">
+                      <AlertDialogCancel className="backdrop-blur-sm bg-white/10 !text-white border border-white/20 hover:!bg-white/20 !rounded-sm">
                         Cancelar
                       </AlertDialogCancel>
                       <AlertDialogAction
-                        className="bg-red-400 text-white hover:!bg-red-400 !rounded-sm font-semibold"
+                        className="bg-red-400 !text-white hover:!bg-red-400 !rounded-sm font-semibold"
                         onClick={async () => {
                           try {
                             const response = await fetch(`/api/admin/blog/delete?id=${postId}`, {
@@ -213,32 +213,32 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
           <TabsContent value="content">
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="title" className="block text-white font-semibold mb-2">Título *</Label>
+                  <Label htmlFor="title" className="block !text-white font-semibold mb-2">Título *</Label>
                   <Input
                     id="title"
                     placeholder="Ex: Tendências em Construção Civil para 2025"
                     value={formData.title}
                     onChange={(e) => updateFormData("title", e.target.value)}
-                    className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="slug" className="block text-white font-semibold mb-2">Slug (URL) *</Label>
+                  <Label htmlFor="slug" className="block !text-white font-semibold mb-2">Slug (URL) *</Label>
                   <Input
                     id="slug"
                     placeholder="Ex: tendencias-construcao-civil-2025"
                     value={formData.slug}
                     onChange={(e) => handleSlugChange(e.target.value)}
-                    className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
                   />
-                  <p className="text-xs text-white/60">
+                  <p className="text-xs !text-white/60">
                     Use apenas letras minúsculas, números e hífens
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="block text-white font-semibold mb-2">Conteúdo *</Label>
+                  <Label className="block !text-white font-semibold mb-2">Conteúdo *</Label>
                   <BlogEditor
                     content={formData.content}
                     onChange={(value) => updateFormData("content", value)}
@@ -254,19 +254,19 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Status - 1/3 */}
                   <div className="space-y-2 md:w-1/3 w-full">
-                    <Label htmlFor="status" className="block text-white font-semibold mb-2">Status de Publicação</Label>
+                    <Label htmlFor="status" className="block !text-white font-semibold mb-2">Status de Publicação</Label>
                     <div className="relative">
                       <select
                         id="status"
                         value={formData.status}
                         onChange={(e) => updateFormData("status", e.target.value as FormData["status"])}
-                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
                       >
                         <option value="rascunho" className="bg-gray-800 text-white">Rascunho</option>
                         <option value="publicado" className="bg-gray-800 text-white">Publicado</option>
                       </select>
                       <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                        <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 !text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </div>
@@ -275,13 +275,13 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
 
                   {/* Categoria - 1/3 */}
                   <div className="space-y-2 md:w-1/3 w-full">
-                    <Label htmlFor="category" className="block text-white font-semibold mb-2">Categoria</Label>
+                    <Label htmlFor="category" className="block !text-white font-semibold mb-2">Categoria</Label>
                     <div className="relative">
                       <select
                         id="category"
                         value={formData.category}
                         onChange={(e) => updateFormData("category", e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
                       >
                         <option value="" className="bg-gray-800 text-white">Selecione uma categoria</option>
                         <option value="Engenharia" className="bg-gray-800 text-white">Engenharia</option>
@@ -292,7 +292,7 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                         <option value="Notícias" className="bg-gray-800 text-white">Notícias</option>
                       </select>
                       <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                        <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 !text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </div>
@@ -301,7 +301,7 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
 
                   {/* Tags - 1/3 */}
                   <div className="space-y-2 md:w-1/3 w-full">
-                    <Label htmlFor="tags" className="block text-white font-semibold mb-2">Tags</Label>
+                    <Label htmlFor="tags" className="block !text-white font-semibold mb-2">Tags</Label>
                     <MultipleSelector
                       value={selectedTags}
                       onChange={(options) => {
@@ -310,9 +310,9 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                       }}
                       placeholder="Digite e pressione Enter..."
                       creatable
-                      emptyIndicator={<p className="text-center text-sm text-white/60">Nenhuma tag encontrada</p>}
-                      className="w-full rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white [&>button]:min-h-[52px] [&>button]:rounded-lg [&>button]:backdrop-blur-sm [&>button]:bg-white/10 [&>button]:border [&>button]:border-white/20 [&_input]:py-[14px] [&_input]:px-4"
-                      badgeClassName="bg-white/20 text-white border-white/30"
+                      emptyIndicator={<p className="text-center text-sm !text-white/60">Nenhuma tag encontrada</p>}
+                      className="w-full rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white [&>button]:min-h-[52px] [&>button]:rounded-lg [&>button]:backdrop-blur-sm [&>button]:bg-white/10 [&>button]:border [&>button]:border-white/20 [&_input]:py-[14px] [&_input]:px-4 [&_input]:!text-white"
+                      badgeClassName="bg-white/20 !text-white border-white/30"
                     />
                   </div>
                 </div>
@@ -321,19 +321,19 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                 <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
                   {/* Resumo - 2/3 no desktop */}
                   <div className="flex flex-col lg:w-2/3 w-full">
-                    <Label htmlFor="excerpt" className="block text-white font-semibold mb-2">Resumo</Label>
+                    <Label htmlFor="excerpt" className="block !text-white font-semibold mb-2">Resumo</Label>
                     <Textarea
                       id="excerpt"
                       placeholder="Breve descrição do post (aparece na listagem)"
                       value={formData.excerpt}
                       onChange={(e) => updateFormData("excerpt", e.target.value)}
-                      className="w-full flex-1 px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+                      className="w-full flex-1 px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
                     />
                   </div>
 
                   {/* Imagem de Capa - 1/3 no desktop */}
                   <div className="flex flex-col lg:w-1/3 w-full">
-                    <Label className="block text-white font-semibold mb-2">Imagem de Capa</Label>
+                    <Label className="block !text-white font-semibold mb-2">Imagem de Capa</Label>
                     <div className="flex-1 flex flex-col">
                       <ImageUpload
                         value={formData.cover_image}
@@ -355,8 +355,8 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                     {/* Meta Título */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between mb-2">
-                        <Label htmlFor="meta_title" className="text-white font-semibold">Meta Título</Label>
-                        <span className="text-xs text-white/60">
+                        <Label htmlFor="meta_title" className="!text-white font-semibold">Meta Título</Label>
+                        <span className="text-xs !text-white/60">
                           {formData.meta_title.length}/60 caracteres
                         </span>
                       </div>
@@ -366,15 +366,15 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                         value={formData.meta_title}
                         onChange={(e) => updateFormData("meta_title", e.target.value)}
                         maxLength={60}
-                        className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-6 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all"
                       />
                     </div>
 
                     {/* Meta Descrição */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between mb-2">
-                        <Label htmlFor="meta_description" className="text-white font-semibold">Meta Descrição</Label>
-                        <span className="text-xs text-white/60">
+                        <Label htmlFor="meta_description" className="!text-white font-semibold">Meta Descrição</Label>
+                        <span className="text-xs !text-white/60">
                           {formData.meta_description.length}/160 caracteres
                         </span>
                       </div>
@@ -385,14 +385,14 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                         onChange={(e) => updateFormData("meta_description", e.target.value)}
                         maxLength={160}
                         rows={4}
-                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
                       />
                     </div>
                   </div>
 
                   {/* Imagem Open Graph - 1/3 no desktop */}
                   <div className="flex flex-col lg:w-1/3 w-full">
-                    <Label className="block text-white font-semibold mb-2">Imagem (Compartilhamento)</Label>
+                    <Label className="block !text-white font-semibold mb-2">Imagem (Compartilhamento)</Label>
                     <div className="flex-1 flex flex-col">
                       <ImageUpload
                         value={formData.og_image}

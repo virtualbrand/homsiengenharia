@@ -16,7 +16,7 @@ export const AdminHeader = () => {
                 className="w-8 h-8"
               />
               <div className="hidden sm:block">
-                <h1 className="text-2xl font-bold text-white">
+                <h1 className="text-2xl font-bold !text-white">
                   Homsi Engenharia
                 </h1>
               </div>

@@ -126,7 +126,7 @@ export default function NewBlogPostPage() {
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-6">
           <div className="flex justify-between items-center mt-10 mb-6">
-            <h1 className="text-3xl font-bold text-white">Novo Artigo</h1>
+            <h1 className="text-3xl font-bold !text-white">Novo Artigo</h1>
             <div className="flex items-center gap-3">
               <Button
                 type="button"
