@@ -185,9 +185,39 @@ export default async function ArtigoPage({ params }: Props) {
           />
           <div className="absolute inset-0 bg-black/70" />
           <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-xl md:text-2xl font-bold mt-16 leading-tight" style={{ color: '#FFFFFF' }}>
-              {post.title}
-            </h1>
+            <div className="mt-16">
+              {/* Category */}
+              {post.category && (
+                <div className="mb-4">
+                  <Link
+                    href={`/artigos?category=${post.category}`}
+                    className="inline-block px-3 py-1 text-xs font-semibold text-white bg-[#9b7b6b] rounded-full hover:bg-[#8a6a5b] transition-colors"
+                  >
+                    {post.category}
+                  </Link>
+                </div>
+              )}
+              
+              {/* Title */}
+              <h1 className="text-xl md:text-2xl font-bold leading-tight mb-4 [color:white!important]">
+                {post.title}
+              </h1>
+
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag: string) => (
+                    <Link
+                      key={tag}
+                      href={`/artigos?tag=${tag}`}
+                      className="inline-block px-3 py-0.5 text-xs bg-white/10 [color:white!important] border border-white/30 rounded-md hover:bg-white/20 hover:border-white/50 transition-colors"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -195,19 +225,6 @@ export default async function ArtigoPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
             {/* Main Content */}
             <article className="w-full">
-              {/* Header */}
-              <header className="mb-8">
-                {post.category && (
-                  <div className="mb-4">
-                    <Link
-                      href={`/artigos?category=${post.category}`}
-                      className="inline-block px-3 py-1 text-xs font-semibold text-white bg-[#9b7b6b] rounded-full hover:bg-[#8a6a5b] transition-colors"
-                    >
-                      {post.category}
-                    </Link>
-                  </div>
-                )}
-              </header>
 
               {/* Cover Image */}
               {post.cover_image && (
@@ -227,26 +244,6 @@ export default async function ArtigoPage({ params }: Props) {
                 className="article-content"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
-
-              {/* Tags */}
-              {post.tags && post.tags.length > 0 && (
-                <div className="mt-12 pt-8 border-t border-gray-300">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-3">
-                    Tags:
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag: string) => (
-                      <Link
-                        key={tag}
-                        href={`/artigos?tag=${tag}`}
-                        className="inline-block px-3 py-0.5 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:border-[#9b7b6b] hover:text-[#9b7b6b] transition-colors"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
             </article>
 
             {/* Sidebar - Artigos Relacionados */}

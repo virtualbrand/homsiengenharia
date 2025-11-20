@@ -49,7 +49,7 @@ export default function TagFilter({ allTags }: TagFilterProps) {
               href={buildTagUrl(tag, isSelected)}
               className={`inline-flex items-center gap-2 px-3 py-0.5 text-xs rounded-md border transition-colors ${
                 isSelected
-                  ? 'bg-[#9b7b6b] text-white border-[#9b7b6b] hover:bg-[#8a6a5a] hover:text-white'
+                  ? 'bg-[#9b7b6b] [color:white!important] border-[#9b7b6b] hover:bg-[#8a6a5a] hover:[color:white!important]'
                   : 'bg-gray-100 text-gray-700 border-gray-300 hover:border-[#9b7b6b] hover:text-[#9b7b6b]'
               }`}
             >

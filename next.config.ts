@@ -71,10 +71,18 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: [
-          // Early Hints (103) para resource hints críticos
+          // Headers de segurança compatíveis com Safari
           {
-            key: 'Link',
-            value: '</fonts/Satoshi-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous, </fonts/Satoshi-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
         ],
       },
