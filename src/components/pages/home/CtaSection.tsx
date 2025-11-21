@@ -83,7 +83,7 @@ function AppInput({
           {...rest}
         />
       </div>
-      {error && <p className="text-sm mt-1 text-red-300">{error}</p>}
+      {error && <p className="text-sm mt-1 !text-red-400 font-medium">{error}</p>}
     </div>
   );
 }
@@ -107,7 +107,7 @@ function AppTextarea({
         {...register}
         {...rest}
       />
-      {error && <p className="text-sm mt-1 text-red-300">{error}</p>}
+      {error && <p className="text-sm mt-1 !text-red-400 font-medium">{error}</p>}
     </div>
   );
 }
@@ -143,7 +143,7 @@ function AppSelect({
           </svg>
         </div>
       </div>
-      {error && <p className="text-sm mt-1 text-red-300">{error}</p>}
+      {error && <p className="text-sm mt-1 !text-red-400 font-medium">{error}</p>}
     </div>
   );
 }
