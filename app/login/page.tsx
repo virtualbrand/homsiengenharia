@@ -31,7 +31,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-8">
             <div className="flex items-center gap-3">
               <img 
-                src="/images/icon-white.svg" 
+                src="/images/icon-white.svg?v=2" 
                 alt="Homsi Engenharia" 
                 className="w-6 h-6 transition-all duration-300 brightness-0 invert"
               />
