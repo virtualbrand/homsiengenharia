@@ -16,20 +16,42 @@ export default function LoadingBar() {
     const handleStart = () => setLoading(true)
     const handleComplete = () => setLoading(false)
 
-    // Listener para clicks em links
+    // Listener para clicks em links e elementos clicáveis
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
-      const link = target.closest('a')
       
+      // Verifica se é um link
+      const link = target.closest('a')
       if (link && link.href && !link.href.startsWith('#') && !link.target) {
         const url = new URL(link.href)
         if (url.origin === window.location.origin && url.pathname !== pathname) {
           handleStart()
         }
       }
+
+      // Verifica se é um botão com texto "VOLTAR" ou "voltar"
+      const button = target.closest('button')
+      if (button) {
+        const buttonText = button.textContent?.toLowerCase() || ''
+        if (buttonText.includes('voltar')) {
+          handleStart()
+        }
+      }
+
+      // Verifica se clicou em um card de artigo (div com cursor-pointer ou article dentro de div)
+      const clickableDiv = target.closest('div[class*="cursor-pointer"]')
+      if (clickableDiv) {
+        handleStart()
+      }
+
+      // Verifica se clicou em um article dentro de link
+      const article = target.closest('article')
+      if (article && article.closest('a')) {
+        handleStart()
+      }
     }
 
-    document.addEventListener('click', handleClick)
+    document.addEventListener('click', handleClick, true) // Use capture phase
     
     // Timeout de segurança - remove loading após 3 segundos
     let timeout: NodeJS.Timeout
@@ -40,7 +62,7 @@ export default function LoadingBar() {
     }
 
     return () => {
-      document.removeEventListener('click', handleClick)
+      document.removeEventListener('click', handleClick, true)
       if (timeout) clearTimeout(timeout)
     }
   }, [loading, pathname])
