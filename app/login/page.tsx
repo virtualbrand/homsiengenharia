@@ -33,9 +33,9 @@ export default function LoginPage() {
               <img 
                 src="/images/icon-white.svg" 
                 alt="Homsi Engenharia" 
-                className="w-6 h-6 transition-all duration-300"
+                className="w-6 h-6 transition-all duration-300 brightness-0 invert"
               />
-              <h1 className="text-xl font-bold text-white tracking-wide">
+              <h1 className="text-xl font-bold !text-white tracking-wide">
                 HOMSI ENGENHARIA
               </h1>
             </div>
