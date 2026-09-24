@@ -32,15 +32,10 @@ export const metadata: Metadata = {
 export default async function ArtigosPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; tag?: string | string[]; search?: string }>
+  searchParams: Promise<{ search?: string }>
 }) {
   const supabase = await createClient()
   const params = await searchParams
-
-  // Normalizar tags para array
-  const selectedTags = params.tag 
-    ? (Array.isArray(params.tag) ? params.tag : [params.tag])
-    : []
 
   // Build query
   let query = supabase
@@ -56,25 +51,21 @@ export default async function ArtigosPage({
     )
   }
 
-  if (params.category) {
-    query = query.eq('category', params.category)
-  }
-
-  if (selectedTags.length > 0) {
-    // Filtrar posts que contenham qualquer uma das tags selecionadas
-    query = query.or(
-      selectedTags.map(tag => `tags.cs.{${tag}}`).join(',')
-    )
-  }
-
   const { data: posts } = await query
 
-  // Get all unique categories and tags from posts
-  const categories = posts
-    ? Array.from(new Set(posts.map((p) => p.category).filter(Boolean)))
-    : []
+  // Get all categories and tags from database
+  const { data: allCategories } = await supabase
+    .from('blog_categories')
+    .select('name, slug')
+    .order('name')
+
+  const { data: allTagsFromDb } = await supabase
+    .from('blog_tags')
+    .select('name, slug')
+    .order('name')
   
-  const allTags = posts
+  // Get tags from current posts for filtering (fallback if no tags in DB)
+  const postsTagNames = posts
     ? Array.from(
         new Set(
           posts
@@ -83,6 +74,24 @@ export default async function ArtigosPage({
         )
       )
     : []
+
+  // Use tags from DB if available, otherwise use tags from posts
+  const allTags = allTagsFromDb && allTagsFromDb.length > 0
+    ? allTagsFromDb
+    : postsTagNames.map(name => ({
+        name,
+        slug: name.toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim()
+      }))
+
+  // Determine page title based on filters
+  const pageTitle = 'Artigos'
+  const pageDescription = ''
 
   return (
     <>
@@ -100,8 +109,13 @@ export default async function ArtigosPage({
           <div className="absolute inset-0 bg-black/70" />
           <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-xl md:text-2xl font-bold mt-16 leading-tight" style={{ color: '#FFFFFF' }}>
-              Artigos
+              {pageTitle}
             </h1>
+            {pageDescription && (
+              <p className="text-white/80 mt-2 max-w-2xl">
+                {pageDescription}
+              </p>
+            )}
           </div>
         </div>
 
@@ -185,7 +199,7 @@ export default async function ArtigosPage({
               <SearchBox />
 
               {/* Categories */}
-              {categories.length > 0 && (
+              {allCategories && allCategories.length > 0 && (
                 <div className="bg-white rounded-lg p-6 shadow-[0_0_20px_rgba(0,0,0,0.1)]">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     Categorias
@@ -194,26 +208,18 @@ export default async function ArtigosPage({
                     <li>
                       <Link
                         href="/artigos"
-                        className={`block text-sm hover:text-[#9b7b6b] transition-colors ${
-                          !params.category
-                            ? 'text-[#9b7b6b] font-semibold'
-                            : 'text-gray-600'
-                        }`}
+                        className={`block text-sm hover:text-[#9b7b6b] transition-colors text-[#9b7b6b] font-semibold`}
                       >
                         Todas
                       </Link>
                     </li>
-                    {categories.map((category) => (
-                      <li key={category}>
+                    {allCategories.map((category) => (
+                      <li key={category.slug}>
                         <Link
-                          href={`/artigos?category=${category}`}
-                          className={`block text-sm hover:text-[#9b7b6b] transition-colors ${
-                            params.category === category
-                              ? 'text-[#9b7b6b] font-semibold'
-                              : 'text-gray-600'
-                          }`}
+                          href={`/artigos/categoria/${category.slug}`}
+                          className="block text-sm hover:text-[#9b7b6b] transition-colors text-gray-600"
                         >
-                          {category}
+                          {category.name}
                         </Link>
                       </li>
                     ))}

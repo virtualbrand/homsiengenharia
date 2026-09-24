@@ -1,11 +1,12 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 
 export default function SearchBox() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const pathname = usePathname()
   const [searchTerm, setSearchTerm] = useState(searchParams?.get('search') || '')
 
   useEffect(() => {
@@ -18,11 +19,12 @@ export default function SearchBox() {
         params.delete('search')
       }
       
-      router.push(`/artigos?${params.toString()}`)
+      const queryString = params.toString()
+      router.push(queryString ? `${pathname}?${queryString}` : pathname)
     }, 300)
 
     return () => clearTimeout(timer)
-  }, [searchTerm, router, searchParams])
+  }, [searchTerm, router, searchParams, pathname])
 
   return (
     <div className="bg-white rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.1)] relative">

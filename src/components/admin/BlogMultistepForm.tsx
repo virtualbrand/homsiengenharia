@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import BlogEditor from "@/components/editor/BlogEditor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ImageUpload } from "@/components/ui/image-upload";
-import MultipleSelector, { Option } from "@/components/ui/multiselect";
+import { MultipleSelect, TTag } from "@/components/ui/multiple-select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,25 +47,53 @@ interface FormData {
   og_image: string;
 }
 
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Tag {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 interface BlogMultistepFormProps {
   initialData?: any;
   postId?: string;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   setInitialFormData?: React.Dispatch<React.SetStateAction<FormData | null>>;
+  categories?: Category[];
+  tags?: Tag[];
 }
 
-export default function BlogMultistepForm({ initialData, postId, formData, setFormData, setInitialFormData }: BlogMultistepFormProps) {
+export default function BlogMultistepForm({ 
+  initialData, 
+  postId, 
+  formData, 
+  setFormData, 
+  setInitialFormData,
+  categories = [],
+  tags = []
+}: BlogMultistepFormProps) {
   const router = useRouter();
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
+  const [selectedTags, setSelectedTags] = useState<TTag[]>([]);
 
   // Populate form with initial data if in edit mode
   useEffect(() => {
     if (initialData) {
-      // Convert tags string to Option array
-      const tags = Array.isArray(initialData.tags) ? initialData.tags : initialData.tags?.split(',').map((t: string) => t.trim()).filter(Boolean) || [];
-      setSelectedTags(tags.map((tag: string) => ({ value: tag, label: tag })));
+      // Convert tags string/array to TTag array
+      const tagsData = Array.isArray(initialData.tags) 
+        ? initialData.tags 
+        : initialData.tags?.split(',').map((t: string) => t.trim()).filter(Boolean) || [];
+      
+      setSelectedTags(tagsData.map((tagName: string) => ({ 
+        key: tagName.toLowerCase().replace(/\s+/g, '-'), 
+        name: tagName 
+      })));
       
       // Map published boolean to status string
       let status: FormData["status"] = "rascunho";
@@ -190,7 +218,7 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                             });
                             if (response.ok) {
                               toast.success('Artigo excluído com sucesso!');
-                              router.push('/admin/blog');
+                              router.push('/admin/artigos');
                               router.refresh();
                             } else {
                               toast.error('Erro ao excluir artigo');
@@ -284,12 +312,11 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                         className="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
                       >
                         <option value="" className="bg-gray-800 text-white">Selecione uma categoria</option>
-                        <option value="Engenharia" className="bg-gray-800 text-white">Engenharia</option>
-                        <option value="Projetos" className="bg-gray-800 text-white">Projetos</option>
-                        <option value="Sustentabilidade" className="bg-gray-800 text-white">Sustentabilidade</option>
-                        <option value="Construção" className="bg-gray-800 text-white">Construção</option>
-                        <option value="Tecnologia" className="bg-gray-800 text-white">Tecnologia</option>
-                        <option value="Notícias" className="bg-gray-800 text-white">Notícias</option>
+                        {categories.map((cat) => (
+                          <option key={cat.id} value={cat.name} className="bg-gray-800 text-white">
+                            {cat.name}
+                          </option>
+                        ))}
                       </select>
                       <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
                         <svg className="w-5 h-5 !text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,17 +329,13 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                   {/* Tags - 1/3 */}
                   <div className="space-y-2 md:w-1/3 w-full">
                     <Label htmlFor="tags" className="block !text-white font-semibold mb-2">Tags</Label>
-                    <MultipleSelector
-                      value={selectedTags}
-                      onChange={(options) => {
-                        setSelectedTags(options);
-                        updateFormData("tags", options.map(o => o.value).join(', '));
+                    <MultipleSelect
+                      tags={tags.map(tag => ({ key: tag.slug, name: tag.name }))}
+                      onChange={(selected) => {
+                        setSelectedTags(selected);
+                        updateFormData("tags", selected.map(t => t.name).join(', '));
                       }}
-                      placeholder="Digite e pressione Enter..."
-                      creatable
-                      emptyIndicator={<p className="text-center text-sm !text-white/60">Nenhuma tag encontrada</p>}
-                      className="w-full rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 !text-white [&>button]:min-h-[52px] [&>button]:rounded-lg [&>button]:backdrop-blur-sm [&>button]:bg-white/10 [&>button]:border [&>button]:border-white/20 [&_input]:py-[14px] [&_input]:px-4 [&_input]:!text-white"
-                      badgeClassName="bg-white/20 !text-white border-white/30"
+                      defaultValue={selectedTags}
                     />
                   </div>
                 </div>
@@ -351,7 +374,7 @@ export default function BlogMultistepForm({ initialData, postId, formData, setFo
                 {/* Layout responsivo: Desktop (2/3 + 1/3), Mobile (100% + 100%) */}
                 <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
                   {/* Campos SEO - 2/3 no desktop */}
-                  <div className="flex flex-col lg:w-2/3 w-full space-y-6">
+                  <div className="flex flex-col lg:w-2/3 w-full space-y-4">
                     {/* Meta Título */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between mb-2">

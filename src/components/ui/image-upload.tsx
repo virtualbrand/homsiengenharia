@@ -106,15 +106,15 @@ export function ImageUpload({ value, onChange, className }: ImageUploadProps) {
             {isUploading ? (
               <>
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white mb-3"></div>
-                <p className="text-sm text-white/70">Carregando...</p>
+                <p className="text-sm !text-white/70">Carregando...</p>
               </>
             ) : (
               <>
-                <Upload className="h-10 w-10 text-white/50 mb-3" />
-                <p className="mb-2 text-sm text-white/90 font-medium text-center">
+                <Upload className="h-10 w-10 !text-white/50 mb-3" />
+                <p className="mb-2 text-sm !text-white/90 font-medium text-center">
                   <span className="font-semibold">Clique para fazer upload</span> ou arraste e solte
                 </p>
-                <p className="text-xs text-white/60 text-center">
+                <p className="text-xs !text-white/60 text-center">
                   PNG, JPG, GIF até 10MB (1200x630px)
                 </p>
               </>

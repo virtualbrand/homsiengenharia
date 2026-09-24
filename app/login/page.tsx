@@ -35,7 +35,7 @@ export default function LoginPage() {
                 alt="Homsi Engenharia" 
                 className="w-6 h-6 transition-all duration-300"
               />
-              <h1 className="text-xl font-bold text-white tracking-wide">
+              <h1 className="text-xl font-bold tracking-wide" style={{ color: '#FFFFFF' }}>
                 HOMSI ENGENHARIA
               </h1>
             </div>

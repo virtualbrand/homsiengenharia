@@ -78,7 +78,7 @@ export function BlogAdminContent({ posts }: Props) {
         {/* Header */}
         <div className="flex justify-between items-center mt-10 mb-6">
           <h1 className="text-3xl font-bold !text-white">Artigos</h1>
-          <Link href="/admin/blog/new">
+          <Link href="/admin/artigos/new">
             <button className="btn-primary rounded-xl px-6 py-2 shadow-lg flex items-center gap-2">
               + Artigo
             </button>
@@ -205,7 +205,7 @@ export function BlogAdminContent({ posts }: Props) {
             </p>
             {posts.length === 0 && (
               <div className="mt-6">
-                <Link href="/admin/blog/new">
+                <Link href="/admin/artigos/new">
                   <Button>+ Novo Artigo</Button>
                 </Link>
               </div>
@@ -217,7 +217,7 @@ export function BlogAdminContent({ posts }: Props) {
               <div
                 key={post.id}
                 className="block backdrop-blur-md bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all p-6 shadow-lg cursor-pointer"
-                onClick={() => window.location.href = `/admin/blog/${post.id}`}
+                onClick={() => window.location.href = `/admin/artigos/${post.id}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-1 min-w-0">

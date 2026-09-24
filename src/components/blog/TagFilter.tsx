@@ -1,38 +1,36 @@
 'use client'
 
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 interface TagFilterProps {
-  allTags: string[]
+  allTags: Array<{ name: string; slug: string }> | string[]
 }
 
 export default function TagFilter({ allTags }: TagFilterProps) {
-  const searchParams = useSearchParams()
-  const selectedTagsParam = searchParams.get('tag')
-  const selectedTags = selectedTagsParam 
-    ? (selectedTagsParam.includes(',') ? selectedTagsParam.split(',') : [selectedTagsParam])
-    : []
-
-  const buildTagUrl = (tag: string, isSelected: boolean) => {
-    const params = new URLSearchParams(searchParams.toString())
-    
-    if (isSelected) {
-      // Remover tag
-      const newTags = selectedTags.filter(t => t !== tag)
-      if (newTags.length === 0) {
-        params.delete('tag')
-      } else {
-        params.set('tag', newTags.join(','))
+  const pathname = usePathname()
+  
+  // Normalize tags to have slug
+  const normalizedTags = allTags.map(tag => {
+    if (typeof tag === 'string') {
+      return {
+        name: tag,
+        slug: tag.toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim()
       }
-    } else {
-      // Adicionar tag
-      const newTags = [...selectedTags, tag]
-      params.set('tag', newTags.join(','))
     }
-    
-    return `/artigos?${params.toString()}`
-  }
+    return tag
+  })
+
+  // Check if we're on a tag page
+  const currentTagSlug = pathname.startsWith('/artigos/tag/') 
+    ? pathname.replace('/artigos/tag/', '')
+    : null
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-[0_0_20px_rgba(0,0,0,0.1)]">
@@ -40,20 +38,20 @@ export default function TagFilter({ allTags }: TagFilterProps) {
         Tags
       </h3>
       <div className="flex flex-wrap gap-2">
-        {allTags.map((tag) => {
-          const isSelected = selectedTags.includes(tag)
+        {normalizedTags.map((tag) => {
+          const isSelected = currentTagSlug === tag.slug
           
           return (
             <Link
-              key={tag}
-              href={buildTagUrl(tag, isSelected)}
+              key={tag.slug}
+              href={isSelected ? '/artigos' : `/artigos/tag/${tag.slug}`}
               className={`inline-flex items-center gap-2 px-3 py-0.5 text-xs rounded-md border transition-colors ${
                 isSelected
                   ? 'bg-[#9b7b6b] [color:white!important] border-[#9b7b6b] hover:bg-[#8a6a5a] hover:[color:white!important]'
                   : 'bg-gray-100 text-gray-700 border-gray-300 hover:border-[#9b7b6b] hover:text-[#9b7b6b]'
               }`}
             >
-              {tag}
+              {tag.name}
               {isSelected && (
                 <svg 
                   className="w-3 h-3" 
