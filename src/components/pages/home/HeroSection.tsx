@@ -1,20 +1,59 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react'
+import { preload } from 'react-dom'
+
+// Mesmo srcSet/sizes no preload e no <img>, para o navegador baixar um único arquivo
+const HERO_SRCSET = '/images/hero-home-mobile.webp?v=4 810w, /images/hero-home-1440.webp?v=4 1440w, /images/hero-home.webp?v=4 1920w'
+const HERO_SIZES = '100vw'
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
+  const [videoVariant, setVideoVariant] = useState<'mobile' | 'desktop' | null>(null)
+  const shouldLoadVideo = videoVariant !== null
+
+  preload('/images/hero-home.webp?v=4', {
+    as: 'image',
+    imageSrcSet: HERO_SRCSET,
+    imageSizes: HERO_SIZES,
+    fetchPriority: 'high',
+  })
 
   useEffect(() => {
-    // Lazy load video after page load
-    const loadVideoTimer = setTimeout(() => {
-      setShouldLoadVideo(true)
-    }, 100)
+    // Respeita economia de dados e conexões lentas: fica só a imagem
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string }
+    }).connection
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '')) return
 
-    return () => clearTimeout(loadVideoTimer)
+    // Carrega o vídeo só depois do load da página, quando o navegador estiver ocioso
+    let idleId: number | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    const startVideo = () => {
+      const isMobile = window.matchMedia('(max-width: 810px) and (orientation: portrait)').matches
+      setVideoVariant(isMobile ? 'mobile' : 'desktop')
+    }
+    const scheduleVideo = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(startVideo, { timeout: 2000 })
+      } else {
+        timeoutId = setTimeout(startVideo, 200)
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleVideo()
+    } else {
+      window.addEventListener('load', scheduleVideo, { once: true })
+    }
+
+    return () => {
+      window.removeEventListener('load', scheduleVideo)
+      if (idleId !== undefined) window.cancelIdleCallback(idleId)
+      if (timeoutId !== undefined) clearTimeout(timeoutId)
+    }
   }, [])
 
   useEffect(() => {
@@ -139,12 +178,14 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10">
         {/* Poster Image - sempre visível até o vídeo carregar */}
         <img
-          srcSet="/images/hero-home-mobile.webp?v=4 810w, /images/hero-home.webp?v=4 1920w"
-          sizes="100vw"
+          srcSet={HERO_SRCSET}
+          sizes={HERO_SIZES}
           src="/images/hero-home.webp?v=4"
           alt="Homsi Engenharia"
           width="1920"
           height="1280"
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ 
             opacity: isVideoPlaying ? 0 : 1,
@@ -167,8 +208,17 @@ const HeroSection = () => {
               transition: 'opacity 0.5s ease-in-out'
             }}
           >
-            <source src="/videos/hero-home.webm?v=2" type="video/webm" />
-            <source src="/videos/hero-home.mp4?v=2" type="video/mp4" />
+            {videoVariant === 'mobile' ? (
+              <>
+                <source src="/videos/hero-home-mobile.webm?v=1" type="video/webm" />
+                <source src="/videos/hero-home-mobile.mp4?v=1" type="video/mp4" />
+              </>
+            ) : (
+              <>
+                <source src="/videos/hero-home.webm?v=2" type="video/webm" />
+                <source src="/videos/hero-home.mp4?v=2" type="video/mp4" />
+              </>
+            )}
             <track kind="captions" />
           </video>
         )}

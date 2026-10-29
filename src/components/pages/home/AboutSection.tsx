@@ -24,7 +24,7 @@ const AboutSection = () => {
                 placeholder="blur"
                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMjM5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEyMzkiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4="
                 className="relative rounded-2xl w-full h-auto object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                sizes="(max-width: 768px) calc(100vw - 2rem), (max-width: 1024px) 45vw, 40vw"
               />
             </div>
           </div>

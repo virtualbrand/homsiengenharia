@@ -79,10 +79,8 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
-        {/* Preload de imagens críticas do hero */}
-        <link rel="preload" href="/images/hero-home-mobile.webp" as="image" media="(max-width: 810px)" fetchPriority="high" />
-        <link rel="preload" href="/images/hero-home.webp" as="image" media="(min-width: 811px)" fetchPriority="high" />
-        
+        {/* O preload da imagem do hero fica no HeroSection (só na home, com o mesmo srcSet do <img>) */}
+
         {/* SEO: Verificação de propriedade e tags meta adicionais */}
         <meta name="theme-color" content="#1C1C1C" />
         <meta name="format-detection" content="telephone=no" />

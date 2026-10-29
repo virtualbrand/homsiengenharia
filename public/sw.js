@@ -1,12 +1,11 @@
 // Service Worker para cache de recursos de terceiros
-const CACHE_NAME = 'homsi-cache-v1';
+const CACHE_NAME = 'homsi-cache-v2';
 const TILE_CACHE_NAME = 'openstreetmap-tiles-v1';
 
 // Recursos estáticos para cache
 const STATIC_RESOURCES = [
   '/',
   '/images/icon-white.svg',
-  '/images/hero-home.webp',
 ];
 
 // Instalar Service Worker

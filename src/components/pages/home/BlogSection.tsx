@@ -1,12 +1,10 @@
 'use client';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
-import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import Image from 'next/image'
 
-interface BlogPost {
+export interface BlogPost {
   id: string
   title: string
   slug: string
@@ -16,34 +14,10 @@ interface BlogPost {
   published_at: string
 }
 
-const BlogSection = () => {
+// Os posts são buscados no servidor (app/page.tsx), assim o HTML já chega com o conteúdo
+// e o cliente do Supabase não entra no bundle da home
+const BlogSection = ({ posts }: { posts: BlogPost[] }) => {
   useScrollAnimation()
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const supabase = createClient()
-        const { data } = await supabase
-          .from('blog_posts')
-          .select('id, title, slug, excerpt, cover_image, category, published_at')
-          .eq('published', true)
-          .order('published_at', { ascending: false })
-          .limit(3)
-        
-        if (data) {
-          setPosts(data)
-        }
-      } catch (error) {
-        console.error('Error fetching blog posts:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPosts()
-  }, [])
 
   return (
     <section id="blog" className="relative py-20 md:py-32 bg-gray-50">
@@ -60,11 +34,7 @@ const BlogSection = () => {
         </div>
 
         {/* Blog Posts Grid */}
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)]"></div>
-          </div>
-        ) : posts.length > 0 ? (
+        {posts.length > 0 ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {posts.map((post) => (

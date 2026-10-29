@@ -6,7 +6,8 @@ import HeroSection from "@/components/pages/home/HeroSection";
 import AboutSection from "@/components/pages/home/AboutSection";
 import ServicesSection from "@/components/pages/home/ServicesSection";
 import CtaSection from "@/components/pages/home/CtaSection";
-import BlogSection from "@/components/pages/home/BlogSection";
+import BlogSection, { type BlogPost } from "@/components/pages/home/BlogSection";
+import { createClient } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
 import PageLoadingSpinner from "@/components/PageLoadingSpinner";
 
@@ -57,7 +58,39 @@ const structuredData = {
   ]
 };
 
-export default function HomePage() {
+// Página estática regenerada a cada 5 minutos (ISR) para refletir novos artigos
+export const revalidate = 300;
+
+async function getLatestPosts(): Promise<BlogPost[]> {
+  try {
+    // Cliente anônimo sem cookies: mantém a home estática
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        auth: { persistSession: false },
+        // Evita que o Supabase fora do ar trave a geração da página
+        global: { fetch: (input, init) => fetch(input, { ...init, signal: AbortSignal.timeout(5000) }) },
+      }
+    );
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('id, title, slug, excerpt, cover_image, category, published_at')
+      .eq('published', true)
+      .order('published_at', { ascending: false })
+      .limit(3);
+
+    if (error) throw error;
+    return data ?? [];
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const posts = await getLatestPosts();
+
   return (
     <>
       <script
@@ -72,7 +105,7 @@ export default function HomePage() {
           <ServicesSection />
           <ProjectsSection />
           <TestimonialSection />
-          <BlogSection />
+          <BlogSection posts={posts} />
           <CtaSection />
         </main>
         <Footer />
