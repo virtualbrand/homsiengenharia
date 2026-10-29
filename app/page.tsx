@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/pages/home/HeroSection";
 import AboutSection from "@/components/pages/home/AboutSection";
@@ -9,7 +8,6 @@ import CtaSection from "@/components/pages/home/CtaSection";
 import BlogSection, { type BlogPost } from "@/components/pages/home/BlogSection";
 import { createClient } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
-import PageLoadingSpinner from "@/components/PageLoadingSpinner";
 
 // Lazy load componentes pesados que não são above the fold
 const ProjectsSection = dynamic(
@@ -97,19 +95,17 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Suspense fallback={<PageLoadingSpinner />}>
-        <Header />
-        <main>
-          <HeroSection />
-          <AboutSection />
-          <ServicesSection />
-          <ProjectsSection />
-          <TestimonialSection />
-          <BlogSection posts={posts} />
-          <CtaSection />
-        </main>
-        <Footer />
-      </Suspense>
+      <Header />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <ProjectsSection />
+        <TestimonialSection />
+        <BlogSection posts={posts} />
+        <CtaSection />
+      </main>
+      <Footer />
     </>
   );
 }
