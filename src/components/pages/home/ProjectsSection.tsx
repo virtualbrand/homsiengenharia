@@ -1,14 +1,7 @@
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  MotionValue,
-  AnimatePresence,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 
 // Definir os projetos com suas galerias
@@ -162,70 +155,47 @@ const projectGalleries = {
   ],
 };
 
-// Função para embaralhar array usando Fisher-Yates
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
+type ProjectId = keyof typeof projectGalleries;
+type Category = "clinica" | "casa" | "apartamento";
+
+const FILTERS: { id: Category; label: string }[] = [
+  { id: "clinica", label: "Clínica" },
+  { id: "casa", label: "Casa" },
+  { id: "apartamento", label: "Apartamento" },
+];
+
+const projectCategories: Record<ProjectId, Category> = {
+  "clinica-raissa": "clinica",
+  "clinica-marcos": "clinica",
+  "casa-herbert-roberta": "casa",
+  "apto-felipe": "apartamento",
 };
 
-// Função para gerar os produtos dinamicamente baseado nas galerias
-const generateProducts = (): Array<{
-  title: string;
-  link: string;
-  thumbnail: string;
-  projectId: string;
-}> => {
-  const allProducts: Array<{
-    title: string;
-    link: string;
-    thumbnail: string;
-    projectId: string;
-  }> = [];
-  
-  // Mapeia títulos para cada projeto
-  const projectTitles: Record<string, string> = {
-    "casa-herbert-roberta": "Casa",
-    "apto-felipe": "Apartamento", 
-    "clinica-marcos": "Clínica",
-    "clinica-raissa": "Clínica",
-  };
+// Quantidade de fotos exibidas por vez (múltiplo de 4, 3 e 2 para fechar as linhas)
+const PAGE_SIZE = 12;
 
-  // Para cada projeto na galeria, adiciona todas as suas imagens
-  // Garantindo ordem consistente com Object.keys().sort()
-  Object.keys(projectGalleries).sort().forEach((projectId) => {
-    const images = projectGalleries[projectId as keyof typeof projectGalleries];
-    images.forEach((imagePath, index) => {
-      allProducts.push({
-        title: projectTitles[projectId as keyof typeof projectTitles] || "Projeto",
-        link: "#",
-        thumbnail: imagePath,
-        projectId: `${projectId}-${index}`, // ID único para cada imagem
-      });
+type Photo = { src: string; projectId: ProjectId; index: number };
+
+// Fotos de cada categoria, intercalando os projetos para variar o grid
+const photosByCategory = FILTERS.reduce((acc, { id }) => {
+  const galleries = (Object.keys(projectGalleries) as ProjectId[])
+    .filter((projectId) => projectCategories[projectId] === id)
+    .map((projectId) =>
+      projectGalleries[projectId].map((src, index) => ({ src, projectId, index }))
+    );
+  const longest = Math.max(0, ...galleries.map((g) => g.length));
+  const photos: Photo[] = [];
+  for (let i = 0; i < longest; i++) {
+    galleries.forEach((gallery) => {
+      if (gallery[i]) photos.push(gallery[i]);
     });
-  });
+  }
+  acc[id] = photos;
+  return acc;
+}, {} as Record<Category, Photo[]>);
 
-  return allProducts;
-};
-
-// Gerar produtos sem embaralhar (para evitar hydration mismatch)
-const baseProducts = generateProducts();
-
-const Header = () => {
-  return (
-    <div className="container mx-auto py-5 md:py-5 lg:py-20 px-4 md:px-6 lg:px-8">
-      <h2 className="fade-in text-3xl md:text-5xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
-        Nossos Projetos
-      </h2>
-      <p className="fade-in max-w-2xl leading-relaxed text-xl mt-2" style={{ color: '#FFFFFF' }}>
-        Conheça alguns dos principais projetos executados pela Homsi Engenharia. Nossa experiência abrange obras residenciais, comerciais e industriais com excelência e qualidade garantidas.
-      </p>
-    </div>
-  );
-};
+const categoryLabel = (category: Category) =>
+  FILTERS.find((filter) => filter.id === category)?.label ?? "Projeto";
 
 // Componente de Galeria (Lightbox) com Embla Carousel
 const GalleryModal = ({ 
@@ -443,423 +413,111 @@ const GalleryModal = ({
   );
 };
 
-const ProductCard = ({
-  product,
-  translate,
-  onOpenGallery,
-}: {
-  product: {
-    title: string;
-    link: string;
-    thumbnail: string;
-    projectId: string | null;
-  };
-  translate: MotionValue<number>;
-  onOpenGallery: (projectId: string | null, thumbnail: string) => void;
-}) => {
-  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onOpenGallery(product.projectId, product.thumbnail);
-  };
-
-  return (
-    <motion.div
-      style={{
-        x: translate,
-      }}
-      key={product.projectId}
-      className="group/product h-32 w-40 md:h-40 md:w-52 lg:h-40 lg:w-52 relative flex-shrink-0"
-    >
-      <div
-        onClick={handleClick}
-        className="block group-hover/product:shadow-2xl rounded-xl overflow-hidden relative h-full w-full cursor-pointer touch-manipulation select-none"
-        style={{ WebkitTapHighlightColor: 'transparent', userSelect: 'none' }}
-      >
-        <Image
-          src={product.thumbnail}
-          height={600}
-          width={600}
-          quality={75}
-          loading="lazy"
-          placeholder="blur"
-          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzFhMWExYSIvPjwvc3ZnPg=="
-          className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-300 group-hover/product:scale-105 pointer-events-none"
-          alt={product.title}
-          sizes="(max-width: 768px) 160px, (max-width: 1024px) 208px, 208px"
-        />
-        {/* Gradiente escuro de baixo para cima - aparece apenas no hover */}
-        <div className="absolute inset-0 h-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
-        <h3 className="absolute bottom-4 left-4 font-bold text-base md:text-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ color: '#FFFFFF' }}>
-          {product.title}
-        </h3>
-      </div>
-    </motion.div>
-  );
-};
-
 export default function ProjectsSection() {
-  // Estado da galeria
-  const [galleryState, setGalleryState] = useState<{
-    isOpen: boolean;
-    projectId: string | null;
+  const [activeCategory, setActiveCategory] = useState<Category>(FILTERS[0].id);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [gallery, setGallery] = useState<{
+    projectId: ProjectId;
     initialIndex: number;
-    projectTitle: string;
-  }>({
-    isOpen: false,
-    projectId: null,
-    initialIndex: 0,
-    projectTitle: "",
-  });
+  } | null>(null);
 
-  // Função para abrir a galeria
-  const handleOpenGallery = (projectId: string | null, clickedThumbnail: string) => {
-    if (!projectId) return;
-    
-    // Extrair o nome do projeto do projectId (remove o índice)
-    // Ex: "apto-felipe-0" -> "apto-felipe"
-    const projectName = projectId.substring(0, projectId.lastIndexOf('-'));
-    
-    if (!projectGalleries[projectName as keyof typeof projectGalleries]) {
-      return;
-    }
+  const photos = photosByCategory[activeCategory];
+  const visiblePhotos = useMemo(() => photos.slice(0, visibleCount), [photos, visibleCount]);
+  const remaining = photos.length - visiblePhotos.length;
 
-    const gallery = projectGalleries[projectName as keyof typeof projectGalleries];
-    const initialIndex = gallery.findIndex(img => img === clickedThumbnail);
-    
-    // Encontrar o título do projeto usando baseProducts
-    const product = baseProducts.find(p => p.thumbnail === clickedThumbnail);
-    const projectTitle = product?.title || "Projeto";
-
-    setGalleryState({
-      isOpen: true,
-      projectId: projectName,
-      initialIndex: initialIndex >= 0 ? initialIndex : 0,
-      projectTitle,
-    });
+  const handleFilterChange = (category: Category) => {
+    setActiveCategory(category);
+    setVisibleCount(PAGE_SIZE);
   };
 
-  const handleCloseGallery = () => {
-    setGalleryState({
-      isOpen: false,
-      projectId: null,
-      initialIndex: 0,
-      projectTitle: "",
-    });
-  };
-
-  // Embaralhar produtos apenas no cliente para evitar hydration mismatch
-  const [shuffledProducts, setShuffledProducts] = useState(baseProducts);
-  
-  useEffect(() => {
-    // Embaralhar apenas no cliente após a hidratação
-    setShuffledProducts(shuffleArray(baseProducts));
-  }, []);
-
-  // Desktop: 12 fotos por linha (7 linhas)
-  const firstRow = shuffledProducts.slice(0, 12);
-  const secondRow = shuffledProducts.slice(12, 24);
-  const thirdRow = shuffledProducts.slice(24, 36);
-  const fourthRow = shuffledProducts.slice(36, 48);
-  const fifthRow = shuffledProducts.slice(48, 60);
-  const sixthRow = shuffledProducts.slice(60, 72);
-  const seventhRow = shuffledProducts.slice(72, 84);
-  
-  // Tablet: 8 fotos por linha (7 linhas)
-  const firstRowTablet = shuffledProducts.slice(0, 8);
-  const secondRowTablet = shuffledProducts.slice(8, 16);
-  const thirdRowTablet = shuffledProducts.slice(16, 24);
-  const fourthRowTablet = shuffledProducts.slice(24, 32);
-  const fifthRowTablet = shuffledProducts.slice(32, 40);
-  const sixthRowTablet = shuffledProducts.slice(40, 48);
-  const seventhRowTablet = shuffledProducts.slice(48, 56);
-  
-  // Mobile: 4 fotos por linha (7 linhas)
-  const firstRowMobile = shuffledProducts.slice(0, 4);
-  const secondRowMobile = shuffledProducts.slice(4, 8);
-  const thirdRowMobile = shuffledProducts.slice(8, 12);
-  const fourthRowMobile = shuffledProducts.slice(12, 16);
-  const fifthRowMobile = shuffledProducts.slice(16, 20);
-  const sixthRowMobile = shuffledProducts.slice(20, 24);
-  const seventhRowMobile = shuffledProducts.slice(24, 28);
-  
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const springConfig = { stiffness: 100, damping: 50, bounce: 0 };
-
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 800]),
-    springConfig
-  );
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -800]),
-    springConfig
-  );
-  const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [15, 0]),
-    springConfig
-  );
-  const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [0.2, 1]),
-    springConfig
-  );
-  const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [20, 0]),
-    springConfig
-  );
-  const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [-200, 200]),
-    springConfig
-  );
+  const handleCloseGallery = useCallback(() => setGallery(null), []);
 
   return (
-    <div id="projetos" className="bg-black w-full">
+    <section id="projetos" className="bg-black w-full py-20 md:py-32">
       {/* Modal de Galeria */}
-      {galleryState.projectId && (
+      {gallery && (
         <GalleryModal
-          isOpen={galleryState.isOpen}
+          isOpen
           onClose={handleCloseGallery}
-          images={projectGalleries[galleryState.projectId as keyof typeof projectGalleries]}
-          initialIndex={galleryState.initialIndex}
-          projectTitle={galleryState.projectTitle}
+          images={projectGalleries[gallery.projectId]}
+          initialIndex={gallery.initialIndex}
+          projectTitle={categoryLabel(projectCategories[gallery.projectId])}
         />
       )}
 
-      <div
-        ref={ref}
-        className="h-[200vh] md:h-[210vh] lg:h-[190vh] py-20 overflow-hidden antialiased relative flex flex-col justify-center self-auto [perspective:1000px] [transform-style:preserve-3d]"
-      >
-        <Header />
-        <motion.div
-          style={{
-            rotateX,
-            rotateZ,
-            translateY,
-            opacity,
-          }}
-          className=""
-        >
-          {/* Desktop: 12 fotos - hidden on tablet/mobile */}
-          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {firstRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row mb-2 space-x-2">
-            {secondRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {thirdRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row space-x-2 mb-2">
-            {fourthRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {fifthRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row space-x-2 mb-2">
-            {sixthRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden lg:flex flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {seventhRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+        <h2 className="fade-in text-3xl md:text-5xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
+          Nossos Projetos
+        </h2>
+        <p className="fade-in max-w-2xl leading-relaxed text-xl mt-2" style={{ color: '#FFFFFF' }}>
+          Conheça alguns dos principais projetos executados pela Homsi Engenharia. Nossa experiência abrange obras residenciais, comerciais e industriais com excelência e qualidade garantidas.
+        </p>
 
-          {/* Tablet: 8 fotos - hidden on desktop/mobile */}
-          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
-            {firstRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row mb-3 space-x-3">
-            {secondRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
-            {thirdRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3 mb-3">
-            {fourthRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
-            {fifthRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row space-x-3 mb-3">
-            {sixthRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="hidden md:flex lg:hidden flex-row-reverse space-x-reverse space-x-3 mb-3">
-            {seventhRowTablet.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-
-          {/* Mobile: 4 fotos - hidden on tablet/desktop */}
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {firstRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row mb-2 space-x-2">
-            {secondRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {thirdRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row space-x-2 mb-2">
-            {fourthRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {fifthRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row space-x-2 mb-2">
-            {sixthRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-          <motion.div className="flex md:hidden flex-row-reverse space-x-reverse space-x-2 mb-2">
-            {seventhRowMobile.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
-                onOpenGallery={handleOpenGallery}
-                key={product.projectId}
-              />
-            ))}
-          </motion.div>
-        </motion.div>
+        {/* Filtros */}
+        <div className="flex flex-wrap gap-2 md:gap-3 mt-8 md:mt-10" role="group" aria-label="Filtrar projetos">
+          {FILTERS.map((filter) => {
+            const isActive = filter.id === activeCategory;
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                onClick={() => handleFilterChange(filter.id)}
+                aria-pressed={isActive}
+                className={`rounded-[5px] px-4 md:px-5 py-2 text-sm font-black uppercase tracking-wide transition-all duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-br from-[#B8906A] to-[#D6BDAA] text-[var(--color-primary-500)] border border-transparent"
+                    : "border border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+                }`}
+              >
+                {filter.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      {/* Grid: um pouco mais largo que o conteúdo em telas grandes */}
+      <div className="mx-auto w-full max-w-[1440px] 2xl:max-w-[1696px] px-4 md:px-6 lg:px-8 mt-8 md:mt-10">
+        <div
+          key={activeCategory}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4"
+        >
+          {visiblePhotos.map((photo) => (
+            <button
+              key={photo.src}
+              type="button"
+              onClick={() => setGallery({ projectId: photo.projectId, initialIndex: photo.index })}
+              aria-label={`Abrir galeria: ${categoryLabel(activeCategory)}, foto ${photo.index + 1}`}
+              className="animate-fade-in group relative aspect-[4/3] overflow-hidden rounded-xl bg-white/5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BDAA]"
+            >
+              <Image
+                src={photo.src}
+                alt={`${categoryLabel(activeCategory)} - Homsi Engenharia`}
+                fill
+                quality={75}
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, (max-width: 1695px) 25vw, 420px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <span className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-sm md:text-base font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                {categoryLabel(activeCategory)}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {remaining > 0 && (
+          <div className="text-center mt-10">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+              className="btn-secondary text-sm md:text-base"
+            >
+              Ver mais fotos
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
