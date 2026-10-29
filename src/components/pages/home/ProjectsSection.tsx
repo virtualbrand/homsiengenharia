@@ -463,7 +463,7 @@ export default function ProjectsSection() {
                 type="button"
                 onClick={() => handleFilterChange(filter.id)}
                 aria-pressed={isActive}
-                className={`rounded-[5px] px-4 md:px-5 py-2 text-sm font-black uppercase tracking-wide transition-all duration-300 ${
+                className={`cursor-pointer rounded-[5px] px-4 md:px-5 py-2 text-sm font-black uppercase tracking-wide transition-all duration-300 ${
                   isActive
                     ? "bg-gradient-to-br from-[#B8906A] to-[#D6BDAA] text-[var(--color-primary-500)] border border-transparent"
                     : "border border-white/30 text-white hover:bg-white/10 hover:border-white/50"
@@ -511,7 +511,7 @@ export default function ProjectsSection() {
             <button
               type="button"
               onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
-              className="btn-secondary text-sm md:text-base"
+              className="btn-secondary cursor-pointer text-sm md:text-base"
             >
               Ver mais fotos
             </button>
