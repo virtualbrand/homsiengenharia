@@ -488,7 +488,7 @@ export default function ProjectsSection() {
               type="button"
               onClick={() => setGallery({ projectId: photo.projectId, initialIndex: photo.index })}
               aria-label={`Abrir galeria: ${categoryLabel(activeCategory)}, foto ${photo.index + 1}`}
-              className="animate-fade-in group relative aspect-[4/3] overflow-hidden rounded-xl bg-white/5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BDAA]"
+              className="animate-fade-in group relative aspect-[4/3] overflow-hidden rounded-xl bg-white/5 cursor-pointer outline-none"
             >
               <Image
                 src={photo.src}
